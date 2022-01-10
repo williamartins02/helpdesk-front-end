@@ -2,6 +2,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+//Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
   {
     path: '', component: NavComponent
