@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/login/login.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -6,6 +7,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
+  
+  //Rota para LOGIN/entrar no sistema.
+  {path: 'login', component: LoginComponent},
+
+  //Rota NAVEGADOR com filhos HOME/TECNICOS
   {
     path: '', component: NavComponent, 
     children: [
