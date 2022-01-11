@@ -1,3 +1,4 @@
+import { AuthGuard } from './authentication/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { HomeComponent } from './components/home/home.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
 
   //Rota NAVEGADOR com filhos HOME/TECNICOS
   {
-    path: '', component: NavComponent, 
+    path: '', component: NavComponent,  canActivate: [AuthGuard],//canActivate para acessar a rota apos fazer login para ter acesso as Filhas (HOME/Tecnico/CLiente)
     children: [
       { path: 'home', component: HomeComponent },
       {path: 'tecnicos', component: TecnicoListComponent}
