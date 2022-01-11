@@ -10,7 +10,7 @@ export class NavComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  //Metodo reinicia componentes que precisa ser iniciado
+  //Metodo que inicia
   ngOnInit(): void {
    this.router.navigate(['home'])
   }
