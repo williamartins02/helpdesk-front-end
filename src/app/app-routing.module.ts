@@ -6,7 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
   {
-    path: '', component: NavComponent, children: [
+    path: '', component: NavComponent, 
+    children: [
       { path: 'home', component: HomeComponent }
     ]
   }
