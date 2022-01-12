@@ -1,3 +1,4 @@
+import { AuthInterceptor, AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -77,7 +78,7 @@ import { timeout } from 'rxjs';
     //requisições Http
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
