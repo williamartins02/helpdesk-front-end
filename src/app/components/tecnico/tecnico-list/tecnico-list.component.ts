@@ -1,5 +1,8 @@
+import { throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { TecnicoService } from './../../../services/tecnico.service';
 import { Tecnico } from './../../../models/tecnico';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -10,30 +13,34 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class TecnicoListComponent implements OnInit {
 
-  ELEMENT_DATA: Tecnico[] =[
-    {
-      id: 1,
-      nome: 'Otávio Eduardo Mateus de Paula',
-      cpf: '042.293.200-00',
-      email: 'otavioeduardomateusdepaula_@agenciaph.com',
-      senha: 'q8c9PXWebc',
-      perfis: ['0'],
-      dataCriacao: '11/01/2021'
-    }
-  ]
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'acoes'];
+  ELEMENT_DATA: Tecnico[] = [];
+  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  constructor(
+    private service: TecnicoService,
+    private toast: ToastrService,) { }
 
+  ngOnInit(): void {
+    this.findAll();
+  }
+  /*Criando um service para lista uma LIST TECNICO*/
+  findAll() {
+    this.service.findAll().subscribe((resposta) => {
+        this.ELEMENT_DATA = resposta
+        this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;//paginação dos registros.
+    }, (error) => {
+          this.toast.error('Na listagem dos tecnicos, procurar suporte', 'ERROR')
+          return throwError(error);
+       })
+  }
+  /*Metodo para filtrar*/
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
 

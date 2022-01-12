@@ -2,8 +2,21 @@
     width: 90%;
     margin: auto;
 }
-
-
 table {
     width: 100%;
+  }
+
+  .mat-form-field{
+      width: 100%;
+  }
+
+  button{
+    border: 1px solid rgb(161, 159, 159);
+    margin-left: auto;
+    display: flex !important;
+  }
+
+  h1{
+      width: 100%;
+      margin: 10px 0px 16px !important;
   }
