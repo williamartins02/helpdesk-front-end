@@ -14,7 +14,7 @@ const routes: Routes = [
 
   //Rota NAVEGADOR com filhos HOME/TECNICOS
   {
-    path: '', component: NavComponent,  canActivate: [AuthGuard],//canActivate para acessar a rota apos fazer login para ter acesso as Filhas (HOME/Tecnico/CLiente)
+    path: '', component: NavComponent, canActivate: [AuthGuard],//canActivate para acessar a rota apos fazer login para ter acesso as Filhas (HOME/Tecnico/CLiente)
     children: [
       { path: 'home', component: HomeComponent },
       {path: 'tecnicos', component: TecnicoListComponent}

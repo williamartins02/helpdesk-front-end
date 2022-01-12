@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthenticationService } from './../services/authentication.service';
 import { Injectable } from '@angular/core';
@@ -15,17 +16,18 @@ export class AuthGuard implements CanActivate {
     para autenticar o login.*/ 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService,
     ){}
-
-
+    
     /*Validando se esta AUTENTICADO.*/
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot):  boolean {
     let authenticated = this.authenticationService.isAuthenticated();
     if(authenticated){
       return true
     }
-     this.router.navigate(['login']);/*Se não tiver autenticado, renderiza para tela de LOGIN novamente.*/
+     this.router.navigate(['login']);/*Se não tiver autenticado, redirecionar para tela de LOGIN novamente.*/
+     this.toast.warning("token inválido", "Emitir um novo!")
      return false
   }
   

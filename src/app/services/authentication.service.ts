@@ -1,6 +1,8 @@
+import { Credenciais } from './../models/credenciais';
+import { API_CONFIG } from './../config/api.config';
 import { HttpClient } from '@angular/common/http';
 
-import { Credenciais } from './../models/credenciais';
+
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -15,7 +17,7 @@ export class AuthenticationService {
 
 //autenticando LOGIN/SENHA para entrar no sistema, via ENDPOINT
 authenticate(creds: Credenciais){
-  return this.http.post('${API_CONFIG.baseUrl}/login', creds,{
+  return this.http.post(`${API_CONFIG.baseUrl}/login`, creds,{
     //pedindo para observar o TOKEN que vem tipo TEXTO, na respsota de login
     observe: 'response',
     responseType: 'text'
@@ -33,6 +35,12 @@ authenticate(creds: Credenciais){
      return !this.jwtService.isTokenExpired(token)
    }
    return false;
+ }
+
+ /*Metodo para limpar o (toke) */
+ logout(){
+   localStorage.clear();
+
  }
 
 }

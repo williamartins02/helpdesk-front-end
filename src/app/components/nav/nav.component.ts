@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from './../../services/authentication.service';
 import { Router, Routes } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,11 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    private toast: ToastrService,) { }
 
   //Metodo que inicia
   ngOnInit(): void {
-   this.router.navigate(['tecnicos'])
+   this.router.navigate(['home'])
+  }
+
+  /*Metodo para DESLOGAR e limpar o TOKEN do usuario do locaStorage */
+  logout(){
+    this.router.navigate(['login'])
+    this.authService.logout();
+    this.toast.info('logout realizado com sucesso', 'Logout', {timeOut: 7000})
   }
 
 }

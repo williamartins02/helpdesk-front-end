@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     email: '',
     senha: ''
   }
-  //criando VALIDAÇÃO para campo LOGIN/SENHA
+  //criando VALIDAÇÃO para campo(input) LOGIN/SENHA
   email = new FormControl(null, Validators.email);
   senha = new FormControl(null, Validators.minLength(4));
 
@@ -29,15 +30,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /*validando TOKEN para validação do login, chmandoo o EndPOint
+  /*validando TOKEN para validação do login, chmandoo service authenticate/successLogin
   Passando o Baeren com "substring(7)" que ocupa 7 caracteres*/
   login(){
-    this.service.authenticate(this.creds).subscribe(resposta  => {
+    this.service.authenticate(this.creds).subscribe((resposta) => {
       this.service.successLogin(resposta.headers.get('Authorization').substring(7));
       this.router.navigate([''])
-    },() => {
-      this.toast.error('Usuários e/ou senha inválidos')
+    },(error) => {
+      this.toast.error('Usuários e/ou senha inválidos', 'ERROR')
+      return throwError(error);
     })
+    this.toast.success("Usuário logado com sucesso!")
   }
 
   //validando campo de login e senha, para habilitar "Button"
