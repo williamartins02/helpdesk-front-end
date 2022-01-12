@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
     this.service.authenticate(this.creds).subscribe((resposta) => {
       this.service.successLogin(resposta.headers.get('Authorization').substring(7));
       this.router.navigate([''])
+      this.toast.success("Usuário logado com sucesso!")
     },(error) => {
       this.toast.error('Usuários e/ou senha inválidos', 'ERROR')
       return throwError(error);
     })
-    this.toast.success("Usuário logado com sucesso!")
   }
 
   //validando campo de login e senha, para habilitar "Button"
