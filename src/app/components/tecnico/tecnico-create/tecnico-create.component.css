@@ -5,8 +5,11 @@
     border-radius: 1rem;
 }
 
-.fullWidth{
-    width: 100%;
+.full-width{
+    width: 230px;
+    left: 1rem;
+    margin-top: 4px;
+    margin: 0 5px;
 }
 
 h1{
@@ -18,9 +21,14 @@ p{
  opacity: .5;
 }
 
+td {
+    text-align: center
+ }
+
 img{
-    height: 18rem;
     margin: auto;
+    width: 60%;
+    display: block;
 }
 
 .section{
@@ -29,6 +37,7 @@ img{
     justify-content: space-between;
 }
 
-button{
-    margin-top: .5rem;
+mat-icon{
+    opacity: .8 !important;
 }
+
