@@ -44,7 +44,6 @@ export class TecnicoCreateComponent implements OnInit {
     this.service.create(this.tecnico).subscribe(() => {
       this.toast.success('Cadastrado(a) com sucesso',  'Técnico(a) ' + this.tecnico.nome);
       this.router.navigate(['tecnicos']);//assim que salvar voltar para pagina ListTecnicos
-      
     }, (err) => {
         if(err.error.errors)//tratado erro com lista de erro dentro do arrays
            err.error.errors.forEach((element) => {
