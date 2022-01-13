@@ -26,7 +26,7 @@ export class TecnicoListComponent implements OnInit {
   ngOnInit(): void {
     this.findAll();
   }
-  /*Criando um service para lista uma LIST TECNICO*/
+  /*METODO Criando um service para lista uma LIST TECNICO*/
   findAll() {
     this.service.findAll().subscribe((resposta) => {
         this.ELEMENT_DATA = resposta
