@@ -20,3 +20,11 @@ table {
     margin-top: 1rem;
     opacity: .5;
   }
+
+  .edit{
+    color: rgb(65, 180, 225);
+  }
+
+  .delete{
+    color: red;
+  }
