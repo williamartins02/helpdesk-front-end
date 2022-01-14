@@ -1,0 +1,43 @@
+.container{
+    width: 31rem;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.full-width{
+    width: 230px;
+    left: 1rem;
+    margin-top: 4px;
+    margin: 0 5px;
+}
+
+h1{
+    text-align: center;
+}
+
+p{
+ margin-top: 1rem;
+ opacity: .5;
+}
+
+td {
+    text-align: center
+ }
+
+img{
+    margin: auto;
+    width: 60%;
+    display: block;
+}
+
+.section{
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-icon{
+    opacity: .8 !important;
+}
+

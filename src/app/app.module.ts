@@ -27,6 +27,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 //component do projeto.
@@ -38,6 +39,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { NgxMaskModule } from 'ngx-mask';
     HeaderComponent,
     TecnicoListComponent,
     LoginComponent,
-    TecnicoCreateComponent
+    TecnicoCreateComponent,
+    TecnicoUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { NgxMaskModule } from 'ngx-mask';
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatDialogModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -79,7 +83,7 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     ReactiveFormsModule,
     //requisições Http
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

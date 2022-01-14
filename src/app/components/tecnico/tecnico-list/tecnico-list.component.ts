@@ -1,10 +1,14 @@
+import { Router } from '@angular/router';
+import { TecnicoUpdateComponent } from './../tecnico-update/tecnico-update.component';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TecnicoService } from './../../../services/tecnico.service';
 import { Tecnico } from './../../../models/tecnico';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { TecnicoCreateComponent } from '../tecnico-create/tecnico-create.component';
 
 @Component({
   selector: 'app-tecnico-list',
@@ -21,11 +25,23 @@ export class TecnicoListComponent implements OnInit {
 
   constructor(
     private service: TecnicoService,
-    private toast: ToastrService,) { }
+    private toast: ToastrService,
+    public dialog: MatDialog,
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.findAll();
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TecnicoCreateComponent, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
   /*METODO Criando um service para lista uma LIST TECNICO*/
   findAll() {
     this.service.findAll().subscribe((resposta) => {
