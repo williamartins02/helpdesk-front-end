@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tecnico-create.component.css']
 })
 export class TecnicoCreateComponent implements OnInit {
-
+  hide = true;
   
   tecnico: Tecnico = {
     id:         '',

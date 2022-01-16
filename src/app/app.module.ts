@@ -44,6 +44,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
+
 @NgModule({
   declarations: [
     AppComponent,

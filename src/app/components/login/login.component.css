@@ -35,3 +35,8 @@ button{
     margin-top: 1rem;
     border-radius: 1rem;
 }
+mat-icon{
+    opacity: .8 !important;
+    margin-left: 90%;
+    margin-top: auto;
+}
