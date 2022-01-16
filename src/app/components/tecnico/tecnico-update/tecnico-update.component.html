@@ -2,12 +2,12 @@
     <form  class="form">
         <h1 >Atualizar Técnico</h1>
        
-        <img class="full-Width" src="assets/img/tecnico-create.png" alt="Help Desk">
+        <img class="full-Width" src="assets/img/update-sistema.png" alt="Help Desk">
  
         <section class="section">
-         <mat-checkbox (click)="addPerfil(0)"  class="margin" color="primary">Administrador</mat-checkbox>  
-         <mat-checkbox (click)="addPerfil(1)"  class="margin" color="primary" [checked]="true" >Cliente</mat-checkbox> 
-         <mat-checkbox (click)="addPerfil(2)"  class="margin" color="primary">Técnico</mat-checkbox> 
+         <mat-checkbox (click)="checkPerfil(0)"  class="margin" color="primary">Administrador</mat-checkbox>  
+         <mat-checkbox (click)="checkPerfil(1)"  class="margin" color="primary">Cliente</mat-checkbox> 
+         <mat-checkbox (click)="checkPerfil(2)"  [checked]="true" class="margin" color="primary">Técnico</mat-checkbox> 
        </section>
  
        <table class="example-full-width" cellspacing="0"><tr>
@@ -40,7 +40,7 @@
            </mat-form-field>
            
            <button (click)="update()" class="full-width mat-elevation-z8" mat-flat-button color="primary" >Atualizar</button>
-           <button routerLink="../../" class="full-width mat-elevation-z4" mat-flat-button color="warn">Cancelar</button>
+           <button (click)="onNoClick()" class="full-width mat-elevation-z4" mat-flat-button color="warn">Cancelar</button>
          
     </form>
   <p>By Gonçalves M William</p>

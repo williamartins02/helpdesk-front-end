@@ -13,24 +13,26 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 //Imports para componetes do Angular Material
-import {MatButtonModule} from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSelectModule} from '@angular/material/select';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatCardModule} from '@angular/material/card';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
 //component do projeto.
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -40,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,8 @@ import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecn
     MatListModule,
     MatCardModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -85,7 +90,15 @@ import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecn
     //requisições Http
     HttpClientModule,
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [AuthInterceptorProvider,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+ 

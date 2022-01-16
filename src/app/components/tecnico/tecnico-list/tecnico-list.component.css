@@ -28,3 +28,7 @@ table {
   .delete{
     color: red;
   }
+
+  .icons {
+    display: flex;
+  }

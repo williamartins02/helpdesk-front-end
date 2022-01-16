@@ -1,7 +1,8 @@
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Tecnico } from './../../../models/tecnico';
 import { TecnicoService } from './../../../services/tecnico.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -29,6 +30,8 @@ export class TecnicoUpdateComponent implements OnInit {
   senha: FormControl = new FormControl(null, Validators.minLength(3))
 
   constructor(
+    public dialogRef: MatDialogRef<TecnicoUpdateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {id: Number},
     private service: TecnicoService,
     private toast: ToastrService,
     private router: Router,
@@ -37,12 +40,16 @@ export class TecnicoUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tecnico.id = this.route.snapshot.paramMap.get('id');//acessa a url pega o ID (Parametro)) 
     this.findById();
   }
 
+  UrlRoute() {
+    console.log(this.route);
+    this.tecnico.id = this.route.snapshot.paramMap.get('id');//acessa a url pega o ID (Parametro)) 
+  }
+
   findById(): void {
-    this.service.findById(this.tecnico.id).subscribe((resposta) => {
+    this.service.findById(this.data.id).subscribe((resposta) => {
       resposta.perfis = []
       this.tecnico = resposta;
     })
@@ -51,8 +58,9 @@ export class TecnicoUpdateComponent implements OnInit {
   update(): void {
     this.service.update(this.tecnico).subscribe(() => {
       this.toast.success('Atualizado com sucesso', 'Técnico(a) ' + this.tecnico.nome);
-      this.router.navigate(['tecnicos']);
-    }, (err) => {
+      this.router.navigate(['/tecnicos']);
+      this.onNoClick();
+    }, (err) => {//listando LIST de erro.
       if (err.error.errors)
         err.error.errors.forEach((element) => {
           this.toast.error(element.message);
@@ -61,11 +69,16 @@ export class TecnicoUpdateComponent implements OnInit {
     })
   }
 
-  addPerfil(perfil: any): void {
+  checkPerfil(perfil: any): void {
     if (this.tecnico.perfis.includes(perfil)) {
       this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
     }
     this.tecnico.perfis.push(perfil);
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 
 }

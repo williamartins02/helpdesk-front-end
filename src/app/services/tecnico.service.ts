@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tecnico } from './../models/tecnico';
-import { Observable } from 'rxjs';
+import { Observable, pipe, Subject, tap } from 'rxjs';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +12,14 @@ import { API_CONFIG } from '../config/api.config';
 })
 export class TecnicoService {
 
+  private _refresh$ = new Subject<void>();
+
   constructor(private http: HttpClient) { }
+
+  /*GET PARA DA REFRESH AO ADICIONAR UM USUARIO */
+  get refresh$() {
+    return this._refresh$;
+  }
 
   /*Serviço para listar por Id*/
   findById(id: any): Observable<Tecnico> {
@@ -27,9 +34,19 @@ export class TecnicoService {
   /*Serviço apra CRAIR um tecnico novo.*/
   create(tecnicos: Tecnico): Observable<Tecnico> {
     return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnicos)
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+        })
+      )
   }
 
   update(tecnicos: Tecnico): Observable<Tecnico> {
-    return this.http.put<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${tecnicos.id}`, tecnicos);
+    return this.http.put<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${tecnicos.id}`, tecnicos)
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+        })
+      )
   }
 }

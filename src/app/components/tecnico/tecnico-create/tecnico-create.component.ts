@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class TecnicoCreateComponent implements OnInit {
 
+  
   tecnico: Tecnico = {
     id:         '',
     nome:       '',

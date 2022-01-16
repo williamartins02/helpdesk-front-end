@@ -5,10 +5,6 @@ import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
-import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
-
-;
 
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
@@ -23,8 +19,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
 
       {path: 'tecnicos', component: TecnicoListComponent},
-      {path: 'tecnicos', component: TecnicoCreateComponent},
-      {path: 'tecnicos/update/:id', component: TecnicoUpdateComponent}
+      // {path: 'tecnicos/create', component: TecnicoCreateComponent},
+      // {path: 'tecnicos/update/:id', component: TecnicoUpdateComponent},
     ]
   }
 ];
