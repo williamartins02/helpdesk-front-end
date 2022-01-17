@@ -8,54 +8,58 @@
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
     </mat-form-field>
-
-
     <div class="mat-elevation-z8">
-        <table  mat-table [dataSource]="dataSource">
-           
-            <!-- Position Column -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport ">
+            <table mat-table [dataSource]="dataSource">
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="nome">
-                <th mat-header-cell *matHeaderCellDef> Nome </th>
-                <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-            </ng-container>
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let tecnico"> {{tecnico.id}} </td>
+                </ng-container>
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="cpf">
-                <th mat-header-cell *matHeaderCellDef> CPF </th>
-                <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
-            </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let tecnico"> {{tecnico.nome}} </td>
+                </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> E-mail </th>
-                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="cpf">
+                    <th mat-header-cell *matHeaderCellDef> CPF </th>
+                    <td mat-cell *matCellDef="let tecnico"> {{tecnico.cpf}} </td>
+                </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="acoes">
-                <th mat-header-cell *matHeaderCellDef> Ações </th>
-                <td mat-cell *matCellDef="let element">
-                    <div class="icons">
-                        <div>
-                            <mat-icon matSuffix class="edit" (click)="openEdit(element.id)"><a>edit</a></mat-icon>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                    <td mat-cell *matCellDef="let tecnico"> {{tecnico.email}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="acoes">
+                    <th mat-header-cell *matHeaderCellDef> Ações </th>
+                    <td mat-cell *matCellDef="let tecnico">
+                        <div class="icons">
+                            <div>
+                                <mat-icon matSuffix class="edit" (click)="openEdit(tecnico.id)"><a>edit</a></mat-icon>
+                            </div>
+                            <div routerLink="">
+                                <mat-icon matSuffix class="delete">delete_foreve</mat-icon>
+                            </div>
                         </div>
-                        <div routerLink="">
-                            <mat-icon matSuffix class="delete">delete_foreve</mat-icon>
-                        </div>
-                    </div>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 2, 10, 20]" showFirstLastButtons>
-        </mat-paginator>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </cdk-virtual-scroll-viewport>
+        <mat-paginator class="pagination" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
     <p>Lista Técnicos</p>
+
+       <!-- Loading -->
+       <div *ngIf="isLoading" class="loader-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
 </div>

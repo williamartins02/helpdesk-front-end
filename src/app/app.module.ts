@@ -1,4 +1,5 @@
-import { AuthInterceptor, AuthInterceptorProvider } from './interceptors/auth.interceptor';
+
+import {  AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 //para realizar requisiões HTTP
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 //Imports para componetes do Angular Material
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 //component do projeto.
@@ -78,6 +80,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    ScrollingModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -92,6 +95,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     HttpClientModule,
   ],
   providers: [AuthInterceptorProvider,
+
     {
       provide: MatDialogRef,
       useValue: {}

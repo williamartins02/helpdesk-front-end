@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+
 import { TecnicoUpdateComponent } from './../tecnico-update/tecnico-update.component';
 import { Subscription, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -17,47 +17,59 @@ import { TecnicoCreateComponent } from '../tecnico-create/tecnico-create.compone
 })
 export class TecnicoListComponent implements OnInit, OnDestroy {
 
-  subscription: Subscription;
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
+
+  refreshTable: Subscription;
+  isLoading = false;
 
   ELEMENT_DATA: Tecnico[] = [];
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
- 
+
   constructor(
     private service: TecnicoService,
     private toast: ToastrService,
     public dialog: MatDialog,
-  
-   ) { }
+
+  ) { }
 
   ngOnInit(): void {
     this.findAll();
-    this.refresh(); 
+    this.refresh();
   }
 
   /*Destruindo uma sessão */
   ngOnDestroy(): void {
-      this.subscription.unsubscribe(); 
+    this.refreshTable.unsubscribe();
   }
-  /*Dando refresh na LIST ao ADICIONAR/EDITAR um usúario */
-  refresh(){
-    this.subscription = this.service.refresh$.subscribe(() => {
+  /*Dando refresh na LIST ao ADICIONAR/EDITAR um usúario, passando um LOADING */
+  refresh() {
+    this.refreshTable = this.service.refresh$.subscribe(() => {
+      this.isLoading = true;
+      
       this.findAll();
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 2000);
+    }, (error) => {
+      this.toast.error('Ao carregar a lista', 'ERROR')
+      return throwError(error);
     })
   }
 
   /*METODO Criando um service para lista uma LIST TECNICO*/
   findAll() {
     this.service.findAll().subscribe((resposta) => {
-        this.ELEMENT_DATA = resposta
-        this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
-        this.dataSource.paginator = this.paginator;//paginação dos registros. 
+      this.ELEMENT_DATA = resposta
+      this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;//paginação dos registros. 
     }, (error) => {
-          this.toast.error('Na listagem dos tecnicos, procurar suporte', 'ERROR')
-          return throwError(error);
-       })
+      this.toast.error('Na listagem dos tecnicos, procurar suporte', 'ERROR')
+      return throwError(error);
+    })
   }
 
   /*Metodo para filtrar*/
