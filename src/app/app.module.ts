@@ -47,6 +47,8 @@ import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecn
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     TecnicoListComponent,
     LoginComponent,
     TecnicoCreateComponent,
-    TecnicoUpdateComponent
+    TecnicoUpdateComponent,
   ],
   imports: [
     BrowserModule,
