@@ -45,6 +45,7 @@ import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecn
 import { NgxMaskModule } from 'ngx-mask';
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
 
 
 
@@ -59,6 +60,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     LoginComponent,
     TecnicoCreateComponent,
     TecnicoUpdateComponent,
+    TecnicoDeleteComponent,
   ],
   imports: [
     BrowserModule,
