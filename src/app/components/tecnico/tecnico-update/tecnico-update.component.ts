@@ -30,8 +30,8 @@ export class TecnicoUpdateComponent implements OnInit {
   senha: FormControl = new FormControl(null, Validators.minLength(3))
 
   constructor(
-    public dialogRef: MatDialogRef<TecnicoUpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
+    public dialogRef: MatDialogRef<TecnicoUpdateComponent>,
     private service: TecnicoService,
     private toast: ToastrService,
     private router: Router,
@@ -41,11 +41,6 @@ export class TecnicoUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.findById();
-  }
-
-  UrlRoute() {
-    console.log(this.route);
-    this.tecnico.id = this.route.snapshot.paramMap.get('id');//acessa a url pega o ID (Parametro)) 
   }
 
   findById(): void {

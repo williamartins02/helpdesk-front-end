@@ -1,1 +1,26 @@
-<p>tecnico-delete works!</p>
+<div class="container-dialog"> 
+<div class="delete-dialog">
+    <mat-icon class="icon">warning</mat-icon>
+        <div class="header">
+                <h3 mat-dialog-title class="title" style="margin-bottom: 0px">
+                Você realmente quer excluir este item?
+                </h3>
+        </div>
+
+    <div class="body">
+        <div class="option" (click)="delete()">
+                <div>
+                    <mat-icon class="button-icon">check_circle</mat-icon>
+                    <span> Sim, excluir definitivamente!</span>
+                </div>
+                
+        </div>
+        <div class="option" (click)="closeModal(false)">
+            <div>
+                <mat-icon class="button-icon">cancel</mat-icon>
+                <span>Não, cancelar a exclusão!</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

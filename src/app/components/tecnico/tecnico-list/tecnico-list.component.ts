@@ -1,13 +1,15 @@
+import { TecnicoDeleteComponent } from './../tecnico-delete/tecnico-delete.component';
+import { Router } from '@angular/router';
 
 import { TecnicoUpdateComponent } from './../tecnico-update/tecnico-update.component';
 import { Subscription, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TecnicoService } from './../../../services/tecnico.service';
 import { Tecnico } from './../../../models/tecnico';
-import { Component, OnDestroy, OnInit, ViewChild, } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TecnicoCreateComponent } from '../tecnico-create/tecnico-create.component';
 
 @Component({
@@ -21,17 +23,29 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
 
   refreshTable: Subscription;
   isLoading = false;
-
+  tecnico: Tecnico = {
+    id: '',
+    nome: '',
+    cpf: '',
+    email: '',
+    senha: '',
+    perfis: [],
+    dataCriacao: '',
+  }
+ 
   TECNICO_DATA: Tecnico[] = [];
+  @Inject(MAT_DIALOG_DATA) public data: {id: Number}
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.TECNICO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    public dialogRef: MatDialogRef<TecnicoListComponent>,
     private service: TecnicoService,
     private toast: ToastrService,
     public dialog: MatDialog,
+    private router: Router,
 
   ) { }
 
@@ -60,6 +74,13 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     })
   }
 
+  findById(): void {
+    this.service.findById(this.data.id).subscribe((resposta) => {
+      resposta.perfis = []
+      this.tecnico = resposta;
+    })
+  }
+
   /*METODO Criando um service para lista uma LIST TECNICO*/
   findAll() {
     this.service.findAll().subscribe((resposta) => {
@@ -71,7 +92,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
       return throwError(error);
     })
   }
-
+  
   /*Metodo para filtrar*/
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -98,5 +119,17 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
       console.log('The dialog was closed');
     });
   }
+
+  openDelete(id: Number): void {
+    console.log("ID", id);
+    const dialogRef = this.dialog.open(TecnicoDeleteComponent, {
+      width: '600px',
+      data: { id }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
+
 

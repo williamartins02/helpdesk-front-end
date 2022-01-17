@@ -42,10 +42,10 @@
                     <td mat-cell *matCellDef="let tecnico">
                         <div class="icons">
                             <div>
-                                <mat-icon matSuffix class="edit" (click)="openEdit(tecnico.id)"><a>edit</a></mat-icon>
+                                <mat-icon matSuffix class="edit" (click)="openEdit(tecnico.id)">edit</mat-icon>
                             </div>
-                            <div routerLink="">
-                                <mat-icon matSuffix class="delete">delete_foreve</mat-icon>
+                            <div>
+                                <mat-icon matSuffix class="delete" (click)="openDelete(tecnico.id)">delete_foreve</mat-icon>
                             </div>
                         </div>
                     </td>
