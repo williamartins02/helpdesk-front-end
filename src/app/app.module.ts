@@ -54,6 +54,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from 'ngx-mask';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 
 
 
@@ -74,6 +75,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     ClienteDeleteComponent,
     ClienteListComponent,
     ClienteUpdateComponent,
+    ChamadoListComponent,
     
     
   ],
