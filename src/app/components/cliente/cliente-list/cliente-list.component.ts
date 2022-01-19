@@ -1,29 +1,29 @@
-import { TecnicoDeleteComponent } from './../tecnico-delete/tecnico-delete.component';
+import { ClienteDeleteComponent } from '../cliente-delete/cliente-delete.component';
 import { Router } from '@angular/router';
 
-import { TecnicoUpdateComponent } from './../tecnico-update/tecnico-update.component';
+import { ClienteUpdateComponent } from '../cliente-update/cliente-update.component';
 import { Subscription, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { TecnicoService } from './../../../services/tecnico.service';
-import { Tecnico } from './../../../models/tecnico';
+import { ClienteService } from '../../../services/cliente.service';
+import { Cliente } from '../../../models/cliente';
 import { Component, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TecnicoCreateComponent } from '../tecnico-create/tecnico-create.component';
+import { ClienteCreateComponent } from '../cliente-create/cliente-create.component';
 
 @Component({
-  selector: 'app-tecnico-list',
-  templateUrl: './tecnico-list.component.html',
-  styleUrls: ['./tecnico-list.component.css']
+  selector: 'app-cliente-list',
+  templateUrl: './cliente-list.component.html',
+  styleUrls: ['./cliente-list.component.css']
 })
-export class TecnicoListComponent implements OnInit, OnDestroy {
+export class ClienteListComponent implements OnInit, OnDestroy {
 
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);//scroll
 
   refreshTable: Subscription;
   isLoading = false;
-  tecnico: Tecnico = {
+  cliente: Cliente = {
     id: '',
     nome: '',
     cpf: '',
@@ -33,16 +33,16 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     dataCriacao: '',
   }
  
-  TECNICO_DATA: Tecnico[] = [];
+  TECNICO_DATA: Cliente[] = [];
   @Inject(MAT_DIALOG_DATA) public data: {id: Number}
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
-  dataSource = new MatTableDataSource<Tecnico>(this.TECNICO_DATA);
-  /*Paninação da tabela tecnico*/
+  dataSource = new MatTableDataSource<Cliente>(this.TECNICO_DATA);
+  /*Paninação da tabela cliente*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    public dialogRef: MatDialogRef<TecnicoListComponent>,
-    private service: TecnicoService,
+    public dialogRef: MatDialogRef<ClienteListComponent>,
+    private service: ClienteService,
     private toast: ToastrService,
     public dialog: MatDialog,
     private router: Router,
@@ -76,7 +76,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
   findById(): void {
     this.service.findById(this.data.id).subscribe((resposta) => {
       resposta.perfis = []
-      this.tecnico = resposta;
+      this.cliente = resposta;
     })
   }
 
@@ -84,10 +84,10 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
   findAll() {
     this.service.findAll().subscribe((resposta) => {
       this.TECNICO_DATA = resposta
-      this.dataSource = new MatTableDataSource<Tecnico>(this.TECNICO_DATA);
+      this.dataSource = new MatTableDataSource<Cliente>(this.TECNICO_DATA);
       this.dataSource.paginator = this.paginator;//paginação dos registros. 
     }, (error) => {
-      this.toast.error('Na listagem dos tecnicos, procurar suporte', 'ERROR')
+      this.toast.error('Na listagem dos clientes, procurar suporte', 'ERROR')
       return throwError(error);
     })
   }
@@ -98,9 +98,9 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  /*MODAL para EDIATR/CRIAR/DELETAR do tecnico-update/tecnico-create/tecnico-delete */
+  /*MODAL para EDIATR/CRIAR/DELETAR do cliente-update/cliente-create/cliente-delete */
   openCreate(): void {
-    const dialogRef = this.dialog.open(TecnicoCreateComponent, {
+    const dialogRef = this.dialog.open(ClienteCreateComponent, {
       width: '600px'
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -110,9 +110,9 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
 
   openEdit(id: Number): void {
     console.log("ID", id);
-    const dialogRef = this.dialog.open(TecnicoUpdateComponent, {
+    const dialogRef = this.dialog.open(ClienteUpdateComponent, {
       width: '600px',
-      data: { id }//Pegando ID tecnico para editar..
+      data: { id }//Pegando ID cliente para editar..
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -121,7 +121,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
 
   openDelete(id: Number): void {
     console.log("ID", id);
-    const dialogRef = this.dialog.open(TecnicoDeleteComponent, {
+    const dialogRef = this.dialog.open(ClienteDeleteComponent, {
       width: '600px',
       data: { id }
     });

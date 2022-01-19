@@ -1,3 +1,4 @@
+
 import { AuthGuard } from './authentication/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
@@ -5,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
       {path: 'tecnicos', component: TecnicoListComponent},
       // {path: 'tecnicos/create', component: TecnicoCreateComponent},
       // {path: 'tecnicos/update/:id', component: TecnicoUpdateComponent},
+
+      {path: 'clientes', component: ClienteListComponent},
     ]
   }
 ];

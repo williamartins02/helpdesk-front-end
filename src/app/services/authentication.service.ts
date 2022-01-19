@@ -40,7 +40,6 @@ authenticate(creds: Credenciais){
  /*Metodo para limpar o (toke) */
  logout(){
    localStorage.clear();
-
  }
 
 }
