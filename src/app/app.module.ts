@@ -46,6 +46,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
+
 //component do projeto.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 

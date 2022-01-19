@@ -19,7 +19,8 @@ import { ClienteCreateComponent } from '../cliente-create/cliente-create.compone
 })
 export class ClienteListComponent implements OnInit, OnDestroy {
 
-  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);//scroll
+  /*Scrooll da tabela */
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
 
   refreshTable: Subscription;
   isLoading = false;
@@ -33,10 +34,10 @@ export class ClienteListComponent implements OnInit, OnDestroy {
     dataCriacao: '',
   }
  
-  TECNICO_DATA: Cliente[] = [];
+  CLIENTE_DATA: Cliente[] = [];
   @Inject(MAT_DIALOG_DATA) public data: {id: Number}
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
-  dataSource = new MatTableDataSource<Cliente>(this.TECNICO_DATA);
+  dataSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);
   /*Paninação da tabela cliente*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -83,8 +84,8 @@ export class ClienteListComponent implements OnInit, OnDestroy {
   /*METODO Criando um service para lista uma LIST TECNICO*/
   findAll() {
     this.service.findAll().subscribe((resposta) => {
-      this.TECNICO_DATA = resposta
-      this.dataSource = new MatTableDataSource<Cliente>(this.TECNICO_DATA);
+      this.CLIENTE_DATA = resposta
+      this.dataSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);
       this.dataSource.paginator = this.paginator;//paginação dos registros. 
     }, (error) => {
       this.toast.error('Na listagem dos clientes, procurar suporte', 'ERROR')

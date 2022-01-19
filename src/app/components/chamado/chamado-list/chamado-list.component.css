@@ -1,0 +1,69 @@
+.container{
+    width: 95%;
+    margin: auto;
+}
+table {
+    width: 100%;
+  }
+.mat-form-field{
+      width: 100%;
+  }
+
+  button{
+    border: 1px solid rgb(161, 159, 159);
+    margin-left: auto;
+    display: flex !important;
+  }
+
+  .text-spinner{
+    margin-top: 10rem;
+  }
+
+  p{
+    margin-top: 1rem;
+    opacity: .5;
+  }
+
+  .edit{
+    color: rgb(65, 180, 225);
+  }
+
+  .delete{
+    color: red;
+  }
+
+  .icons {
+    display: flex;
+  }
+  .pagination{
+    margin-top: 0.1rem;
+  }
+
+  .loader-spinner{
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index:99999; 
+    background: white;
+    height: 16rem;
+    margin-top: -400px;
+  
+  }
+
+  .example-viewport {
+    height: 296px;
+    width: auto;
+    border: 2px solid white;
+  }
+  
+  .example-item {
+    height: 100px;
+  }
+
+  mat-radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+  }

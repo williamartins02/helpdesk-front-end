@@ -1,1 +1,79 @@
-<p>chamado-list works!</p>
+<div class="container">
+
+    <button class="mat-elevation-z8" mat-raised-button color="primary">
+        <mat-icon md-36> person_add </mat-icon> Adicionar Chamado(a)
+    </button>
+
+    <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport ">
+            <table mat-table [dataSource]="dataSource">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.id}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="titulo">
+                    <th mat-header-cell *matHeaderCellDef> Titulo </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.titulo}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="cliente">
+                    <th mat-header-cell *matHeaderCellDef> Cliente </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.nomeCliente}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="tecnico">
+                    <th mat-header-cell *matHeaderCellDef> Técnico </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.nomeTecnico}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dataAbertura">
+                    <th mat-header-cell *matHeaderCellDef> Data de Abertura </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.dataAbertura}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="prioridade">
+                    <th mat-header-cell *matHeaderCellDef> Prioridade </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.prioridade}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let chamado"> {{chamado.status}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="acoes">
+                    <th mat-header-cell *matHeaderCellDef> Ações </th>
+                    <td mat-cell *matCellDef="let tecnico">
+                        <div class="icons">
+                            <div class="icons-edit">
+                                <mat-icon matSuffix class="edit">edit</mat-icon>
+                            </div>
+                            <div class="icons-delete">
+                                <mat-icon matSuffix class="delete">visibility</mat-icon>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </cdk-virtual-scroll-viewport>
+        <mat-paginator class="pagination" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <p>Lista Técnicos</p>
+
+       <!-- Loading -->
+ 
+    
+</div>
