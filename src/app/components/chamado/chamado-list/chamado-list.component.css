@@ -10,13 +10,16 @@ table {
   }
 
   .table{
-    border-spacing: 10px;
+    border-spacing: 7px;
+  }
+
+  .mat-row{
+    height: 35px !important;
   }
  
-  .mat{
+  .mat-status{
     width: 110px !important;
     padding: 1px 20px 1px 17px;
-    margin-right: 20px;
     color: #e9e4e4;
     border-radius: 10px !important;
     text-align: center;
@@ -84,6 +87,10 @@ table {
   }
 
   .statusColor{
-     width: 50rem;
+     width: 10rem;
+  }
+
+  mat-row cdk-row ng-star-inserted{
+    height: 10pxpx;
   }
  

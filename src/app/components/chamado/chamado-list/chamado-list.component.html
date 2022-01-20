@@ -46,12 +46,12 @@
        
                 <ng-container matColumnDef="prioridade">
                    <th mat-header-cell *matHeaderCellDef> Prioridade </th>
-                   <td mat-cell class="mat mat-elevation-z8"  *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColor(chamado.prioridade)}">{{returnPrioridade(chamado.prioridade)}} </td>
+                   <td mat-cell class="mat-status mat-elevation-z8"  *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColor(chamado.prioridade)}">{{returnPrioridade(chamado.prioridade)}} </td>
                 </ng-container>
        
                 <ng-container class="statusColor" matColumnDef="status">
                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                   <td mat-cell class="mat mat-elevation-z8" *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColorBackground(chamado.status) }">{{returnStatus(chamado.status)}} </td>
+                   <td mat-cell class="mat-status mat-elevation-z8" *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColorBackground(chamado.status) }">{{returnStatus(chamado.status)}} </td>
                 </ng-container>
 
                 <!-- Symbol Column -->
@@ -69,7 +69,7 @@
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </cdk-virtual-scroll-viewport>
         <mat-paginator class="pagination" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

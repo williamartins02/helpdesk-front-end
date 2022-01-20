@@ -4,9 +4,11 @@
 }
 table {
     width: 100%;
+    border-spacing: 10px;
   }
 .mat-form-field{
       width: 100%;
+      
   }
 
   button{

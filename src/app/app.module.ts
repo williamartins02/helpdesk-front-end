@@ -56,6 +56,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
+import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 
 
 
@@ -77,6 +78,7 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
     ClienteListComponent,
     ClienteUpdateComponent,
     ChamadoListComponent,
+    ChamadoCreateComponent,
     
     
   ],
