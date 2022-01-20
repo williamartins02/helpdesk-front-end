@@ -9,6 +9,21 @@ table {
       width: 100%;
   }
 
+  .table{
+    border-spacing: 10px;
+  }
+ 
+  .mat{
+    width: 110px !important;
+    padding: 1px 20px 1px 17px;
+    margin-right: 20px;
+    color: #e9e4e4;
+    border-radius: 10px !important;
+    text-align: center;
+    font-weight: bold;
+    color: white; text-shadow: black 0.1em 0.1em 0.2em;
+    }
+
   button{
     border: 1px solid rgb(161, 159, 159);
     margin-left: auto;
@@ -67,3 +82,8 @@ table {
     justify-content: space-around;
     margin-bottom: 1rem;
   }
+
+  .statusColor{
+     width: 50rem;
+  }
+ 

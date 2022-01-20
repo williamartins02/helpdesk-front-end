@@ -8,53 +8,56 @@
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
     </mat-form-field>
+
+    <mat-radio-group color="primary">
+        <mat-radio-button (click)="orderByStatus(0)" value="0">ABERTO</mat-radio-button>
+        <mat-radio-button (click)="orderByStatus(1)" value="1">ANDAMENTO</mat-radio-button>
+        <mat-radio-button (click)="orderByStatus(2)" value="2">ENCERRADO</mat-radio-button>
+      </mat-radio-group>
+
+
     <div class="mat-elevation-z8">
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport ">
-            <table mat-table [dataSource]="dataSource">
+            <table mat-table class="table" [dataSource]="dataSource">
 
-                <!-- Position Column -->
                 <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef> ID </th>
-                    <td mat-cell *matCellDef="let chamado"> {{chamado.id}} </td>
+                   <th mat-header-cell *matHeaderCellDef> ID </th>
+                   <td mat-cell *matCellDef="let chamado"> {{chamado.id}} </td>
                 </ng-container>
-
-                <!-- Name Column -->
+       
                 <ng-container matColumnDef="titulo">
-                    <th mat-header-cell *matHeaderCellDef> Titulo </th>
-                    <td mat-cell *matCellDef="let chamado"> {{chamado.titulo}} </td>
+                   <th mat-header-cell *matHeaderCellDef> Titulo </th>
+                   <td mat-cell *matCellDef="let chamado"> {{chamado.titulo}} </td>
                 </ng-container>
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="cliente">
-                    <th mat-header-cell *matHeaderCellDef> Cliente </th>
-                    <td mat-cell *matCellDef="let chamado"> {{chamado.nomeCliente}} </td>
-                </ng-container>
-
-                <!-- Symbol Column -->
+       
                 <ng-container matColumnDef="tecnico">
                     <th mat-header-cell *matHeaderCellDef> Técnico </th>
                     <td mat-cell *matCellDef="let chamado"> {{chamado.nomeTecnico}} </td>
+                 </ng-container>
+                <ng-container matColumnDef="cliente">
+                   <th mat-header-cell *matHeaderCellDef> Cliente </th>
+                   <td mat-cell *matCellDef="let chamado"> {{chamado.nomeCliente}} </td>
                 </ng-container>
-
+       
                 <ng-container matColumnDef="dataAbertura">
-                    <th mat-header-cell *matHeaderCellDef> Data de Abertura </th>
-                    <td mat-cell *matCellDef="let chamado"> {{chamado.dataAbertura}} </td>
+                   <th mat-header-cell *matHeaderCellDef> Data de Abertura </th>
+                   <td mat-cell *matCellDef="let chamado"> {{chamado.dataAbertura}} </td>
                 </ng-container>
-
+       
                 <ng-container matColumnDef="prioridade">
-                    <th mat-header-cell *matHeaderCellDef> Prioridade </th>
-                    <td mat-cell *matCellDef="let chamado"> {{chamado.prioridade}} </td>
+                   <th mat-header-cell *matHeaderCellDef> Prioridade </th>
+                   <td mat-cell class="mat mat-elevation-z8"  *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColor(chamado.prioridade)}">{{returnPrioridade(chamado.prioridade)}} </td>
                 </ng-container>
-
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let chamado"> {{chamado.status}} </td>
+       
+                <ng-container class="statusColor" matColumnDef="status">
+                   <th mat-header-cell *matHeaderCellDef> Status </th>
+                   <td mat-cell class="mat mat-elevation-z8" *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColorBackground(chamado.status) }">{{returnStatus(chamado.status)}} </td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="acoes">
                     <th mat-header-cell *matHeaderCellDef> Ações </th>
-                    <td mat-cell *matCellDef="let tecnico">
+                    <td mat-cell *matCellDef="let chamado">
                         <div class="icons">
                             <div class="icons-edit">
                                 <mat-icon matSuffix class="edit">edit</mat-icon>
@@ -72,8 +75,5 @@
         <mat-paginator class="pagination" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
     <p>Lista Técnicos</p>
-
-       <!-- Loading -->
- 
     
 </div>
