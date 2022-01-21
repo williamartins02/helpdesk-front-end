@@ -1,1 +1,63 @@
-<p>chamado-create works!</p>
+<div class="container mat-elevation-z8">
+  <form class="form">
+    <h1>Cadastrar Chamado</h1>
+
+    <img class="full-Width" src="assets/img/chamadoList.png" alt="Help Desk" />
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Título do chamado</mat-label>
+          <input name="nome" matInput placeholder="Ex.. Trocar teclado" />
+        </mat-form-field>
+
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Selecione um status</mat-label>
+          <mat-select>
+            <mat-option>NENHUM</mat-option>
+            <mat-option value="O">ABERTO</mat-option>
+            <mat-option value="1">EM ANDAMENTO</mat-option>
+            <mat-option value="2">ENCERRADO</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Selecione um prioridade</mat-label>
+          <mat-select>
+            <mat-option>NENHUM</mat-option>
+            <mat-option value="O">BAIXA</mat-option>
+            <mat-option value="1">MÉDIA</mat-option>
+            <mat-option value="2">ALTA</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-person" appearance="outline">
+          <mat-label>Selecione um técnico</mat-label>
+          <mat-select>
+            <mat-option>NENHUM</mat-option>
+            <mat-option value="0">WIlliam Martins</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-person" appearance="outline">
+          <mat-label>Selecione um cliente</mat-label>
+          <mat-select>
+            <mat-option>NENHUM</mat-option>
+            <mat-option value="0">Dayane Souza</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+          <mat-form-field class="full-text-area" appearance="outline">
+            <mat-label>Deixe uma descrição</mat-label>
+            <textarea class="descricao" matInput placeholder="Ex. Trocar bateria de notebook..."></textarea>
+          </mat-form-field>
+      
+      </tr>
+    </table>
+
+    <button class="full-button mat-elevation-z8" mat-flat-button color="primary">Adicionar</button>
+    <button class="full-button mat-elevation-z4" mat-flat-button color="warn">Cancelar</button>
+  </form>
+  <p>By Gonçalves M William</p>
+</div>
