@@ -8,13 +8,12 @@
       <tr>
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Título do chamado</mat-label>
-          <input name="nome" matInput placeholder="Ex.. Trocar teclado" />
+          <input name="titulo" matInput placeholder="Ex.. Trocar teclado" [formControl]="titulo" required />
         </mat-form-field>
-
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Selecione um status</mat-label>
-          <mat-select>
+          <mat-select [formControl]="status" required>
             <mat-option>NENHUM</mat-option>
             <mat-option value="O">ABERTO</mat-option>
             <mat-option value="1">EM ANDAMENTO</mat-option>
@@ -24,7 +23,7 @@
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Selecione um prioridade</mat-label>
-          <mat-select>
+          <mat-select [formControl]="prioridade" required>
             <mat-option>NENHUM</mat-option>
             <mat-option value="O">BAIXA</mat-option>
             <mat-option value="1">MÉDIA</mat-option>
@@ -34,7 +33,7 @@
 
         <mat-form-field class="full-person" appearance="outline">
           <mat-label>Selecione um técnico</mat-label>
-          <mat-select>
+          <mat-select [formControl]="tecnico" required>
             <mat-option>NENHUM</mat-option>
             <mat-option value="0">WIlliam Martins</mat-option>
           </mat-select>
@@ -42,22 +41,27 @@
 
         <mat-form-field class="full-person" appearance="outline">
           <mat-label>Selecione um cliente</mat-label>
-          <mat-select>
+          <mat-select [formControl]="cliente" required>
             <mat-option>NENHUM</mat-option>
             <mat-option value="0">Dayane Souza</mat-option>
           </mat-select>
         </mat-form-field>
 
-          <mat-form-field class="full-text-area" appearance="outline">
-            <mat-label>Deixe uma descrição</mat-label>
-            <textarea class="descricao" matInput placeholder="Ex. Trocar bateria de notebook..."></textarea>
-          </mat-form-field>
-      
+        <mat-form-field class="full-text-area" appearance="outline">
+          <mat-label>Deixe uma descrição</mat-label>
+          <textarea [formControl]="descricao" required class="descricao" matInput placeholder="Ex. Trocar bateria de notebook..."></textarea>
+        </mat-form-field>
       </tr>
     </table>
 
-    <button class="full-button mat-elevation-z8" mat-flat-button color="primary">Adicionar</button>
-    <button class="full-button mat-elevation-z4" mat-flat-button color="warn">Cancelar</button>
+    <button [disabled]="!validaCampos()" class="full-button mat-elevation-z8"
+      mat-flat-button
+      color="primary">
+      Adicionar
+    </button>
+    <button class="full-button mat-elevation-z4" mat-flat-button color="warn">
+      Cancelar
+    </button>
   </form>
   <p>By Gonçalves M William</p>
 </div>
