@@ -1,3 +1,4 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Chamado } from './../../../models/chamado';
 
@@ -19,32 +20,34 @@ import { FormControl, Validators } from "@angular/forms";
 export class ChamadoCreateComponent implements OnInit {
 
   chamado: Chamado = {
-    prioridade: '',
-    status:     '',
-    titulo:     '',
-    observacoes:  '',
-    tecnico:    '',
-    cliente:    '',
-    nomeCliente:'',
-    nomeTecnico:'',
+    prioridade:  '',
+    status:      '',
+    titulo:      '',
+    observacoes: '',
+    tecnico:     '',
+    cliente:     '',
+    nomeCliente: '',
+    nomeTecnico: '',
   }
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
 
 
-  prioridade: FormControl = new FormControl(null, [Validators.required]);
-  status: FormControl = new FormControl(null, [Validators.required]);
-  titulo: FormControl = new FormControl(null, [Validators.required]);
+  prioridade:  FormControl = new FormControl(null, [Validators.required]);
+  status:      FormControl = new FormControl(this.chamado.status || 'ABERTO', [Validators.required,]);
+  titulo:      FormControl = new FormControl(null, [Validators.required]);
   observacoes: FormControl = new FormControl(null, [Validators.required]);
-  tecnico: FormControl = new FormControl(null, [Validators.required]);
-  cliente: FormControl = new FormControl(null, [Validators.required]);
+  tecnico:     FormControl = new FormControl(null, [Validators.required]);
+  cliente:     FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
     private chamadoService: ChamadoService,
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+
+    public dialogRef: MatDialogRef<ChamadoCreateComponent>,
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +59,7 @@ export class ChamadoCreateComponent implements OnInit {
      this.chamadoService.create(this.chamado).subscribe((resposta) =>{
       this.toast.success("Chamado criando com sucesso", "Novo chamado");
       this.router.navigate(['chamados']);
+      this.onNoClick();
     },(error) => {
       this.toast.error("Ao adicionar um chamado", "ERROR");
       return throwError(error.error.error);
@@ -67,7 +71,7 @@ export class ChamadoCreateComponent implements OnInit {
         this.clientes = resposta;
       },(error) => {
         this.toast.error("Ao carregar a lista técnico", "ERROR");
-        return throwError(error);
+        return throwError(error.error.error);
       });
   }
 
@@ -77,7 +81,7 @@ export class ChamadoCreateComponent implements OnInit {
         this.tecnicos = resposta;
       },(error) => {
         this.toast.error("Ao carregar a lista técnico", "ERROR");
-        return throwError(error);
+        return throwError(error.error.error);
       }
     );
   }
@@ -91,5 +95,9 @@ export class ChamadoCreateComponent implements OnInit {
       this.tecnico &&
       this.cliente.valid
     );
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

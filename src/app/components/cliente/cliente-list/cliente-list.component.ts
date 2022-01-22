@@ -17,7 +17,7 @@ import { ClienteCreateComponent } from '../cliente-create/cliente-create.compone
   templateUrl: './cliente-list.component.html',
   styleUrls: ['./cliente-list.component.css']
 })
-export class ClienteListComponent implements OnInit, OnDestroy {
+export class ClienteListComponent implements OnInit  {
 
   /*Scrooll da tabela */
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
@@ -85,7 +85,7 @@ export class ClienteListComponent implements OnInit, OnDestroy {
   findAll() {
     this.service.findAll().subscribe((resposta) => {
       this.CLIENTE_DATA = resposta
-      this.dataSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);
+      this.dataSource = new MatTableDataSource<Cliente>(resposta);
       this.dataSource.paginator = this.paginator;//paginação dos registros. 
     }, (error) => {
       this.toast.error('Na listagem dos clientes, procurar suporte', 'ERROR')

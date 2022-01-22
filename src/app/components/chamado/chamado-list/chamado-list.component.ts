@@ -1,9 +1,13 @@
+import { ToastrService } from 'ngx-toastr';
+import { Subscription, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { ChamadoCreateComponent } from "./../chamado-create/chamado-create.component";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { Chamado } from "./../../../models/chamado";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ChamadoService } from "src/app/services/chamado.service";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+
 
 @Component({
   selector: "app-chamado-list",
@@ -14,15 +18,25 @@ export class ChamadoListComponent implements OnInit {
   CHAMADO_DATA: Chamado[] = [];
   FILTERED_DATA: Chamado[] = [];
 
+  
+  refreshTable: Subscription;
+  isLoading = false;
+
   displayedColumns: string[] = ["id","titulo","tecnico","cliente","dataAbertura","prioridade","status","acoes",];
   dataSource = new MatTableDataSource<Chamado>(this.CHAMADO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service: ChamadoService) {}
+  constructor(
+    public dialog: MatDialog, 
+    private service: ChamadoService,
+    private toast: ToastrService,
+    public dialogRef: MatDialogRef<ChamadoListComponent>,
+    ) {}
 
   ngOnInit(): void {
     this.findAll();
+    this.refresh();
   }
 
   findAll(): void {
@@ -30,7 +44,29 @@ export class ChamadoListComponent implements OnInit {
       this.CHAMADO_DATA = resposta;
       this.dataSource = new MatTableDataSource<Chamado>(resposta);
       this.dataSource.paginator = this.paginator;
+    }, (error) => {
+      this.toast.error('Na listagem de chamado, procurar suporte', 'ERROR')
+      return throwError(error.error.error);
     });
+  }
+
+  /*Destruindo uma sessão */
+  ngOnDestroy(): void {
+    this.refreshTable.unsubscribe();
+  }
+  /*Dando refresh na LIST ao ADICIONAR/EDITAR um usúario, passando um LOADING */
+  refresh() {
+    this.refreshTable = this.service.refresh$.subscribe(() => {
+      this.isLoading = true;
+      this.findAll();
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 900);
+    }, (error) => {
+      this.toast.error('Ao carregar a lista', 'ERROR')
+      return throwError(error);
+    })
   }
   /**Retornando status como string*/
   returnStatus(status: any): string {
@@ -52,35 +88,43 @@ export class ChamadoListComponent implements OnInit {
   }
 
   /*Retornar cores de FUNDO/TEXTO */
-  getColorBackground(prioridade: any){
-    if(prioridade == "0"){
-      return 'Tomato'
-    } else if (prioridade == "1"){
-       return 'LightSkyBlue'
+  getColorBackground(prioridade: any) {
+    if (prioridade == "0") {
+      return "Tomato";
+    } else if (prioridade == "1") {
+      return "LightSkyBlue";
     }
-    return 'MediumSeaGreen'
+    return "MediumSeaGreen";
   }
-  getColor(status: any){
-    if(status == "0"){
-      return 'LimeGreen'
-    } else if (status == "1"){
-       return 'Gold'
+  getColor(status: any) {
+    if (status == "0") {
+      return "LimeGreen";
+    } else if (status == "1") {
+      return "Gold";
     }
-    return 'Tomato'
+    return "Tomato";
   }
-  
+
+  openCreate(): void {
+    const dialogRef = this.dialog.open(ChamadoCreateComponent, {
+      height: "800px",
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed");
+    });
+  }
 
   /*Listando a list por ordem de chamado.*/
-  orderByStatus(status: any): void{
-    let list: Chamado[] = []
-    this.CHAMADO_DATA.forEach(element => {
-      if(element.status == status)
-      list.push(element)
+  orderByStatus(status: any): void {
+    let list: Chamado[] = [];
+    this.CHAMADO_DATA.forEach((element) => {
+      if (element.status == status) 
+          list.push(element);
     });
     /*Trazendo a list filtrada em sintonia com o pagination*/
     this.FILTERED_DATA = list;
     this.dataSource = new MatTableDataSource<Chamado>(list);
-      this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.paginator;
   }
 
   /*Metodo para filtrar*/

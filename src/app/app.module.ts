@@ -48,6 +48,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
+
 //component do projeto.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -58,6 +59,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
+import { TecTelefoneCreateComponent } from './components/tecnico/telefone/tec-telefone-create/tec-telefone-create.component';
 
 
 
@@ -80,6 +82,7 @@ import { ChamadoCreateComponent } from './components/chamado/chamado-create/cham
     ClienteUpdateComponent,
     ChamadoListComponent,
     ChamadoCreateComponent,
+    TecTelefoneCreateComponent,
     
     
   ],
