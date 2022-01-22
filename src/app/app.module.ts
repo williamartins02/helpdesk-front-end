@@ -60,6 +60,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { TecTelefoneCreateComponent } from './components/tecnico/telefone/tec-telefone-create/tec-telefone-create.component';
+import { TecTelefoneListComponent } from './components/tecnico/telefone/telefone-list/tec-telefone-list/tec-telefone-list.component';
+import { TecTelefoneDeleteComponent } from './components/tecnico/telefone/tec-telefone-delete/tec-telefone-delete/tec-telefone-delete.component';
+import { TecTelefoneUpdateComponent } from './components/tecnico/telefone/tec-telefone-update/tec-telefone-update/tec-telefone-update.component';
+
+
 
 
 
@@ -84,6 +89,11 @@ import { TecTelefoneCreateComponent } from './components/tecnico/telefone/tec-te
     ChamadoListComponent,
     ChamadoCreateComponent,
     TecTelefoneCreateComponent,
+    TecTelefoneListComponent,
+    TecTelefoneDeleteComponent,
+    TecTelefoneUpdateComponent,
+    
+   
     
     
   ],

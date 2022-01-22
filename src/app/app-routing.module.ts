@@ -1,4 +1,4 @@
-import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
+
 
 import { AuthGuard } from './authentication/auth.guard';
 import { LoginComponent } from './components/login/login.component';
@@ -9,6 +9,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
+import { TecTelefoneListComponent } from './components/tecnico/telefone/telefone-list/tec-telefone-list/tec-telefone-list.component';
+
 
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
@@ -23,7 +25,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
 
       {path: 'tecnicos', component: TecnicoListComponent},
-       //{path: 'tecnicos/telefones', component: TelefoneCreateComponent},
+       {path: 'tecnicos/telefones', component: TecTelefoneListComponent},
       // {path: 'tecnicos/update/:id', component: TecnicoUpdateComponent},
       {path: 'clientes', component: ClienteListComponent},
 
