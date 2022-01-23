@@ -70,6 +70,27 @@ export class ChamadoListComponent implements OnInit {
       return throwError(error);
     })
   }
+
+  openCreate(): void {
+    const dialogRef = this.dialog.open(ChamadoCreateComponent, {
+      height: "800px",
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed");
+    });
+  }
+
+  openEdit(id: Number): void {
+    console.log("ID", id);
+    const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
+      width: '600px',
+      data: { id }//Pegando ID cliente para editar..
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
   /**Retornando status como string*/
   returnStatus(status: any): string {
     if (status == "0") {
@@ -107,26 +128,7 @@ export class ChamadoListComponent implements OnInit {
     return "Tomato";
   }
 
-  openCreate(): void {
-    const dialogRef = this.dialog.open(ChamadoCreateComponent, {
-      height: "800px",
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed");
-    });
-  }
-
-  openEdit(id: Number): void {
-    console.log("ID", id);
-    const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
-      width: '600px',
-      data: { id }//Pegando ID cliente para editar..
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
+ 
   /*Listando a list por ordem de chamado.*/
   orderByStatus(status: any): void {
     let list: Chamado[] = [];
