@@ -1,12 +1,16 @@
-import { throwError } from 'rxjs';
-import { FormControl, Validators } from '@angular/forms';
-import { Telefone } from 'src/app/models/telefone';
-import { Component, OnInit } from '@angular/core';
-import { Tecnico } from 'src/app/models/tecnico';
-
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { TecnicoService } from './../../../services/tecnico.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+
+
+import { throwError } from "rxjs";
+import { ToastrService } from "ngx-toastr";
+
+import { Tecnico } from "./../../../models/tecnico";
+
+import { Component, OnInit } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
+import { Telefone } from 'src/app/models/telefone';
 import { TelefoneService } from 'src/app/services/telefone.service';
 
 @Component({
@@ -23,6 +27,7 @@ export class TelefoneCreateComponent implements OnInit {
     numero: '',
     tipoTelefone: '',
     tecnico: '',
+    nomeTecnico: '',
   }
 
   numero:       FormControl = new FormControl(null, [Validators.required]);
@@ -32,6 +37,7 @@ export class TelefoneCreateComponent implements OnInit {
 
   constructor(
     private telefoneService: TelefoneService,
+    private tecnicoService: TecnicoService,
     private toast: ToastrService,
     private router: Router,
 
@@ -44,11 +50,11 @@ export class TelefoneCreateComponent implements OnInit {
 
   create(): void{
     this.telefoneService.create(this.telefone).subscribe((resposta) =>{
-     this.toast.success("Chamado criando com sucesso", "Novo chamado");
-     this.router.navigate(['chamados']);
+     this.toast.success("Telefone criando com sucesso", "Novo chamado");
+     this.router.navigate(['telefones']);
      this.onNoClick();
    },(error) => {
-     this.toast.error("Ao adicionar um chamado", "ERROR");
+     this.toast.error("Ao adicionar um telefone", "ERROR");
      return throwError(error.error.error);
    });
  }

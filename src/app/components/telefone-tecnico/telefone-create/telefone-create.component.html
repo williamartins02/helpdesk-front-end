@@ -13,6 +13,13 @@
             [formControl]="numero" required matInput placeholder="Ex.. Fulano de tal" maxlength="11">
            <mat-icon matSuffix>person_add</mat-icon>
          </mat-form-field>
+
+         <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Técnico</mat-label>
+          <input [disabled]="true"  [(ngModel)]="telefone.tecnico" name="tecnico"
+           [formControl]="tecnico" required matInput placeholder="Ex.. Fulano de tal">
+          <mat-icon matSuffix>person_add</mat-icon>
+        </mat-form-field>
  
          <mat-form-field class="full-width" appearance="outline">
             <mat-label>Selecione um tipo</mat-label>

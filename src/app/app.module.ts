@@ -1,3 +1,6 @@
+import { TelefoneListComponent } from './components/telefone-tecnico/telefonte-list/telefonte-list.component';
+import { TelefoneCreateComponent } from './components/telefone-tecnico/telefone-create/telefone-create.component';
+
 
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
@@ -12,8 +15,7 @@ import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecn
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
 
-import { TelefoneCreateComponent } from './components/telefone-tecnico/telefone-create/telefone-create.component';
-import { TelefoneListComponent } from './components/telefone-tecnico/telefonte-list/telefonte-list.component';
+
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
@@ -89,10 +91,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     TelefoneCreateComponent,
     TelefoneListComponent,
     
-  
-
-
-    
   ],
   imports: [
     BrowserModule,
@@ -129,7 +127,6 @@ import {MatTabsModule} from '@angular/material/tabs';
   ],
 
   providers: [AuthInterceptorProvider,
-
     {
       provide: MatDialogRef,
       useValue: {}

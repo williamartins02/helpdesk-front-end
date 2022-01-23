@@ -34,7 +34,7 @@ export class ChamadoCreateComponent implements OnInit {
 
 
   prioridade:  FormControl = new FormControl(null, [Validators.required]);
-  status:      FormControl = new FormControl(this.chamado.status || 'ABERTO', [Validators.required,]);
+  status:      FormControl = new FormControl(null, [Validators.required,]);
   titulo:      FormControl = new FormControl(null, [Validators.required]);
   observacoes: FormControl = new FormControl(null, [Validators.required]);
   tecnico:     FormControl = new FormControl(null, [Validators.required]);

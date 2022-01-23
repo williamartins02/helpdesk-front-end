@@ -3,5 +3,6 @@ export interface Telefone {
   numero: string;
   tecnico: any;
   tipoTelefone: String;
+  nomeTecnico: string;
  
 }

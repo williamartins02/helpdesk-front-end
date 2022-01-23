@@ -1,14 +1,14 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-
+import { throwError } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
-import { Subscription, throwError } from 'rxjs';
-
-import { Telefone } from 'src/app/models/telefone';
+import { Subscription } from 'rxjs';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Telefone } from 'src/app/models/telefone';
 import { MatTableDataSource } from '@angular/material/table';
 import { TelefoneService } from 'src/app/services/telefone.service';
 import { ToastrService } from 'ngx-toastr';
 import { TelefoneCreateComponent } from '../telefone-create/telefone-create.component';
+
 
 
 @Component({
@@ -24,13 +24,7 @@ export class TelefoneListComponent implements OnInit {
     refreshTable: Subscription;
     
     isLoading = false;
-    telefone: Telefone = {
-      id: '',
-      numero: '',
-      tipoTelefone: '',
-      tecnico: '',
-    }
-   
+  
     TELEFONE_DATA: Telefone[] = [];
     @Inject(MAT_DIALOG_DATA) public data: {id: Number}
     displayedColumns: string[] = ['id', 'numero', 'tipoTelefone', 'tecnico', 'acoes'];
