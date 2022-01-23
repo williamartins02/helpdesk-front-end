@@ -1,9 +1,6 @@
-<h1>Cadastrar Chamados</h1>
+<h1>Atualizar Chamados</h1>
 <div class="container mat-elevation-z8">
-  
   <form class="form">
-    
-
     <img class="full-Width" src="assets/img/chamadoList.png" alt="Help Desk" />
 
     <table class="example-full-width" cellspacing="0">
@@ -42,7 +39,7 @@
           <mat-label>Selecione um cliente</mat-label>
           <mat-select [(ngModel)]="chamado.cliente" name="cliente" [formControl]="cliente" required>
             <mat-option>NENHUM</mat-option>
-            <mat-option *ngFor="let cli of clientes" value="{{ cli.id}}">{{ cli.nome }}</mat-option>
+            <mat-option *ngFor="let cli of clientes" value="{{cli.id}}">{{ cli.nome }}</mat-option>
           </mat-select>
         </mat-form-field>
 

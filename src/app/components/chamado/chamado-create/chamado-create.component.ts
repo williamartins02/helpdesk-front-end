@@ -86,6 +86,7 @@ export class ChamadoCreateComponent implements OnInit {
     );
   }
 
+
   validaCampos(): boolean {
     return (
       this.prioridade.valid &&

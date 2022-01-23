@@ -16,7 +16,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class TecnicoTelefoneCreateComponent implements OnInit {
 
   telefone: Telefone = {
-
     id:           '',
     numero:       '',
     tecnico:      '',

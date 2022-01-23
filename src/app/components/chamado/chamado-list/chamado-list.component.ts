@@ -17,14 +17,13 @@ import { ChamadoUpdateComponent } from '../chamado-update/chamado-update.compone
   styleUrls: ["./chamado-list.component.css"],
 })
 export class ChamadoListComponent implements OnInit {
+
   CHAMADO_DATA: Chamado[] = [];
   FILTERED_DATA: Chamado[] = [];
-
-  
   refreshTable: Subscription;
   isLoading = false;
 
-  displayedColumns: string[] = ["id","titulo","tecnico","cliente","dataAbertura","prioridade","status","acoes",];
+  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.CHAMADO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -73,7 +72,7 @@ export class ChamadoListComponent implements OnInit {
 
   openCreate(): void {
     const dialogRef = this.dialog.open(ChamadoCreateComponent, {
-      height: "800px",
+      height: "1000px",
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log("The dialog was closed");
@@ -128,7 +127,6 @@ export class ChamadoListComponent implements OnInit {
     return "Tomato";
   }
 
- 
   /*Listando a list por ordem de chamado.*/
   orderByStatus(status: any): void {
     let list: Chamado[] = [];

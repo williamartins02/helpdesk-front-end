@@ -1,3 +1,4 @@
+import { Tecnico } from './../../../../models/tecnico';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,20 +17,20 @@ import { TecnicoTelefoneCreateComponent } from '../tecnico-telefone-create/tecni
 })
 export class TecnicoTelefoneListComponent implements OnInit {
 
-  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);//scroll
 
   refreshTable: Subscription;
   
   isLoading = false;
 
   telefone: Telefone = {
-
     id:           '',
     numero:       '',
     tecnico:      '',
     tipoTelefone: '',
     nomeTecnico:  '',
   }
+
+  tecnicos: Tecnico[] = [];
 
   TELEFONE_DATA: Telefone[] = [];
   @Inject(MAT_DIALOG_DATA) public data: {id: Number}
@@ -71,20 +72,23 @@ export class TecnicoTelefoneListComponent implements OnInit {
     })
   }
 
-
-
   /*METODO Criando um service para lista uma LIST TECNICO*/
   findAll() {
-    this.service.findAll().subscribe((resposta) => {
+    this.service.findAll().subscribe(resposta => {
       this.TELEFONE_DATA = resposta
-      this.dataSource = new MatTableDataSource<Telefone>(this.TELEFONE_DATA);
-      this.dataSource.paginator = this.paginator;//paginação dos registros. 
-    }, (error) => {
-      this.toast.error('Na listagem dos tecnicos, procurar suporte', 'ERROR')
-      return throwError(error);
+      this.dataSource = new MatTableDataSource<Telefone>(resposta);
+      this.dataSource.paginator = this.paginator;
     })
   }
-  
+
+  returnTipoTel(status: any): string {
+    if (status == "0") {
+      return "CASA";
+    } else if (status == "1") {
+      return "EMPRESA";
+    }
+    return "CELULAR";
+  }
   /*Metodo para filtrar*/
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

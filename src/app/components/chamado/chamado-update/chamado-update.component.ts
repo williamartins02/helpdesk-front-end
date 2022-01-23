@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Chamado } from './../../../models/chamado';
 
 import { throwError } from "rxjs";
@@ -49,18 +49,30 @@ export class ChamadoUpdateComponent implements OnInit {
     private tecnicoService: TecnicoService,
     private toast: ToastrService,
     private router: Router,
+    private route: ActivatedRoute,
 
     public dialogRef: MatDialogRef<ChamadoUpdateComponent>,
   ) {}
 
   ngOnInit(): void {
+    this.chamado.id = this.route.snapshot.paramMap.get('id');//passando id para o editar via url
     this.findaAllClientes();
     this.findAllTecnico();
+    this.findById();
+  }
+
+  findById(): void{
+    this.chamadoService.findById(this.data.id).subscribe((resposta) =>{
+      this.chamado = resposta;
+    },(error) => {
+      this.toast.error("ao chamar Tecnico ID", "ERROR");
+      return throwError(error.error.error);
+    })
   }
 
   update(): void{
      this.chamadoService.update(this.chamado).subscribe(() =>{
-      this.toast.success("Chamado criando com sucesso", "Novo chamado");
+      this.toast.success("Chamado atualizado com sucesso", "Novo chamado");
       this.router.navigate(['chamados']);
       this.onNoClick();
     },(error) => {
@@ -87,6 +99,26 @@ export class ChamadoUpdateComponent implements OnInit {
         return throwError(error.error.error);
       }
     );
+  }
+  /**Retornando status como string*/
+  retornaStatus(status: any): string {
+    if(status == '0') {
+      return 'ABERTO'
+    } else if(status == '1') {
+      return 'EM ANDAMENTO'
+    } else {
+      return 'ENCERRADO'
+    }
+  }
+
+  retornaPrioridade(prioridade: any): string {
+    if(prioridade == '0') {
+      return 'BAIXA'
+    } else if(prioridade == '1') {
+      return 'MÉDIA'
+    } else {
+      return 'ALTA'
+    }
   }
 
   validaCampos(): boolean {

@@ -22,9 +22,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
 
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);//scroll
 
-  refreshTable: Subscription;
-  
-  isLoading = false;
+ 
   tecnico: Tecnico = {
     id: '',
     nome: '',
@@ -34,14 +32,15 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     perfis: [],
     dataCriacao: '',
   }
- 
+  refreshTable: Subscription;
+
+  isLoading = false;
   TECNICO_DATA: Tecnico[] = [];
-  @Inject(MAT_DIALOG_DATA) public data: {id: Number}
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.TECNICO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @Inject(MAT_DIALOG_DATA) public data: {id: Number}
   constructor(
     public dialogRef: MatDialogRef<TecnicoListComponent>,
     private service: TecnicoService,

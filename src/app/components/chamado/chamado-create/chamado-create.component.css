@@ -1,9 +1,10 @@
 .container{
     width: 46rem;
-    margin: auto auto 3rem auto;
+    margin: 3rem auto 3rem auto;
     padding: 1rem;
     border-radius: 1rem;
 }
+
 .full-person{
     width: 97%;
     left: 1rem;
@@ -30,7 +31,7 @@
 
 .observacoes{
     min-height: 4rem;
-    max-height: 10rem;
+    max-height: 6rem;
 }
 
 h1{

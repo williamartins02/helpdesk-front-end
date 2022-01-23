@@ -55,12 +55,10 @@ export class TecnicoUpdateComponent implements OnInit {
       this.toast.success('Atualizado com sucesso', 'Técnico(a) ' + this.tecnico.nome);
       this.router.navigate(['/tecnicos']);
       this.onNoClick();
-    }, (err) => {//listando LIST de erro.
-      if (err.error.errors)
+    },(err) => {//listando LIST de erro.
         err.error.errors.forEach((element) => {
           this.toast.error(element.message);
         });
-      this.toast.error(err.error.message)
     })
   }
 
