@@ -9,7 +9,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
-import { TecTelefoneListComponent } from './components/tecnico/telefone/telefone-list/tec-telefone-list/tec-telefone-list.component';
+import { TelefoneListComponent } from './components/telefone-tecnico/telefonte-list/telefonte-list.component';
+
+
 
 
 //Fica toda roda do projeto para ser renderizado.
@@ -25,8 +27,9 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
 
       {path: 'tecnicos', component: TecnicoListComponent},
-       {path: 'tecnicos/telefones', component: TecTelefoneListComponent},
+       {path: 'tecnicos/telefones', component: TelefoneListComponent},
       // {path: 'tecnicos/update/:id', component: TecnicoUpdateComponent},
+      
       {path: 'clientes', component: ClienteListComponent},
 
       {path: 'chamados', component: ChamadoListComponent},

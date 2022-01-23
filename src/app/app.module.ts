@@ -1,12 +1,19 @@
+
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 
+import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
+import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
+
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
+
+import { TelefoneCreateComponent } from './components/telefone-tecnico/telefone-create/telefone-create.component';
+import { TelefoneListComponent } from './components/telefone-tecnico/telefonte-list/telefonte-list.component';
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
@@ -45,10 +52,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
-
-
-
-
 //component do projeto.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -57,15 +60,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from 'ngx-mask';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
-import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
-import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
-import { TecTelefoneCreateComponent } from './components/tecnico/telefone/tec-telefone-create/tec-telefone-create.component';
-import { TecTelefoneListComponent } from './components/tecnico/telefone/telefone-list/tec-telefone-list/tec-telefone-list.component';
-import { TecTelefoneDeleteComponent } from './components/tecnico/telefone/tec-telefone-delete/tec-telefone-delete/tec-telefone-delete.component';
-import { TecTelefoneUpdateComponent } from './components/tecnico/telefone/tec-telefone-update/tec-telefone-update/tec-telefone-update.component';
-
-
-
 
 
 
@@ -77,24 +71,27 @@ import { TecTelefoneUpdateComponent } from './components/tecnico/telefone/tec-te
     NavComponent,
     HomeComponent,
     HeaderComponent,
-    TecnicoListComponent,
     LoginComponent,
+
     TecnicoCreateComponent,
     TecnicoUpdateComponent,
+    TecnicoListComponent,
     TecnicoDeleteComponent,
+
     ClienteCreateComponent,
     ClienteDeleteComponent,
     ClienteListComponent,
     ClienteUpdateComponent,
+
     ChamadoListComponent,
     ChamadoCreateComponent,
-    TecTelefoneCreateComponent,
-    TecTelefoneListComponent,
-    TecTelefoneDeleteComponent,
-    TecTelefoneUpdateComponent,
+
+    TelefoneCreateComponent,
+    TelefoneListComponent,
     
-   
-    
+  
+
+
     
   ],
   imports: [

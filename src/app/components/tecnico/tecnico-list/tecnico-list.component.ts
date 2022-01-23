@@ -22,6 +22,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);//scroll
 
   refreshTable: Subscription;
+  
   isLoading = false;
   tecnico: Tecnico = {
     id: '',

@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./tecnico-create.component.css']
 })
 export class TecnicoCreateComponent implements OnInit {
-  hide = true;
+
+  hide = true;//esconder e aparecer senha 
   
   tecnico: Tecnico = {
     id:         '',

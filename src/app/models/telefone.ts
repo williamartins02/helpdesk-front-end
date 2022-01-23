@@ -1,8 +1,7 @@
 export interface Telefone {
-    id?:         any;
-    numero:     string;
-    tecnico:    any;
-    tipos: string[];
-   
-  }
-  
+  id?: any;
+  numero: string;
+  tecnico: any;
+  tipoTelefone: String;
+ 
+}

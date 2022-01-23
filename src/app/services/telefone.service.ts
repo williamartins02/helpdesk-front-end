@@ -34,7 +34,7 @@ export class TelefoneService {
   }
 
   update(telefones: Telefone): Observable<Telefone> {
-    return this.http.put<Telefone>(`${API_CONFIG.baseUrl}/telefones/${telefones.id}`,telefones)
+    return this.http.put<Telefone>(`${API_CONFIG.baseUrl}/telefones/${telefones.id}`, telefones)
       .pipe(
         tap(() => {
           this._refresh$.next();
