@@ -1,5 +1,5 @@
-import { TelefoneListComponent } from './components/telefone-tecnico/telefonte-list/telefonte-list.component';
-import { TelefoneCreateComponent } from './components/telefone-tecnico/telefone-create/telefone-create.component';
+
+
 
 
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
@@ -12,7 +12,6 @@ import { ChamadoCreateComponent } from './components/chamado/chamado-create/cham
 
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
-import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
 
 
@@ -62,7 +61,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from 'ngx-mask';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
+import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-list/tecnico-telefone-list.component';
+import { TecnicoTelefoneUpdateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-update/tecnico-telefone-update.component';
+import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-create/tecnico-telefone-create.component';
+import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-delete/tecnico-telefone-delete.component';
 
 
 
@@ -88,9 +91,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     ChamadoListComponent,
     ChamadoCreateComponent,
 
-    TelefoneCreateComponent,
-    TelefoneListComponent,
-    
+    TecnicoTelefoneListComponent,
+    TecnicoTelefoneUpdateComponent,
+    TecnicoTelefoneCreateComponent,
+    TecnicoTelefoneDeleteComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
-import { TelefoneListComponent } from './components/telefone-tecnico/telefonte-list/telefonte-list.component';
+import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-create/tecnico-telefone-create.component';
+import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-list/tecnico-telefone-list.component';
+
+
 
 
 
@@ -27,7 +30,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
 
       {path: 'tecnicos', component: TecnicoListComponent},
-       {path: 'tecnicos/telefones', component: TelefoneListComponent},
+      {path: 'tecnicos/telefones', component: TecnicoTelefoneListComponent},
       // {path: 'tecnicos/update/:id', component: TecnicoUpdateComponent},
       
       {path: 'clientes', component: ClienteListComponent},

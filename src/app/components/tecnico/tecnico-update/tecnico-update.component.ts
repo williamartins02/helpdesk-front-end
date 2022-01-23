@@ -1,7 +1,7 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Tecnico } from './../../../models/tecnico';
-import { TecnicoService } from './../../../services/tecnico.service';
+import { Tecnico } from '../../../models/tecnico';
+import { TecnicoService } from '../../../services/tecnico.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';

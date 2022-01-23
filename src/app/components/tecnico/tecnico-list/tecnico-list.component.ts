@@ -1,7 +1,7 @@
 import { TecnicoDeleteComponent } from './../tecnico-delete/tecnico-delete.component';
 import { Router } from '@angular/router';
 
-import { TecnicoUpdateComponent } from './../tecnico-update/tecnico-update.component';
+
 import { Subscription, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TecnicoService } from './../../../services/tecnico.service';
@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TecnicoCreateComponent } from '../tecnico-create/tecnico-create.component';
+import { TecnicoUpdateComponent } from '../tecnico-update/tecnico-update.component';
 
 @Component({
   selector: 'app-tecnico-list',

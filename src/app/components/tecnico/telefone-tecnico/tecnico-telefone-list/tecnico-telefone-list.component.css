@@ -1,62 +1,44 @@
 .container{
     width: 95%;
     margin: auto;
-}
-table {
+  }
+  table {
     width: 100%;
   }
-.mat-form-field{
+  .mat-form-field{
       width: 100%;
   }
-
-  .table{
-    border-spacing: 7px;
-  }
-
-  .mat-row{
-    height: 35px !important;
-  }
- 
-  .mat-status{
-    width: 110px !important;
-    padding: 1px 20px 1px 17px;
-    color: #e9e4e4;
-    border-radius: 10px !important;
-    text-align: center;
-    font-weight: bold;
-    color: white; text-shadow: black 0.1em 0.1em 0.2em;
-    }
-
+  
   button{
     border: 1px solid rgb(161, 159, 159);
     margin-left: auto;
     display: flex !important;
   }
-
+  
   .text-spinner{
     margin-top: 10rem;
   }
-
+  
   p{
     margin-top: 1rem;
     opacity: .5;
   }
-
+  
   .edit{
     color: rgb(65, 180, 225);
   }
-
+  
   .delete{
     color: red;
   }
-
+  
   .icons {
     display: flex;
   }
   .pagination{
     margin-top: 0.1rem;
   }
-
+  
   .loader-spinner{
     padding: 25px;
     display: flex;
@@ -69,7 +51,7 @@ table {
     margin-top: -400px;
   
   }
-
+  
   .example-viewport {
     height: 296px;
     width: auto;
@@ -79,18 +61,4 @@ table {
   .example-item {
     height: 100px;
   }
-
-  mat-radio-group {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-  }
-
-  .statusColor{
-     width: 10rem;
-  }
-
-  mat-row cdk-row ng-star-inserted{
-    height: 10pxpx;
-  }
- 
+  
