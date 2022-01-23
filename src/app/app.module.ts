@@ -1,7 +1,4 @@
 
-
-
-
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
@@ -66,7 +63,8 @@ import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecn
 import { TecnicoTelefoneUpdateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-update/tecnico-telefone-update.component';
 import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-create/tecnico-telefone-create.component';
 import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-delete/tecnico-telefone-delete.component';
-import { ChamadoUpdateComponent } from './components/chamados/chamado-update/chamado-update.component';
+import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
+
 
 
 
@@ -91,12 +89,12 @@ import { ChamadoUpdateComponent } from './components/chamados/chamado-update/cha
 
     ChamadoListComponent,
     ChamadoCreateComponent,
+    ChamadoUpdateComponent,
 
     TecnicoTelefoneListComponent,
     TecnicoTelefoneUpdateComponent,
     TecnicoTelefoneCreateComponent,
     TecnicoTelefoneDeleteComponent,
-    ChamadoUpdateComponent,
   ],
   imports: [
     BrowserModule,

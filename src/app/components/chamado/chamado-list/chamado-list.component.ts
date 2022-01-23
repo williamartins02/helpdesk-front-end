@@ -1,12 +1,14 @@
+
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, throwError } from 'rxjs';
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ChamadoCreateComponent } from "./../chamado-create/chamado-create.component";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { Chamado } from "./../../../models/chamado";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { ChamadoService } from "src/app/services/chamado.service";
+import { ChamadoUpdateComponent } from '../chamado-update/chamado-update.component';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class ChamadoListComponent implements OnInit {
   dataSource = new MatTableDataSource<Chamado>(this.CHAMADO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @Inject(MAT_DIALOG_DATA) public data: {id: Number}
   constructor(
     public dialog: MatDialog, 
     private service: ChamadoService,
@@ -111,6 +113,17 @@ export class ChamadoListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log("The dialog was closed");
+    });
+  }
+
+  openEdit(id: Number): void {
+    console.log("ID", id);
+    const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
+      width: '600px',
+      data: { id }//Pegando ID cliente para editar..
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 

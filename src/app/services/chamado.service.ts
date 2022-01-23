@@ -31,4 +31,13 @@ export class ChamadoService {
       )
   }
 
+  update(chamados: Chamado): Observable<Chamado> {
+    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/chamados/${chamados.id}`, chamados)
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+        })
+      )
+  }
+
 }

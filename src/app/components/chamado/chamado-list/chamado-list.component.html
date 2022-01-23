@@ -60,7 +60,7 @@
                     <td mat-cell *matCellDef="let chamado">
                         <div class="icons">
                             <div class="icons-edit">
-                                <mat-icon matSuffix class="edit">edit</mat-icon>
+                                <mat-icon matSuffix class="edit" (click)="openEdit(chamado.id)">edit</mat-icon>
                             </div>
                             <div class="icons-delete">
                                 <mat-icon matSuffix class="delete">visibility</mat-icon>
