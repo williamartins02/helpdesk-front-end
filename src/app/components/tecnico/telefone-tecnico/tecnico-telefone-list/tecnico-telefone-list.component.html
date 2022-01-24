@@ -12,6 +12,12 @@
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport ">
             <table mat-table [dataSource]="dataSource">
 
+                 <!-- Weight Column -->
+                 <ng-container matColumnDef="tipoTelefone">
+                    <th mat-header-cell *matHeaderCellDef>Tipo </th>
+                    <td mat-cell *matCellDef="let telefone"> {{returnTipoTel(telefone.tipoTelefone)}} </td>
+                </ng-container>
+                
                 <!-- Position Column -->
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -24,11 +30,7 @@
                     <td mat-cell *matCellDef="let telefone"> {{telefone.numero}} </td>
                 </ng-container>
 
-                <!-- Weight Column -->
-                <ng-container matColumnDef="tipoTelefone">
-                    <th mat-header-cell *matHeaderCellDef>Tipo </th>
-                    <td mat-cell *matCellDef="let telefone"> {{returnTipoTel(telefone.tipoTelefone)}} </td>
-                </ng-container>
+               
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="tecnico">
@@ -56,7 +58,7 @@
         </cdk-virtual-scroll-viewport>
         <mat-paginator class="pagination" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
-    <p>Lista Técnicos</p>
+    <p>Lista Telefones</p>
 
        <!-- Loading -->
     <div *ngIf="isLoading" class="loader-spinner">

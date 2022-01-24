@@ -16,8 +16,8 @@ export class TelefoneService {
     return this._refresh$;
   }
 
-  findByAll(id: any): Observable<Telefone> {
-    return this.http.get<Telefone>(`${API_CONFIG.baseUrl}/telefones/${id}`);
+  findById(id: any): Observable<Telefone[]> {
+    return this.http.get<Telefone[]>(`${API_CONFIG.baseUrl}/telefones/${id}`);
   }
 
   findAll(): Observable<Telefone[]> {

@@ -1,12 +1,13 @@
+import { Inject } from '@angular/core';
 import { Tecnico } from './../../../../models/tecnico';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { throwError, Subscription } from 'rxjs';
 import { Telefone } from './../../../../models/telefone';
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TelefoneService } from 'src/app/services/telefone.service';
 import { TecnicoTelefoneCreateComponent } from '../tecnico-telefone-create/tecnico-telefone-create.component';
 
@@ -31,10 +32,10 @@ export class TecnicoTelefoneListComponent implements OnInit {
   }
 
   tecnicos: Tecnico[] = [];
+  
 
   TELEFONE_DATA: Telefone[] = [];
-  @Inject(MAT_DIALOG_DATA) public data: {id: Number}
-  displayedColumns: string[] = ['id', 'numero', 'tipoTelefone', 'tecnico', 'acoes'];
+  displayedColumns: string[] = ['id', 'tipoTelefone', 'numero', 'tecnico', 'acoes'];
   dataSource = new MatTableDataSource<Telefone>(this.TELEFONE_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,14 +46,25 @@ export class TecnicoTelefoneListComponent implements OnInit {
     private toast: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.findAll();
+    //this.findById();
+    this.findByTecnicoId();
     this.refresh();
   }
 
+
+    /*METODO Criando um service para lista uma LIST TECNICO-TELEFONE*/
+  findByTecnicoId() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.service.findById(id).subscribe(resposta => {
+      this.TELEFONE_DATA = resposta
+      this.dataSource = new MatTableDataSource<Telefone>(resposta);
+      this.dataSource.paginator = this.paginator;
+    })
+  }
   /*Destruindo uma sessão */
   ngOnDestroy(): void {
     this.refreshTable.unsubscribe();
@@ -61,7 +73,7 @@ export class TecnicoTelefoneListComponent implements OnInit {
   refresh() {
     this.refreshTable = this.service.refresh$.subscribe(() => {
       this.isLoading = true;
-      this.findAll();
+      this.findByTecnicoId();
 
       setTimeout(() => {
         this.isLoading = false;
@@ -69,15 +81,6 @@ export class TecnicoTelefoneListComponent implements OnInit {
     }, (error) => {
       this.toast.error('Ao carregar a lista', 'ERROR')
       return throwError(error);
-    })
-  }
-
-  /*METODO Criando um service para lista uma LIST TECNICO*/
-  findAll() {
-    this.service.findAll().subscribe(resposta => {
-      this.TELEFONE_DATA = resposta
-      this.dataSource = new MatTableDataSource<Telefone>(resposta);
-      this.dataSource.paginator = this.paginator;
     })
   }
 
@@ -89,6 +92,7 @@ export class TecnicoTelefoneListComponent implements OnInit {
     }
     return "CELULAR";
   }
+  
   /*Metodo para filtrar*/
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
