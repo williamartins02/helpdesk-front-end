@@ -33,14 +33,14 @@ export class ChamadoReadComponent implements OnInit {
     private toast: ToastrService,
     private route: ActivatedRoute,
 
-    public dialogRef: MatDialogRef<ChamadoUpdateComponent>,
+    public dialogRef: MatDialogRef<ChamadoReadComponent>,
   ) {}
 
   ngOnInit(): void {
     this.chamado.id = this.route.snapshot.paramMap.get('id');//passando id para o editar via url
     this.findById();
   }
-  
+
   findById(): void{
     this.chamadoService.findById(this.data.id).subscribe((resposta) =>{
       this.chamado = resposta;

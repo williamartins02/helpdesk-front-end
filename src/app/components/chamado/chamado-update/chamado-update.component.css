@@ -48,8 +48,10 @@ td {
 
 img{
     margin: auto;
-    width: 88%;
+    width: 100%;
     display: block;
+    margin-top: -14rem;
+  
 }
 
 .section{

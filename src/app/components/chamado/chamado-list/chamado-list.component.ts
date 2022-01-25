@@ -9,6 +9,8 @@ import { Chamado } from "./../../../models/chamado";
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { ChamadoService } from "src/app/services/chamado.service";
 import { ChamadoUpdateComponent } from '../chamado-update/chamado-update.component';
+import { ChamadoReadComponent } from '../chamado-read/chamado-read.component';
+
 
 
 @Component({
@@ -72,7 +74,7 @@ export class ChamadoListComponent implements OnInit {
 
   openCreate(): void {
     const dialogRef = this.dialog.open(ChamadoCreateComponent, {
-      height: "800px",
+      height: "799px",
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log("The dialog was closed");
@@ -82,13 +84,25 @@ export class ChamadoListComponent implements OnInit {
   openEdit(id: Number): void {
     console.log("ID", id);
     const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
-      height: "800px",
+     
       data: { id }//Pegando ID cliente para editar..
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
+
+  openRed(id: Number): void {
+    console.log("ID", id);
+    const dialogRef = this.dialog.open(ChamadoReadComponent, {
+      height: "790px",
+      data: { id }//Pegando ID cliente para editar..
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 
   /**Retornando status como string*/
   returnStatus(status: any): string {

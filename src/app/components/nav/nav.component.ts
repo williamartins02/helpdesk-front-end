@@ -17,13 +17,13 @@ export class NavComponent implements OnInit {
 
   //Metodo que inicia
   ngOnInit(): void {
-   this.router.navigate(['chamados'])
+   this.router.navigate(['home'])
   }
 
   /*Metodo para DESLOGAR e limpar o TOKEN do usuario do locaStorage */
   logout(){
     this.router.navigate(['login'])
     this.authService.logout();
-    this.toast.info('logout realizado com sucesso', 'Logout', {timeOut: 300})
+    this.toast.info('logout realizado com sucesso', 'Logout', {timeOut: 4000})
   }
 }
