@@ -72,7 +72,7 @@ export class ChamadoListComponent implements OnInit {
 
   openCreate(): void {
     const dialogRef = this.dialog.open(ChamadoCreateComponent, {
-      height: "1000px",
+      height: "800px",
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log("The dialog was closed");
@@ -82,7 +82,7 @@ export class ChamadoListComponent implements OnInit {
   openEdit(id: Number): void {
     console.log("ID", id);
     const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
-      width: '600px',
+      height: "800px",
       data: { id }//Pegando ID cliente para editar..
     });
     dialogRef.afterClosed().subscribe(result => {

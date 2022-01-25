@@ -18,11 +18,8 @@ import { TecnicoTelefoneCreateComponent } from '../tecnico-telefone-create/tecni
 })
 export class TecnicoTelefoneListComponent implements OnInit {
 
-
   refreshTable: Subscription;
-  
   isLoading = false;
-
   telefone: Telefone = {
     id:           '',
     numero:       '',
@@ -30,10 +27,7 @@ export class TecnicoTelefoneListComponent implements OnInit {
     tipoTelefone: '',
     nomeTecnico:  '',
   }
-
   tecnicos: Tecnico[] = [];
-  
-
   TELEFONE_DATA: Telefone[] = [];
   displayedColumns: string[] = ['id', 'tipoTelefone', 'numero', 'tecnico', 'acoes'];
   dataSource = new MatTableDataSource<Telefone>(this.TELEFONE_DATA);
@@ -108,6 +102,15 @@ export class TecnicoTelefoneListComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
+  getColor(status: any) {
+    if (status == "0") {
+      return "DarkSlateBlue";
+    } else if (status == "1") {
+      return "Maroon";
+    }return "DarkOliveGreen";
+  }
+
 }
 
 
