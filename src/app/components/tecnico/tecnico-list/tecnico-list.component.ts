@@ -110,7 +110,6 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
   }
 
   openEdit(id: Number): void {
-    console.log("ID", id);
     const dialogRef = this.dialog.open(TecnicoUpdateComponent, {
       width: '600px',
       data: { id }//Pegando ID tecnico para editar..

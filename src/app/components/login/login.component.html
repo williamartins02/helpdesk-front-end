@@ -8,7 +8,6 @@
             <mat-label>E-mail</mat-label>
             <input [formControl]="email" required
             [(ngModel)]="creds.email" name="email" matInput placeholder="Ex. fulano@mail.com">
-            <mat-icon>email</mat-icon>
         </mat-form-field>
        
 
@@ -16,7 +15,6 @@
             <mat-label>Senha</mat-label>
             <input [formControl]="senha" required
             [(ngModel)]="creds.senha" name="senha" type="password" matInput placeholder="Ex. 123">
-            <mat-icon>lock_open</mat-icon>
         </mat-form-field>
 
         <button (click)="login()" [disabled]="!validaCampos()" class="full-width mat-elevation-z4" mat-raised-button color="primary">CONECTAR-SE</button>

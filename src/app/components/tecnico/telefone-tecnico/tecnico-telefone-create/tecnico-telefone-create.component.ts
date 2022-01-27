@@ -1,6 +1,7 @@
+import { throwError } from 'rxjs';
 import { TecnicoService } from './../../../../services/tecnico.service';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TelefoneService } from './../../../../services/telefone.service';
 import { Validators } from '@angular/forms';
@@ -31,19 +32,34 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
    numero:         FormControl =  new FormControl(null, Validators.required);
    tecnico:        FormControl =  new FormControl(null, Validators.required);
    tipoTelefone:   FormControl =  new FormControl(null, Validators.required);
-   senha:          FormControl =  new FormControl(null, Validators.required);
+  
  
    constructor(
      private service: TelefoneService,
      private toast: ToastrService,
      private router: Router,
+     private route: ActivatedRoute,
      public dialogRef: MatDialogRef<TecnicoTelefoneCreateComponent>,
      private tecnicoService: TecnicoService,
      @Inject(MAT_DIALOG_DATA) public data: {id: Number},
    ) { }
  
    ngOnInit(): void {
+     this.findById();
+     this.routeIdUrl();
    }
+
+   routeIdUrl(): void {
+    this.telefone.id = this.route.snapshot.paramMap.get("id"); //passando id para o editar via url
+  }
+   findById(): void {
+    this.service.findById(this.data.id).subscribe((resposta) => {
+      },(error) => {
+          this.toast.error("ao chamar Telefones ID", "ERROR");
+          return throwError(error.error.error);
+        }
+    );
+  }
  
   /*Metodo para criar um Tecnico*/
    async create(): Promise<void> {
@@ -60,6 +76,17 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
        this.toast.error(err.error.message)
      })
    }
+   /*Passando informações para serem gravada, telefone */
+   private async generatePayload(id: Number, telefone: Telefone): Promise<Telefone> {
+    const tecnico = await this.tecnicoService.findById(id).toPromise();
+
+    return {
+      tipoTelefone: telefone.tipoTelefone,
+      numero: telefone.numero,
+      nomeTecnico: tecnico.nome,
+      tecnico: tecnico.id
+    }
+ }
  
 
     /* validando o retorno dos campos.*/
@@ -72,15 +99,6 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
    }
    
 
-   private async generatePayload(id: Number, telefone: Telefone): Promise<Telefone> {
-      const tecnico = await this.tecnicoService.findById(id).toPromise();
-
-      return {
-        tipoTelefone: telefone.tipoTelefone,
-        numero: telefone.numero,
-        nomeTecnico: tecnico.nome,
-        tecnico: tecnico.id
-      }
-   }
+ 
  }
  

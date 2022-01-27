@@ -125,7 +125,9 @@ import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-
     MatTabsModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({ timeOut: 4000, closeButton: true, progressBar: true}),
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false // Ao salvar, vai manter a mascara
+    }),
     //form reactive
     FormsModule,
     ReactiveFormsModule,

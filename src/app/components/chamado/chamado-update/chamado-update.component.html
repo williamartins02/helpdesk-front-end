@@ -22,7 +22,7 @@
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>{{ retornaPrioridade(chamado.prioridade) }}</mat-label>
-          <mat-select  [(ngModel)]="chamado.prioridade" name="prioridade" [formControl]="prioridade" required>
+          <mat-select  [(ngModel)]="chamado.prioridade" name="prioridade" [formControl]="prioridade" [disabled]="true">
             <mat-option value="0">BAIXA</mat-option>
             <mat-option value="1">MÉDIA</mat-option>
             <mat-option value="2">ALTA</mat-option>
