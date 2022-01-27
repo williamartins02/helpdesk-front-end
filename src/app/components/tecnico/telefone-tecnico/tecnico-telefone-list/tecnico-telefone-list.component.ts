@@ -10,6 +10,7 @@ import { Telefone } from './../../../../models/telefone';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TelefoneService } from 'src/app/services/telefone.service';
 import { TecnicoTelefoneCreateComponent } from '../tecnico-telefone-create/tecnico-telefone-create.component';
+import { TecnicoTelefoneDeleteComponent } from '../tecnico-telefone-delete/tecnico-telefone-delete.component';
 
 @Component({
   selector: 'app-tecnico-telefone-list',
@@ -96,7 +97,19 @@ export class TecnicoTelefoneListComponent implements OnInit {
   /*MODAL para EDIATR/CRIAR/DELETAR do tecnico-update/tecnico-create/tecnico-delete */
   openCreate(): void {
     const dialogRef = this.dialog.open(TecnicoTelefoneCreateComponent, {
-      width: '600px'
+      width: '600px',
+      data: { id: this.route.snapshot.paramMap.get('id') }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openDelete(id: Number): void {
+    console.log("ID", id);
+    const dialogRef = this.dialog.open(TecnicoTelefoneDeleteComponent, {
+      width: '600px',
+      data: { id }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

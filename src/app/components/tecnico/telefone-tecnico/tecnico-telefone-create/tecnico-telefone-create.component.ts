@@ -1,3 +1,4 @@
+import { TecnicoService } from './../../../../services/tecnico.service';
 
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -5,8 +6,9 @@ import { TelefoneService } from './../../../../services/telefone.service';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Telefone } from './../../../../models/telefone';
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Tecnico } from 'src/app/models/tecnico';
 
 @Component({
   selector: 'app-tecnico-telefone-create',
@@ -23,10 +25,12 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
     nomeTecnico:  '',
   }
 
+  tecnicos: Tecnico[] = [];
+
    /*Validação usando o FormControl*/
    numero:         FormControl =  new FormControl(null, Validators.required);
    tecnico:        FormControl =  new FormControl(null, Validators.required);
-   tipotelefone:   FormControl =  new FormControl(null, Validators.required);
+   tipoTelefone:   FormControl =  new FormControl(null, Validators.required);
    senha:          FormControl =  new FormControl(null, Validators.required);
  
    constructor(
@@ -34,17 +38,19 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
      private toast: ToastrService,
      private router: Router,
      public dialogRef: MatDialogRef<TecnicoTelefoneCreateComponent>,
- 
+     private tecnicoService: TecnicoService,
+     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
    ) { }
  
    ngOnInit(): void {
    }
  
   /*Metodo para criar um Tecnico*/
-   create(): void {
-     this.service.create(this.telefone).subscribe(() => {
+   async create(): Promise<void> {
+     const payload = await this.generatePayload(this.data.id, this.telefone);
+     this.service.create(payload).subscribe(() => {
        this.toast.success('Cadastrado(a) com sucesso',  'Telefone');
-       this.router.navigate(['/tecnicos']);//assim que salvar voltar para pagina ListTecnicos
+       this.router.navigate(['/telefones']);//assim que salvar voltar para pagina ListTecnicos
        this.onNoClick();
      }, (err) => {
          if(err.error.errors)//tratado erro com lista de erro dentro do arrays
@@ -58,12 +64,23 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
 
     /* validando o retorno dos campos.*/
     validaCampos(): boolean {
-     return this.numero.valid && this.tipotelefone.valid 
+     return this.numero.valid && this.tipoTelefone.valid 
    }
  
    onNoClick(): void {
      this.dialogRef.close();
    }
- 
+   
+
+   private async generatePayload(id: Number, telefone: Telefone): Promise<Telefone> {
+      const tecnico = await this.tecnicoService.findById(id).toPromise();
+
+      return {
+        tipoTelefone: telefone.tipoTelefone,
+        numero: telefone.numero,
+        nomeTecnico: tecnico.nome,
+        tecnico: tecnico.id
+      }
+   }
  }
  

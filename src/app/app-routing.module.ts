@@ -11,6 +11,7 @@ import { ClienteListComponent } from './components/cliente/cliente-list/cliente-
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-create/tecnico-telefone-create.component';
 import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-list/tecnico-telefone-list.component';
+import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-delete/tecnico-telefone-delete.component';
 
 
 
@@ -27,7 +28,8 @@ const routes: Routes = [
   {
     path: '', component: NavComponent, canActivate: [AuthGuard],//canActivate para acessar a rota apos fazer login para ter acesso as Filhas (HOME/Tecnico/CLiente)
     children: [
-      { path: 'home', component: HomeComponent },
+      
+      {path: 'home', component: HomeComponent },
 
       {path: 'tecnicos', component: TecnicoListComponent},
       {path: 'tecnicos/telefones/:id', component: TecnicoTelefoneListComponent},

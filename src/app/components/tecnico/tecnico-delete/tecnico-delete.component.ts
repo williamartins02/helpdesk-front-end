@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class TecnicoDeleteComponent implements OnInit {
 
-  TECNICO_DATA: Tecnico[] = [];
+
   tecnico: Tecnico = {
     id: '',
     nome: '',

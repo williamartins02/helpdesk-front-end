@@ -42,12 +42,12 @@ export class TelefoneService {
       )
   }
 
-  delete(id: any): Observable<Telefone> {
+  delete(id: any): Observable<Telefone>{
     return this.http.delete<Telefone>(`${API_CONFIG.baseUrl}/telefones/${id}`)
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      )
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    )
   }
 }

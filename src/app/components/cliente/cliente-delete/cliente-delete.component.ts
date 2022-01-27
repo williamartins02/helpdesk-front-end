@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ClienteDeleteComponent implements OnInit {
 
-  TECNICO_DATA: Cliente[] = [];
+
   cliente: Cliente = {
     id: '',
     nome: '',
@@ -21,6 +21,8 @@ export class ClienteDeleteComponent implements OnInit {
     perfis: [],
     dataCriacao: '',
   }
+
+  isLoading = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
     public dialogRef: MatDialogRef<ClienteDeleteComponent>,

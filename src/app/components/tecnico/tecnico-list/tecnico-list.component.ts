@@ -1,3 +1,4 @@
+
 import { TecnicoDeleteComponent } from './../tecnico-delete/tecnico-delete.component';
 import { Router } from '@angular/router';
 
@@ -21,8 +22,6 @@ import { TecnicoUpdateComponent } from '../tecnico-update/tecnico-update.compone
 export class TecnicoListComponent implements OnInit, OnDestroy {
 
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);//scroll
-
- 
   tecnico: Tecnico = {
     id: '',
     nome: '',
@@ -35,6 +34,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
   refreshTable: Subscription;
 
   isLoading = false;
+
   TECNICO_DATA: Tecnico[] = [];
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.TECNICO_DATA);
@@ -47,10 +47,10 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     private toast: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-
   ) { }
 
   ngOnInit(): void {
+  
     this.findAll();
     this.refresh();
   }

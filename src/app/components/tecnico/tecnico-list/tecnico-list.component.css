@@ -61,3 +61,17 @@ p{
 .example-item {
   height: 100px;
 }
+
+.loader-container{
+  position: absolute;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 99;
+  margin-top: -41rem;
+  height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}

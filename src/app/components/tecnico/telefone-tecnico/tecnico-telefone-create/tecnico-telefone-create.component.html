@@ -14,20 +14,16 @@
          </mat-form-field>
  
          <mat-form-field class="full-width" appearance="fill">
-             <mat-label>Tipo</mat-label>
-             <input  [(ngModel)]="telefone.tipoTelefone" name="tipoTelefone" [formControl]="tipotelefone" required
-             matInput placeholder="Ex.. 000.000.000-00" mask="000.000.000-00">
-             <mat-icon matSuffix>pin</mat-icon>
-           </mat-form-field>
+          <mat-label>Selecione um tipo</mat-label>
+          <mat-select  [(ngModel)]="telefone.tipoTelefone" name="tipoTelefone" [formControl]="tipoTelefone" required>
+            <mat-option>NENHUM</mat-option>
+            <mat-option value="0">CASA</mat-option>
+            <mat-option value="1">EMPRESA</mat-option>
+            <mat-option value="2">CELULAR</mat-option>
+            <mat-option value="3">OUTROS</mat-option>
+          </mat-select>
+        </mat-form-field>
          </tr></table>
-         
-           <mat-form-field class="full-width" appearance="fill">
-             <mat-label>Técnico</mat-label>
-             <input  [(ngModel)]="telefone.tecnico" name="tecnico" [formControl]="tecnico" required
-             matInput placeholder="Ex.. fulano@gmail.com" maxlength="50">
-             <mat-icon matSuffix>email</mat-icon>
-           </mat-form-field>
- 
            <button (click)="create()" [disabled]="!validaCampos()" class="full-width mat-elevation-z8" mat-flat-button color="primary" ><mat-icon>group_add</mat-icon>Cadastrar</button>
            <button class="full-width mat-elevation-z4" mat-flat-button color="warn" (click)="onNoClick()"><mat-icon>cancel</mat-icon>Cancelar</button>
     </form>

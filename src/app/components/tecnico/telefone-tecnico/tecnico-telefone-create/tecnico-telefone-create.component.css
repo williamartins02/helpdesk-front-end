@@ -12,6 +12,11 @@
     margin: 0 5px;
 }
 
+.full-person{
+    width: 96%;
+    left: 1rem;
+}
+
 h1{
     text-align: center;
 }

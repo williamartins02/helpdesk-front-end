@@ -103,7 +103,6 @@ export class ChamadoListComponent implements OnInit {
     });
   }
 
-
   /**Retornando status como string*/
   returnStatus(status: any): string {
     if (status == "0") {
