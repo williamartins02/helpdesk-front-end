@@ -11,6 +11,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TelefoneService } from 'src/app/services/telefone.service';
 import { TecnicoTelefoneCreateComponent } from '../tecnico-telefone-create/tecnico-telefone-create.component';
 import { TecnicoTelefoneDeleteComponent } from '../tecnico-telefone-delete/tecnico-telefone-delete.component';
+import { TecnicoTelefoneUpdateComponent } from '../tecnico-telefone-update/tecnico-telefone-update.component';
 
 @Component({
   selector: 'app-tecnico-telefone-list',
@@ -105,8 +106,17 @@ export class TecnicoTelefoneListComponent implements OnInit {
     });
   }
 
+  openEdit(id: Number): void {
+    const dialogRef = this.dialog.open(TecnicoTelefoneUpdateComponent, {
+      width: '600px',
+      data: { id }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
   openDelete(id: Number): void {
-    console.log("ID", id);
     const dialogRef = this.dialog.open(TecnicoTelefoneDeleteComponent, {
       width: '600px',
       data: { id }

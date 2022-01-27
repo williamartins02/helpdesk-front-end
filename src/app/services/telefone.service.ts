@@ -20,6 +20,10 @@ export class TelefoneService {
     return this.http.get<Telefone[]>(`${API_CONFIG.baseUrl}/telefones/${id}`);
   }
 
+  findByTelefoneId(id: Number): Observable<Telefone> {
+    return this.http.get<Telefone>(`${API_CONFIG.baseUrl}/telefones/id/${id}`);
+  }
+
   findAll(): Observable<Telefone[]> {
     return this.http.get<Telefone[]>(`${API_CONFIG.baseUrl}/telefones`);
   }
