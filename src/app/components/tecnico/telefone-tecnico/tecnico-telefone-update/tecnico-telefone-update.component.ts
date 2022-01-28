@@ -33,7 +33,7 @@ export class TecnicoTelefoneUpdateComponent implements OnInit {
     dataCriacao: ''
   }
    /*Validação usando o FormControl*/
-   numero:         FormControl =  new FormControl(null, Validators.minLength(21));
+   numero:         FormControl =  new FormControl(null, Validators.required);
    tecnico:        FormControl =  new FormControl(null, Validators.required);
    tipoTelefone:   FormControl =  new FormControl(null, Validators.required);
   

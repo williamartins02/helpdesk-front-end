@@ -32,8 +32,10 @@ td {
 
 img{
     margin: auto;
-    width: 55%;
+    width: 64%;
     display: block;
+    margin-left: 6rem;
+    margin-bottom: 2rem;
 }
 
 .section{

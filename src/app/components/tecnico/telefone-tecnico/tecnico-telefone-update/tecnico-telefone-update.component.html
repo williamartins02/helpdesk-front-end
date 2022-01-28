@@ -2,12 +2,18 @@
     <form  class="form">
         <h1 >Editar Telefone</h1>
        
-        <img class="full-Width" src="assets/img/criarTecnico.png" alt="Help Desk">
+        <img class="full-Width" src="assets/img/update-telefone.png" alt="Help Desk">
  
  
        <table class="example-full-width" cellspacing="0"><tr>
 
-         
+        <mat-form-field class="full-person" appearance="outline">
+          <mat-label>{{ telefone.nomeTecnico }}</mat-label>
+          <mat-select [(ngModel)]="telefone.tecnico" name="tecnico" [disabled]="true">
+            <mat-option>{{telefone.nomeTecnico}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
          <mat-form-field class="full-width" appearance="fill">
            <mat-label>Numero</mat-label>
            <input  [(ngModel)]="telefone.numero" name="numero"
