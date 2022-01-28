@@ -61,4 +61,22 @@
   .example-item {
     height: 100px;
   }
+
+  .filter-empty{
+    height: 100%;
+    max-height: 300px;
+    width: 91%;
+    position: absolute;
+    padding-top: 100px;
+    text-align: center;
+    color: #949494;
+    margin-top: -22rem;
+    
+  }
+
+  strong{
+margin-top: 1rem;
+  }
+
+
   

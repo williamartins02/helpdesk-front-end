@@ -46,7 +46,6 @@ export class TecnicoTelefoneListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //this.findById();
     this.findByTecnicoId();
     this.refresh();
   }
@@ -73,7 +72,7 @@ export class TecnicoTelefoneListComponent implements OnInit {
 
       setTimeout(() => {
         this.isLoading = false;
-      }, 900);
+      }, 90000);
     }, (error) => {
       this.toast.error('Ao carregar a lista', 'ERROR')
       return throwError(error);

@@ -66,10 +66,14 @@
        <!-- Loading -->
     <div *ngIf="isLoading" class="loader-spinner">
         <mat-spinner></mat-spinner>
-        <div class="text-spinner">
-            
-        </div>
-        
     </div>
-    
+
+    <div class="filter-empty" *ngIf="!TELEFONE_DATA?.length">
+        <div class="empty-icon">
+            <mat-icon class="warning">warning</mat-icon>
+        </div>
+        <div>
+            <span>Sem resultado para telefones.</span>
+        </div>
+   </div>
 </div>
