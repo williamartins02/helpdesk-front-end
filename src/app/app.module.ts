@@ -65,6 +65,7 @@ import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-te
 import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-delete/tecnico-telefone-delete.component';
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
+import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamado/relatorio-chamado.component';
 
 
 
@@ -97,6 +98,7 @@ import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-
     TecnicoTelefoneUpdateComponent,
     TecnicoTelefoneCreateComponent,
     TecnicoTelefoneDeleteComponent,
+    RelatorioChamadoComponent,
     
   ],
   imports: [

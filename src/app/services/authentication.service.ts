@@ -14,7 +14,6 @@ export class AuthenticationService {
   jwtService: JwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient) { }
-
 //autenticando LOGIN/SENHA para entrar no sistema, via ENDPOINT
 authenticate(creds: Credenciais){
   return this.http.post(`${API_CONFIG.baseUrl}/login`, creds,{

@@ -12,6 +12,7 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
 import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-create/tecnico-telefone-create.component';
 import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-list/tecnico-telefone-list.component';
 import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-delete/tecnico-telefone-delete.component';
+import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamado/relatorio-chamado.component';
 
 
 
@@ -38,6 +39,7 @@ const routes: Routes = [
       {path: 'clientes', component: ClienteListComponent},
 
       {path: 'chamados', component: ChamadoListComponent},
+      //{path: 'chamados/relatorios', component: RelatorioChamadoComponent},
     ]
   }
 ];

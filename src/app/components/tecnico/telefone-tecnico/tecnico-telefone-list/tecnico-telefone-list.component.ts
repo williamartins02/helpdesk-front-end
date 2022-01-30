@@ -72,7 +72,7 @@ export class TecnicoTelefoneListComponent implements OnInit {
 
       setTimeout(() => {
         this.isLoading = false;
-      }, 90000);
+      }, 500);
     }, (error) => {
       this.toast.error('Ao carregar a lista', 'ERROR')
       return throwError(error);

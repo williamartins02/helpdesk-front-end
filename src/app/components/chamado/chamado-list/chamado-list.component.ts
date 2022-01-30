@@ -10,6 +10,7 @@ import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { ChamadoService } from "src/app/services/chamado.service";
 import { ChamadoUpdateComponent } from '../chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from '../chamado-read/chamado-read.component';
+import { RelatorioChamadoComponent } from '../relatorio-chamado/relatorio-chamado.component';
 
 
 
@@ -29,7 +30,7 @@ export class ChamadoListComponent implements OnInit {
   dataSource = new MatTableDataSource<Chamado>(this.CHAMADO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Inject(MAT_DIALOG_DATA) public data: {id: Number}
+  @Inject(MAT_DIALOG_DATA) public data: {id: Number, string: Text}
   constructor(
     public dialog: MatDialog, 
     private service: ChamadoService,
@@ -81,6 +82,16 @@ export class ChamadoListComponent implements OnInit {
     });
   }
 
+  imprimeReport(): void {
+    const dialogRef = this.dialog.open(RelatorioChamadoComponent, {
+      height: "90%", width:"90%",
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
   openEdit(id: Number): void {
     console.log("ID", id);
     const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
@@ -93,7 +104,6 @@ export class ChamadoListComponent implements OnInit {
   }
 
   openRed(id: Number): void {
-    console.log("ID", id);
     const dialogRef = this.dialog.open(ChamadoReadComponent, {
       height: "790px",
       data: { id }//Pegando ID cliente para editar..
@@ -102,6 +112,7 @@ export class ChamadoListComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
 
   /**Retornando status como string*/
   returnStatus(status: any): string {
