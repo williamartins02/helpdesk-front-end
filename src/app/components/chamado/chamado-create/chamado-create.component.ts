@@ -22,6 +22,7 @@ export class ChamadoCreateComponent implements OnInit {
   chamado: Chamado = {
     prioridade:  '',
     status:      '',
+    classificacao:'',
     titulo:      '',
     observacoes: '',
     tecnico:     '',
@@ -33,12 +34,13 @@ export class ChamadoCreateComponent implements OnInit {
   tecnicos: Tecnico[] = [];
 
 
-  prioridade:  FormControl = new FormControl(null, [Validators.required]);
-  status:      FormControl = new FormControl(null, [Validators.required,]);
-  titulo:      FormControl = new FormControl(null, [Validators.required]);
-  observacoes: FormControl = new FormControl(null, [Validators.required]);
-  tecnico:     FormControl = new FormControl(null, [Validators.required]);
-  cliente:     FormControl = new FormControl(null, [Validators.required]);
+  prioridade:     FormControl = new FormControl(null, [Validators.required]);
+  status:         FormControl = new FormControl(null, [Validators.required]);
+  classificacao:  FormControl = new FormControl(null, [Validators.required]);
+  titulo:         FormControl = new FormControl(null, [Validators.required]);
+  observacoes:    FormControl = new FormControl(null, [Validators.required]);
+  tecnico:        FormControl = new FormControl(null, [Validators.required]);
+  cliente:        FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
     private chamadoService: ChamadoService,
@@ -89,6 +91,7 @@ export class ChamadoCreateComponent implements OnInit {
   validaCampos(): boolean {
     return (
       this.prioridade.valid &&
+      this.classificacao.valid &&
       this.status.valid &&
       this.titulo.valid &&
       this.observacoes.valid &&

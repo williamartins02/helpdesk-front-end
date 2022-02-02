@@ -33,6 +33,11 @@
                    <th mat-header-cell *matHeaderCellDef> Titulo </th>
                    <td mat-cell *matCellDef="let chamado"> {{chamado.titulo}} </td>
                 </ng-container>
+                
+                <ng-container matColumnDef="classificacao">
+                    <th mat-header-cell *matHeaderCellDef>Classificação </th>
+                    <td mat-cell *matCellDef="let chamado">{{returnClassificacao(chamado.classificacao)}} </td>
+                </ng-container>
        
                 <ng-container matColumnDef="tecnico">
                     <th mat-header-cell *matHeaderCellDef> Técnico </th>
@@ -48,6 +53,7 @@
                    <td mat-cell *matCellDef="let chamado"> {{chamado.dataAbertura}} </td>
                 </ng-container>
        
+
                 <ng-container matColumnDef="prioridade">
                    <th mat-header-cell *matHeaderCellDef> Prioridade </th>
                    <td mat-cell class="mat-status mat-elevation-z8"  *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColor(chamado.prioridade)}">{{returnPrioridade(chamado.prioridade)}} </td>
@@ -55,8 +61,10 @@
        
                 <ng-container class="statusColor" matColumnDef="status">
                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                   <td mat-cell class="mat-status mat-elevation-z8" *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColorBackground(chamado.status) }">{{returnStatus(chamado.status)}} </td>
+                   <td mat-cell class="mat-status mat-elevation-z8" *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColorBackground(chamado.status)}">{{returnStatus(chamado.status)}} </td>
                 </ng-container>
+
+               
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="acoes">

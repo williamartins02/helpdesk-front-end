@@ -1,11 +1,12 @@
-<h1>Criar Chamados</h1>
+
 <div class="container mat-elevation-z8">
   <form class="form">
+    <h1>Criar Chamados</h1>
     <img class="full-Width" src="assets/img/fazerChamado.png" alt="Help Desk" />
 
     <table class="example-full-width" cellspacing="0">
       <tr>
-        <mat-form-field class="full-width" appearance="outline">
+        <mat-form-field class="full-person" appearance="outline">
           <mat-label>Título do chamado</mat-label>
           <input name="titulo" matInput placeholder="Ex.. Trocar teclado" [(ngModel)]="chamado.titulo" name="titulo" [formControl]="titulo" required />
         </mat-form-field>
@@ -24,6 +25,18 @@
             <mat-option value="0">BAIXA</mat-option>
             <mat-option value="1">MÉDIA</mat-option>
             <mat-option value="2">ALTA</mat-option>
+            <mat-option value="3">CRITICA</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Selecione um classificação</mat-label>
+          <mat-select  [(ngModel)]="chamado.classificacao" name="classificacao" [formControl]="classificacao" required>
+            <mat-option>NENHUM</mat-option>
+            <mat-option value="0">HARDWARE</mat-option>
+            <mat-option value="1">SOFTWARE</mat-option>
+            <mat-option value="2">REDES</mat-option>
+            <mat-option value="3">BANCO DE DADOS</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -56,5 +69,4 @@
     <button class="full-button mat-elevation-z4" mat-flat-button color="warn" (click)="onNoClick()">
       <mat-icon>cancel</mat-icon>Cancelar</button>
   </form>
-  <p>By Gonçalves M William</p>
 </div>

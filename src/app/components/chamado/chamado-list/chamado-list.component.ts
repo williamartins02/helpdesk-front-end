@@ -11,9 +11,6 @@ import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { ChamadoService } from "src/app/services/chamado.service";
 import { ChamadoUpdateComponent } from '../chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from '../chamado-read/chamado-read.component';
-import { RelatorioChamadoComponent } from '../relatorio-chamado/relatorio-chamado.component';
-
-
 
 @Component({
   selector: "app-chamado-list",
@@ -27,7 +24,7 @@ export class ChamadoListComponent implements OnInit {
   refreshTable: Subscription;
   isLoading = false;
 
-  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status', 'acoes'];
+  displayedColumns: string[] = ['id', 'titulo', 'classificacao', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status','acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.CHAMADO_DATA);
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -90,7 +87,6 @@ export class ChamadoListComponent implements OnInit {
     });
   }
 
-
   openEdit(id: Number): void {
     const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
       data: { id }//Pegando ID cliente para editar..
@@ -124,8 +120,23 @@ export class ChamadoListComponent implements OnInit {
       return "BAIXA";
     } else if (prioridade == "1") {
       return "MÉDIA";
+    } else if(prioridade == "2") {
+      return "ALTA";
+    }else{
+    return "CRITICA";
     }
-    return "ALTA";
+  }
+
+  returnClassificacao(classificacao: any): string {
+    if (classificacao == "0") {
+      return "HARDWARE";
+    } else if (classificacao == "1") {
+      return "SOFTWARE";
+    }else if(classificacao == "2"){
+      return "REDES";
+    }else{
+    return "BANCO";
+    }
   }
 
   /*Retornar cores de FUNDO/TEXTO */
@@ -134,9 +145,13 @@ export class ChamadoListComponent implements OnInit {
       return "Tomato";
     } else if (prioridade == "1") {
       return "LightSkyBlue";
+    }else if (prioridade == "2"){
+      return "MediumSeaGreen";
+    }else{
+    return "black";
     }
-    return "MediumSeaGreen";
   }
+
   getColor(status: any) {
     if (status == "0") {
       return "LimeGreen";
@@ -145,6 +160,7 @@ export class ChamadoListComponent implements OnInit {
     }
     return "Tomato";
   }
+
 
   /*Listando a list por ordem de chamado.*/
   orderByStatus(status: any): void {

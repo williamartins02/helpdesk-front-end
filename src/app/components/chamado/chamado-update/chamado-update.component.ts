@@ -21,26 +21,28 @@ import { FormControl, Validators } from "@angular/forms";
 export class ChamadoUpdateComponent implements OnInit {
 
   chamado: Chamado = {
-    prioridade:  '',
-    status:      '',
-    titulo:      '',
-    observacoes: '',
-    tecnico:     '',
-    cliente:     '',
-    nomeCliente: '',
-    nomeTecnico: '',
+    prioridade:    '',
+    classificacao: '',
+    status:        '',
+    titulo:        '',
+    observacoes:   '',
+    tecnico:       '',
+    cliente:       '',
+    nomeCliente:   '',
+    nomeTecnico:   '',
   }
  
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
 
 
-  prioridade:  FormControl = new FormControl(null, [Validators.required]);
-  status:      FormControl = new FormControl(null, [Validators.required,]);
-  titulo:      FormControl = new FormControl(null, [Validators.required]);
-  observacoes: FormControl = new FormControl(null, [Validators.required]);
-  tecnico:     FormControl = new FormControl(null, [Validators.required]);
-  cliente:     FormControl = new FormControl(null, [Validators.required]);
+  prioridade:    FormControl = new FormControl(null, [Validators.required]);
+  status:        FormControl = new FormControl(null, [Validators.required]);
+  classificacao: FormControl = new FormControl(null, [Validators.required]);
+  titulo:        FormControl = new FormControl(null, [Validators.required]);
+  observacoes:   FormControl = new FormControl(null, [Validators.required]);
+  tecnico:       FormControl = new FormControl(null, [Validators.required]);
+  cliente:       FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
@@ -100,6 +102,7 @@ export class ChamadoUpdateComponent implements OnInit {
       }
     );
   }
+
   /**Retornando status como string*/
   retornaStatus(status: any): string {
     if(status == '0') {
@@ -116,14 +119,28 @@ export class ChamadoUpdateComponent implements OnInit {
       return 'BAIXA'
     } else if(prioridade == '1') {
       return 'MÉDIA'
-    } else {
+    } else if(prioridade == '2') {
       return 'ALTA'
     }
+    return "CRITICA"
   }
+
+  retornaClassificacao(classificacao: any): string {
+    if (classificacao == "0") {
+      return "HARDWARE";
+    } else if (classificacao == "1") {
+      return "SOFTWARE";
+    } else if(classificacao == "2"){
+      return "REDES";
+    } 
+      return "BANCO";
+  }
+
 
   validaCampos(): boolean {
     return (
       this.prioridade.valid &&
+      this.classificacao.valid &&
       this.status.valid &&
       this.titulo.valid &&
       this.observacoes.valid &&

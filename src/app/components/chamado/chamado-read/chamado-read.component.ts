@@ -15,15 +15,16 @@ import { ChamadoUpdateComponent } from "src/app/components/chamado/chamado-updat
 })
 export class ChamadoReadComponent implements OnInit {
   chamado: Chamado = {
-    prioridade: "",
-    status: "",
-    titulo: "",
-    observacoes: "",
-    tecnico: "",
-    cliente: "",
-    nomeCliente: "",
-    nomeTecnico: "",
-  };
+    prioridade:   '',
+    status:       '',
+    classificacao:'',
+    titulo:       '',
+    observacoes:  '',
+    tecnico:      '',
+    cliente:      '',
+    nomeCliente:  '',
+    nomeTecnico:  '',
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: Number },
@@ -70,10 +71,24 @@ export class ChamadoReadComponent implements OnInit {
       return "BAIXA";
     } else if (prioridade == "1") {
       return "MÉDIA";
-    } else {
+    } else if(prioridade == "2") {
       return "ALTA";
     }
+    return "CRITICA"
   }
+
+  retornaClassificacao(classificacao: any): string {
+    if (classificacao == "0") {
+      return "HARDWARE";
+    } else if (classificacao == "1") {
+      return "SOFTWARE";
+    } else if(classificacao == "2"){
+      return "REDES";
+    } 
+      return "BANCO";
+  }
+
+  
   onNoClick(): void {
     this.dialogRef.close();
   }
