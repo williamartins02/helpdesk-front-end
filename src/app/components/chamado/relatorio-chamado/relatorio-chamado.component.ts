@@ -1,6 +1,7 @@
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Report } from './../../../models/report';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RelatorioService } from './../../../services/relatorio.service';
-import { ChamadoService } from 'src/app/services/chamado.service';
+
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
@@ -11,14 +12,23 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class RelatorioChamadoComponent implements OnInit {
 
   constructor(
-    private relatortioService: RelatorioService,
+    private relatorioService: RelatorioService,
+    public dialogRef: MatDialogRef<RelatorioChamadoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Report,
   ) { }
 
   ngOnInit(): void {
-    this.imprimeReport();
+   this.imprimiRelatorio();
   }
 
-  imprimeReport(): void{
-    this.relatortioService.downloadPdfRelatorio();
+  imprimiRelatorio(){
+    this.relatorioService.downloadPdfRelatorioParam(this.data);
+  }
+  //imprimeReport(): void{
+    //this.relatortioService.downloadPdfRelatorio();
+  //}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

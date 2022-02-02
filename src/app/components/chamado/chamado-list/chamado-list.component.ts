@@ -1,3 +1,4 @@
+import { ReportParamComponent } from './../report-param/report-param.component';
 
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, throwError } from 'rxjs';
@@ -78,28 +79,23 @@ export class ChamadoListComponent implements OnInit {
       height: "799px",
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed");
     });
   }
 
-  imprimeReport(): void {
-    const dialogRef = this.dialog.open(RelatorioChamadoComponent, {
-      height: "90%", width:"90%",
+  reportParame(): void {
+    const dialogRef = this.dialog.open(ReportParamComponent, {
+      width: "729px", height: "310px",
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
 
   openEdit(id: Number): void {
-    console.log("ID", id);
     const dialogRef = this.dialog.open(ChamadoUpdateComponent, {
-     
       data: { id }//Pegando ID cliente para editar..
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -109,7 +105,6 @@ export class ChamadoListComponent implements OnInit {
       data: { id }//Pegando ID cliente para editar..
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

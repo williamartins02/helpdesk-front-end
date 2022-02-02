@@ -1,0 +1,25 @@
+<h1>Selecione uma data</h1>
+
+  <form class="form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Data Inicio</mat-label>
+          <input name="dataInicio" matInput placeholder="Selecione data de Inicio" [(ngModel)]="userReport.dataInicio" name="dataInicio" [formControl]="dataInicio" required />
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Data Fim</mat-label>
+          <input name="dataFim" matInput placeholder="Selecione data Fim" [(ngModel)]="userReport.dataFim" name="dataFim" [formControl]="dataFim" required />
+        </mat-form-field>
+
+      </tr>
+    </table>
+
+    <button class="full-button mat-elevation-z8"mat-flat-button color="primary" (click)="imprimeRelatorio()" [disabled]="!validaCampos()">
+      Gerar Relatório<mat-icon>picture_as_pdf</mat-icon></button>
+    <button (click)="onNoClick()" class="full-button mat-elevation-z4" mat-flat-button color="warn">
+      Cancelar<mat-icon>cancel</mat-icon></button>
+  </form>
+ 
+

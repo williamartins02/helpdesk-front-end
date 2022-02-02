@@ -66,6 +66,8 @@ import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-te
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
 import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamado/relatorio-chamado.component';
+import { ReportParamComponent } from './components/chamado/report-param/report-param.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -99,6 +101,7 @@ import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamad
     TecnicoTelefoneCreateComponent,
     TecnicoTelefoneDeleteComponent,
     RelatorioChamadoComponent,
+    ReportParamComponent,
     
   ],
   imports: [
@@ -125,6 +128,7 @@ import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamad
     MatProgressBarModule,
     ScrollingModule,
     MatTabsModule,
+    MatDatepickerModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({ timeOut: 4000, closeButton: true, progressBar: true}),
     NgxMaskModule.forRoot({

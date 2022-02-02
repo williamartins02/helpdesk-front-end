@@ -1,0 +1,78 @@
+.container{
+    width: 46rem;
+    margin: auto auto 1rem auto;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.full-person{
+    width: 97%;
+    left: 1rem;
+    
+}
+.full-width{
+    width: 221px;
+    left: 7rem;
+    margin: 40px 5px;
+    display: center;
+}
+
+.full-button{
+    width: 221px;
+    left: 7rem;
+    margin: 0 5px;
+}
+
+.full-text-area{
+    width: 97%;
+    left: 1.1rem;
+}
+
+.observacoes{
+    min-height: 4rem;
+    max-height: 6rem;
+}
+
+h1{
+    text-align: center;
+}
+
+p{
+ margin-top: 1rem;
+ opacity: .5;
+}
+
+td {
+    text-align: center
+ }
+
+img{
+    margin: auto;
+    width: 73%;
+    display: block;
+}
+
+.section{
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-icon{
+    opacity: .8 !important;
+}
+
+.loader-spinner{
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index:99999; 
+    background: white;
+    height: 16rem;
+    margin-top: -400px;
+  
+  }
+
+
