@@ -68,6 +68,7 @@ import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-
 import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamado/relatorio-chamado.component';
 import { ReportParamComponent } from './components/chamado/report-param/report-param.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -129,6 +130,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ScrollingModule,
     MatTabsModule,
     MatDatepickerModule,
+    MatTooltipModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({ timeOut: 4000, closeButton: true, progressBar: true}),
     NgxMaskModule.forRoot({

@@ -54,7 +54,8 @@ table {
     display: flex;
   }
   .pagination{
-    margin-top: 0.1rem;
+
+    margin-right: 35rem; 
   }
 
   .loader-spinner{
@@ -93,8 +94,17 @@ table {
   mat-row cdk-row ng-star-inserted{
     height: 10px;
   }
+
   .full-button{
     width: 195px;
-    margin-top: 4px;
-    display: flex;
-}
+    margin-top: 1rem;
+    display: row;
+  }
+
+  .full-button-report{
+    margin-right: 60px;
+    margin-top: 1rem;
+   
+   
+  }
+

@@ -4,20 +4,20 @@
         <mat-icon md-36> person_add </mat-icon> Adicionar Chamados
     </button>
 
-    <button (click)="reportParame()"  class=" full-button mat-elevation-z8" mat-raised-button color="primary">
-        <mat-icon md-36> summarize </mat-icon> Gerar relatorio
-    </button>
-
     <mat-form-field appearance="standard">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        <mat-label>Filtro de Chamados</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Nome Técnico" #input>
     </mat-form-field>
 
-    <mat-radio-group color="primary">
-        <mat-radio-button (click)="orderByStatus(0)" value="0">ABERTO</mat-radio-button>
-        <mat-radio-button (click)="orderByStatus(1)" value="1">ANDAMENTO</mat-radio-button>
-        <mat-radio-button (click)="orderByStatus(2)" value="2">ENCERRADO</mat-radio-button>
-      </mat-radio-group>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Selecione um status</mat-label>
+        <mat-select>
+          <mat-option>NENHUM</mat-option>
+          <mat-option (click)="orderByStatus(0)"value="0">ABERTO</mat-option>
+          <mat-option (click)="orderByStatus(1)"value="1">ANDAMENTO</mat-option>
+          <mat-option (click)="orderByStatus(2)"value="2">ENCERRADO</mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
     <div class="mat-elevation-z8">
@@ -53,7 +53,6 @@
                    <td mat-cell *matCellDef="let chamado"> {{chamado.dataAbertura}} </td>
                 </ng-container>
        
-
                 <ng-container matColumnDef="prioridade">
                    <th mat-header-cell *matHeaderCellDef> Prioridade </th>
                    <td mat-cell class="mat-status mat-elevation-z8"  *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColor(chamado.prioridade)}">{{returnPrioridade(chamado.prioridade)}} </td>
@@ -63,8 +62,6 @@
                    <th mat-header-cell *matHeaderCellDef> Status </th>
                    <td mat-cell class="mat-status mat-elevation-z8" *matCellDef="let chamado" [ngStyle]="{ backgroundColor : getColorBackground(chamado.status)}">{{returnStatus(chamado.status)}} </td>
                 </ng-container>
-
-               
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="acoes">
@@ -80,21 +77,24 @@
                         </div>
                     </td>
                 </ng-container>
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+               
             </table>
         </cdk-virtual-scroll-viewport>
+
+        <button (click)="reportParame()" (click)="onNoClick()"  class=" full-button-report mat-elevation-z8" mat-stroked-button color="primary">
+            <mat-icon md-36> summarize </mat-icon> Gerar relatorio
+        </button>
         <mat-paginator class="pagination" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        
     </div>
     <p>Lista Técnicos</p>
-
           <!-- Loading -->
           <div *ngIf="isLoading" class="loader-spinner">
             <mat-spinner></mat-spinner>
             <div class="text-spinner">
-                
             </div>
-            
         </div>
-    
 </div>

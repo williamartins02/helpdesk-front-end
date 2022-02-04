@@ -1,3 +1,4 @@
+import { FormControl, FormGroup } from '@angular/forms';
 import { ReportParamComponent } from './../report-param/report-param.component';
 
 import { ToastrService } from 'ngx-toastr';
@@ -23,6 +24,8 @@ export class ChamadoListComponent implements OnInit {
   FILTERED_DATA: Chamado[] = [];
   refreshTable: Subscription;
   isLoading = false;
+
+  formGroup: FormGroup;
 
   displayedColumns: string[] = ['id', 'titulo', 'classificacao', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status','acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.CHAMADO_DATA);
@@ -169,6 +172,7 @@ export class ChamadoListComponent implements OnInit {
       if (element.status == status) 
           list.push(element);
     });
+
     /*Trazendo a list filtrada em sintonia com o pagination*/
     this.FILTERED_DATA = list;
     this.dataSource = new MatTableDataSource<Chamado>(list);
@@ -180,4 +184,9 @@ export class ChamadoListComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  
 }
