@@ -1,3 +1,4 @@
+import { GenericDialog } from './models/dialog/generic-dialog/generic-dialog';
 
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
@@ -69,6 +70,9 @@ import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamad
 import { ReportParamComponent } from './components/chamado/report-param/report-param.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { GenericDialogComponent } from './components/generic/generic-dialog/generic-dialog.component';
+
+
 
 
 
@@ -103,6 +107,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     TecnicoTelefoneDeleteComponent,
     RelatorioChamadoComponent,
     ReportParamComponent,
+    GenericDialogComponent,
+    
     
   ],
   imports: [

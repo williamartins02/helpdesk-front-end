@@ -46,7 +46,6 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     private service: TecnicoService,
     private toast: ToastrService,
     public dialog: MatDialog,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {

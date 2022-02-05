@@ -1,0 +1,13 @@
+<div [class]="'alert-dialog catalog alert-dialog--' + type + ' padding'">
+    <mat-icon *ngIf="icon" class="alert-dialog-icon">{{icon}}</mat-icon>
+    <div class="align-center">
+        <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
+    <h3 mat-dialog-title *ngIf="title" class="alert-dialog-title" style="margin-bottom: 0px">{{title}}</h3>
+     <mat-dialog-content>
+         <p class="alert-dialog-text" *ngIf="content">{{content}}</p>
+     </mat-dialog-content>
+     <mat-dialog-actions *ngIf="btnOK" class="btn">
+        <button mat-button mat-dialog-close="">OK</button>
+     </mat-dialog-actions>
+</div>

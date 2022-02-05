@@ -1,3 +1,4 @@
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Chamado } from './../../../models/chamado';
@@ -11,6 +12,7 @@ import { Tecnico } from "./../../../models/tecnico";
 import { Cliente } from "./../../../models/cliente";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
+import { GenericDialogComponent } from '../../generic/generic-dialog/generic-dialog.component';
 
 @Component({
   selector: "app-chamado-create",
@@ -18,7 +20,9 @@ import { FormControl, Validators } from "@angular/forms";
   styleUrls: ["./chamado-create.component.css"],
 })
 export class ChamadoCreateComponent implements OnInit {
-
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+ 
   chamado: Chamado = {
     prioridade:  '',
     status:      '',
@@ -43,13 +47,13 @@ export class ChamadoCreateComponent implements OnInit {
   cliente:        FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
-    private chamadoService: ChamadoService,
-    private clienteService: ClienteService,
-    private tecnicoService: TecnicoService,
-    private toast: ToastrService,
+    private  chamadoService: ChamadoService,
+    private  clienteService: ClienteService,
+    private  tecnicoService: TecnicoService,
+    private  toast: ToastrService,
     private router: Router,
-
-    public dialogRef: MatDialogRef<ChamadoCreateComponent>,
+    public  dialogRef: MatDialogRef<ChamadoCreateComponent>,
+   
   ) {}
 
   ngOnInit(): void {
