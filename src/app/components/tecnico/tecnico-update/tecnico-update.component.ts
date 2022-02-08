@@ -1,4 +1,6 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Tecnico } from '../../../models/tecnico';
 import { TecnicoService } from '../../../services/tecnico.service';
@@ -29,6 +31,9 @@ export class TecnicoUpdateComponent implements OnInit {
   email: FormControl = new FormControl(null, Validators.email);
   senha: FormControl = new FormControl(null, Validators.minLength(3))
 
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
     public dialogRef: MatDialogRef<TecnicoUpdateComponent>,
@@ -36,8 +41,10 @@ export class TecnicoUpdateComponent implements OnInit {
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute, //permite de um GET em parametros pela url para pegar paramentros 
-
-  ) { }
+    public dialog: MatDialog
+  ) { 
+    this.genericDialog = new GenericDialog(dialog);
+  }
 
   ngOnInit(): void {
     this.findById();
@@ -51,11 +58,16 @@ export class TecnicoUpdateComponent implements OnInit {
   }
   
   update(): void {
+    this.onNoClick();
+    const matDialogRef = this.genericDialog.loadingMessage("Atualizando técnico...");
     this.service.update(this.tecnico).subscribe(() => {
-      this.toast.success('Atualizado com sucesso', 'Técnico(a) ' + this.tecnico.nome);
-      this.router.navigate(['/tecnicos']);
-      this.onNoClick();
+      setTimeout(() => {
+        matDialogRef.close();
+          this.toast.success('Atualizado com sucesso', 'Técnico(a) ' + this.tecnico.nome);
+          this.router.navigate(['/tecnicos']);
+      },1000)
     },(err) => {//listando LIST de erro.
+        matDialogRef.close();
         err.error.errors.forEach((element) => {
           this.toast.error(element.message);
         });

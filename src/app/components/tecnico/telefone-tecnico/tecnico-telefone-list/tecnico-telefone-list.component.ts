@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { GenericDialog } from './../../../../models/dialog/generic-dialog/generic-dialog';
+import { GenericDialogComponent } from './../../../molecules/generic-dialog/generic-dialog.component';
 import { Inject } from '@angular/core';
 import { Tecnico } from './../../../../models/tecnico';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -36,6 +39,9 @@ export class TecnicoTelefoneListComponent implements OnInit {
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+
   constructor(
     public dialogRef: MatDialogRef<TecnicoTelefoneListComponent>,
     private service: TelefoneService,
@@ -43,21 +49,23 @@ export class TecnicoTelefoneListComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+    this.genericDialog = new GenericDialog(dialog); 
+   }
 
   ngOnInit(): void {
     this.findByTecnicoId();
     this.refresh();
+    
   }
-
 
     /*METODO Criando um service para lista uma LIST TECNICO-TELEFONE*/
   findByTecnicoId() {
     const id = this.route.snapshot.paramMap.get('id');
     this.service.findById(id).subscribe(resposta => {
-      this.TELEFONE_DATA = resposta
-      this.dataSource = new MatTableDataSource<Telefone>(resposta);
-      this.dataSource.paginator = this.paginator;
+        this.TELEFONE_DATA = resposta
+        this.dataSource = new MatTableDataSource<Telefone>(resposta);
+        this.dataSource.paginator = this.paginator;
     })
   }
   /*Destruindo uma sessão */
@@ -69,10 +77,9 @@ export class TecnicoTelefoneListComponent implements OnInit {
     this.refreshTable = this.service.refresh$.subscribe(() => {
       this.isLoading = true;
       this.findByTecnicoId();
-
       setTimeout(() => {
         this.isLoading = false;
-      }, 500);
+      }, 1000);
     }, (error) => {
       this.toast.error('Ao carregar a lista', 'ERROR')
       return throwError(error);

@@ -1,3 +1,5 @@
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReportParamComponent } from './../report-param/report-param.component';
 
@@ -32,12 +34,18 @@ export class ChamadoListComponent implements OnInit {
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Inject(MAT_DIALOG_DATA) public data: {id: Number, string: Text}
+
+   private genericDialog: GenericDialog;
+   private matDialogRef: MatDialogRef<GenericDialogComponent>;
+
   constructor(
     public dialog: MatDialog, 
     private service: ChamadoService,
     private toast: ToastrService,
     public dialogRef: MatDialogRef<ChamadoListComponent>,
-    ) {}
+    ) {
+      this.genericDialog = new GenericDialog(dialog);
+    }
 
   ngOnInit(): void {
     this.findAll();
@@ -46,9 +54,9 @@ export class ChamadoListComponent implements OnInit {
 
   findAll(): void {
     this.service.findAll().subscribe((resposta) => {
-      this.CHAMADO_DATA = resposta;
-      this.dataSource = new MatTableDataSource<Chamado>(resposta);
-      this.dataSource.paginator = this.paginator;
+          this.CHAMADO_DATA = resposta;
+          this.dataSource = new MatTableDataSource<Chamado>(resposta);
+          this.dataSource.paginator = this.paginator;
     }, (error) => {
       this.toast.error('Na listagem de chamado, procurar suporte', 'ERROR')
       return throwError(error.error.error);
@@ -64,10 +72,9 @@ export class ChamadoListComponent implements OnInit {
     this.refreshTable = this.service.refresh$.subscribe(() => {
       this.isLoading = true;
       this.findAll();
-
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 900);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 900);
     }, (error) => {
       this.toast.error('Ao carregar a lista', 'ERROR')
       return throwError(error);

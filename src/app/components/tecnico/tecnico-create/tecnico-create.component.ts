@@ -1,4 +1,5 @@
-import { GenericDialogComponent } from "src/app/components/generic/generic-dialog/generic-dialog.component";
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+
 import { GenericDialog } from "./../../../models/dialog/generic-dialog/generic-dialog";
 import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
@@ -14,8 +15,6 @@ import { Router } from "@angular/router";
   styleUrls: ["./tecnico-create.component.css"],
 })
 export class TecnicoCreateComponent implements OnInit {
-  private genericDialog: GenericDialog;
-  private matDialogRef: MatDialogRef<GenericDialogComponent>;
 
   hide = true; //esconder e aparecer senha
 
@@ -34,6 +33,9 @@ export class TecnicoCreateComponent implements OnInit {
   cpf: FormControl = new FormControl(null, Validators.required);
   email: FormControl = new FormControl(null, Validators.email);
   senha: FormControl = new FormControl(null, Validators.minLength(3));
+  
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
 
   constructor(
     private service: TecnicoService,
@@ -50,14 +52,14 @@ export class TecnicoCreateComponent implements OnInit {
   /*Metodo para criar um Tecnico*/
   public create(): void{
     this.onNoClick();
-     const matDialogRef = this.genericDialog.loadingMessage("Salvando técnico...");
+    const matDialogRef = this.genericDialog.loadingMessage("Salvando técnico...");
     this.service.create(this.tecnico).subscribe(() => {
         setTimeout(() => {
           matDialogRef.close();
           this.router.navigate(["/tecnicos"]); //assim que salvar voltar para pagina ListTecnicos
           this.toast.success("Cadastrado(a) com sucesso","Técnico(a) " + this.tecnico.nome
           );
-        }, 500)
+        },1000)
       },(err) => {
         matDialogRef.close();
         if(err.error.errors)//tratado erro com lista de erro dentro do arrays

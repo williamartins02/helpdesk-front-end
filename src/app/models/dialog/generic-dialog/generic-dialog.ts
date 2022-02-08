@@ -1,8 +1,11 @@
+import { Subject } from 'rxjs';
+import { GenericDialogComponent } from './../../../components/molecules/generic-dialog/generic-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { GenericDialogComponent } from 'src/app/components/generic/generic-dialog/generic-dialog.component';
+
 
 
 export class GenericDialog {
+  modalWasClosed = new Subject<any>();
 
 constructor(
   private dialog: MatDialog
@@ -39,6 +42,10 @@ public erroMessage(message: string): MatDialogRef<GenericDialogComponent>{
       },
       disableClose: true
   });
+}
+
+closeModal(){
+  this.modalWasClosed.next;
 }
 
  }

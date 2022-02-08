@@ -9,7 +9,7 @@ import { MatDialog, MatDialogRef,  } from '@angular/material/dialog';
   templateUrl: './report-param.component.html',
   styleUrls: ['./report-param.component.css']
 })
-export class ReportParamComponent implements OnInit {
+export class ReportParamComponent {
 
   userReport: Report = {
     dataInicio:  '',
@@ -24,32 +24,27 @@ export class ReportParamComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  ngOnInit(): void {
+    imprimeRelatorio(): void {
+      const dialogRef = this.dialog.open(RelatorioChamadoComponent, {
+        height: "90%", width:"90%",
+        data: {
+          dataInicio: this.dataInicio.value,
+          dataFim: this.dataFim.value
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
 
-  }
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
 
-  imprimeRelatorio(): void {
-    const dialogRef = this.dialog.open(RelatorioChamadoComponent, {
-      height: "90%", width:"90%",
-      data: {
-        dataInicio: this.dataInicio.value,
-        dataFim: this.dataFim.value
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  validaCampos(): boolean {
-    return (
-      this.dataInicio.valid && this.dataFim.valid
-    );
-  }
+    validaCampos(): boolean {
+      return (
+        this.dataInicio.valid && this.dataFim.valid
+      );
+    }
   }
 
 

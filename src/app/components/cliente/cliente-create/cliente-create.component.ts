@@ -1,6 +1,8 @@
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { ClienteService } from './../../../services/cliente.service';
 import { Cliente } from './../../../models/cliente';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
 import { Component, OnInit } from '@angular/core';
@@ -32,24 +34,35 @@ export class ClienteCreateComponent implements OnInit {
   email: FormControl =        new FormControl(null, Validators.email);
   senha: FormControl = new FormControl(null, Validators.minLength(3));
 
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+
   constructor(
     private service: ClienteService,
     private toast: ToastrService,
     private router: Router,
     public dialogRef: MatDialogRef<ClienteCreateComponent>,
+    public dialog: MatDialog
 
-  ) { }
+  ) {
+    this.genericDialog = new GenericDialog(dialog);
+   }
 
   ngOnInit(): void {
   }
 
  /*Metodo para criar um Cliente*/
   create(): void {
+    this.onNoClick();
+    const matDialogRef = this.genericDialog.loadingMessage("Salvando Cliente...");
     this.service.create(this.cliente).subscribe(() => {
-      this.toast.success('Cadastrado(a) com sucesso',  'Cliente ' + this.cliente.nome);
-      this.router.navigate(['/clientes']);//assim que salvar voltar para pagina ListClientes
-      this.onNoClick();
+      setTimeout(() => {
+        matDialogRef.close();
+        this.toast.success('Cadastrado(a) com sucesso',  'Cliente ' + this.cliente.nome);
+        this.router.navigate(['/clientes']);//assim que salvar voltar para pagina ListClientes
+      },1000)
     }, (err) => {
+      matDialogRef.close();
         if(err.error.errors)//tratado erro com lista de erro dentro do arrays
            err.error.errors.forEach((element) => {
              this.toast.error(element.message);

@@ -1,5 +1,7 @@
-import { GenericDialogComponent } from "src/app/components/generic/generic-dialog/generic-dialog.component";
-import { GenericDialog } from "./../../../models/dialog/generic-dialog/generic-dialog";
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+
+
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { TecnicoService } from "./../../../services/tecnico.service";
@@ -61,7 +63,7 @@ export class TecnicoDeleteComponent implements OnInit {
           matDialogRef.close();
           this.toast.success("Deletado com sucesso","Técnico(a) " + this.tecnico.nome);
           this.router.navigate(["/tecnicos"]);
-        }, 500);
+        }, 1000);
       },(err) => {
         //listando LIST de erro.
         matDialogRef.close();

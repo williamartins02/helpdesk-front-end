@@ -1,3 +1,5 @@
+import { GenericDialogComponent } from './../../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../../models/dialog/generic-dialog/generic-dialog';
 import { throwError } from 'rxjs';
 import { TecnicoService } from './../../../../services/tecnico.service';
 
@@ -8,7 +10,7 @@ import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Telefone } from './../../../../models/telefone';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Tecnico } from 'src/app/models/tecnico';
 
 @Component({
@@ -32,7 +34,8 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
    numero:         FormControl =  new FormControl(null, Validators.required);
    tecnico:        FormControl =  new FormControl(null, Validators.required);
    tipoTelefone:   FormControl =  new FormControl(null, Validators.required);
-  
+   private genericDialog: GenericDialog;
+   private matDialogRef: MatDialogRef<GenericDialogComponent>;
  
    constructor(
      private service: TelefoneService,
@@ -41,8 +44,11 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
      private route: ActivatedRoute,
      public dialogRef: MatDialogRef<TecnicoTelefoneCreateComponent>,
      private tecnicoService: TecnicoService,
+     public dialog: MatDialog,
      @Inject(MAT_DIALOG_DATA) public data: {id: Number},
-   ) { }
+   ) {
+    this.genericDialog = new GenericDialog(dialog);
+    }
  
    ngOnInit(): void {
      this.findById();
@@ -63,12 +69,17 @@ export class TecnicoTelefoneCreateComponent implements OnInit {
  
   /*Metodo para criar um Tecnico*/
    async create(): Promise<void> {
-     const payload = await this.generatePayload(this.data.id, this.telefone);
-     this.service.create(payload).subscribe(() => {
-       this.toast.success('Cadastrado(a) com sucesso',  'Telefone');
-       this.router.navigate(['/telefones']);//assim que salvar voltar para pagina ListTecnicos
-       this.onNoClick();
+      this.onNoClick();
+      const payload = await this.generatePayload(this.data.id, this.telefone);
+      const matDialogRef = this.genericDialog.loadingMessage("Salvando Telefone...");
+      this.service.create(payload).subscribe(() => {
+       setTimeout(() =>{
+          matDialogRef.close();
+          this.toast.success('Cadastrado(a) com sucesso',  'Telefone');
+          this.router.navigate(['/telefones']);//assim que salvar voltar para pagina ListTecnicos
+       },1000)
      }, (err) => {
+      matDialogRef.close();
          if(err.error.errors)//tratado erro com lista de erro dentro do arrays
             err.error.errors.forEach((element) => {
               this.toast.error(element.message);

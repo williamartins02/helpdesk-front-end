@@ -1,4 +1,6 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '../../../models/cliente';
 import { ClienteService } from '../../../services/cliente.service';
@@ -29,6 +31,9 @@ export class ClienteUpdateComponent implements OnInit {
   email: FormControl = new FormControl(null, Validators.email);
   senha: FormControl = new FormControl(null, Validators.minLength(3))
 
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
     public dialogRef: MatDialogRef<ClienteUpdateComponent>,
@@ -36,8 +41,10 @@ export class ClienteUpdateComponent implements OnInit {
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute, //permite de um GET em parametros pela url para pegar paramentros 
-
-  ) { }
+    public dialog: MatDialog
+  ) { 
+    this.genericDialog = new GenericDialog(dialog);
+  }
 
   ngOnInit(): void {
     this.findById();
@@ -51,10 +58,14 @@ export class ClienteUpdateComponent implements OnInit {
   }
   
   update(): void {
+    this.onNoClick();
+    const matDialogRef = this.genericDialog.loadingMessage("Editando Cliente...");
     this.service.update(this.cliente).subscribe(() => {
-      this.toast.success('Atualizado com sucesso', 'Cliente ' + this.cliente.nome);
-      this.router.navigate(['/clientes']);
-      this.onNoClick();
+      setTimeout(() => {
+        matDialogRef.close();
+        this.toast.success('Atualizado com sucesso', 'Cliente ' + this.cliente.nome);
+        this.router.navigate(['/clientes']);
+      },1000)
     }, (err) => {//listando LIST de erro.
       if (err.error.errors)
         err.error.errors.forEach((element) => {

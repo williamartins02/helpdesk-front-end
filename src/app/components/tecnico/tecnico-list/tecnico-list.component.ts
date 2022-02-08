@@ -1,3 +1,5 @@
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
 
 import { TecnicoDeleteComponent } from './../tecnico-delete/tecnico-delete.component';
 import { Router } from '@angular/router';
@@ -41,17 +43,24 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
   /*Paninação da tabela tecnico*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Inject(MAT_DIALOG_DATA) public data: {id: Number}
+
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+  
   constructor(
     public dialogRef: MatDialogRef<TecnicoListComponent>,
     private service: TecnicoService,
     private toast: ToastrService,
     public dialog: MatDialog,
-  ) { }
+  ) {
+    this.genericDialog = new GenericDialog(dialog);
+   }
 
   ngOnInit(): void {
   
     this.findAll();
     this.refresh();
+   
   }
 
   /*Destruindo uma sessão */
@@ -63,10 +72,9 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     this.refreshTable = this.service.refresh$.subscribe(() => {
       this.isLoading = true;
       this.findAll();
-
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 900);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
     }, (error) => {
       this.toast.error('Ao carregar a lista', 'ERROR')
       return throwError(error);

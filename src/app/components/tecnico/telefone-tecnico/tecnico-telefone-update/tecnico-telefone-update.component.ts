@@ -1,10 +1,12 @@
+import { GenericDialog } from './../../../../models/dialog/generic-dialog/generic-dialog';
+import { GenericDialogComponent } from './../../../molecules/generic-dialog/generic-dialog.component';
 import { throwError } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { TelefoneService } from 'src/app/services/telefone.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 import { Tecnico } from 'src/app/models/tecnico';
 import { Telefone } from 'src/app/models/telefone';
@@ -37,6 +39,8 @@ export class TecnicoTelefoneUpdateComponent implements OnInit {
    tecnico:        FormControl =  new FormControl(null, Validators.required);
    tipoTelefone:   FormControl =  new FormControl(null, Validators.required);
   
+   private genericDialog: GenericDialog;
+   private matDialogRef: MatDialogRef<GenericDialogComponent>;
  
    constructor(
      private service: TelefoneService,
@@ -45,8 +49,11 @@ export class TecnicoTelefoneUpdateComponent implements OnInit {
      private route: ActivatedRoute,
      public dialogRef: MatDialogRef<TecnicoTelefoneUpdateComponent>,
      private tecnicoService: TecnicoService,
+     public dialog: MatDialog,
      @Inject(MAT_DIALOG_DATA) public data: {id: Number},
-   ) { }
+   ) {
+    this.genericDialog = new GenericDialog(dialog);
+    }
  
    ngOnInit(): void {
     this.findById();
@@ -61,11 +68,16 @@ export class TecnicoTelefoneUpdateComponent implements OnInit {
   }
 
   update(): void{
+    this.onNoClick();
+    const matDialogRef = this.genericDialog.loadingMessage("Editando Telefone...");
     this.service.update(this.telefone).subscribe(() =>{
-     this.toast.success("Editar com sucesso", "Telefonee Técnico(a)" + this.tecnicos.nome);
-     this.router.navigate(['telefones']);
-     this.onNoClick();
+      setTimeout(() =>{
+        matDialogRef.close();
+        this.toast.success("Editar com sucesso", "Telefonee Técnico(a)" + this.tecnicos.nome);
+        this.router.navigate(['telefones']);
+      },1000)
    },(error) => {
+    matDialogRef.close();
      this.toast.error("Ao adicionar um chamado", "ERROR");
      return throwError(error.error.error);
    });

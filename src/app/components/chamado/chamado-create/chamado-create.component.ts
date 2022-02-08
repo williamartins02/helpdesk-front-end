@@ -1,5 +1,6 @@
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
 import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Chamado } from './../../../models/chamado';
 
@@ -12,7 +13,6 @@ import { Tecnico } from "./../../../models/tecnico";
 import { Cliente } from "./../../../models/cliente";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
-import { GenericDialogComponent } from '../../generic/generic-dialog/generic-dialog.component';
 
 @Component({
   selector: "app-chamado-create",
@@ -53,8 +53,11 @@ export class ChamadoCreateComponent implements OnInit {
     private  toast: ToastrService,
     private router: Router,
     public  dialogRef: MatDialogRef<ChamadoCreateComponent>,
+    public dialog: MatDialog
    
-  ) {}
+  ) {
+    this.genericDialog = new GenericDialog(dialog);
+  }
 
   ngOnInit(): void {
     this.findaAllClientes();
@@ -62,10 +65,14 @@ export class ChamadoCreateComponent implements OnInit {
   }
 
   create(): void{
+    this.onNoClick();
+    const matDialogRef = this.genericDialog.loadingMessage("Salvando Chamado...");
      this.chamadoService.create(this.chamado).subscribe(() =>{
-      this.toast.success("Chamado criando com sucesso", "Novo chamado");
-      this.router.navigate(['chamados']);
-      this.onNoClick();
+      setTimeout(() => {
+        matDialogRef.close();
+        this.toast.success("Chamado criando com sucesso", "Novo chamado");
+        this.router.navigate(['chamados']);
+      },1000)
     },(error) => {
       this.toast.error("Ao adicionar um chamado", "ERROR");
       return throwError(error.error.error);

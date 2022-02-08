@@ -11,31 +11,10 @@
 .alert-dialog-text {
   margin-top: 14px;
   color: #2317d7;
-  font-size: 19.9px;
-  margin-left: 5rem;
+  font-size: 23px;
+  margin-left: 4rem;
 }
 
-.alert-dialog-icon .error {
-  width: 65px;
-  height: 65px;
-  font-size: 65px;
-  margin-bottom: 16px;
-  color: #d50000;
-}
-.btn {
-  color: #ec2928;
-}
-
-.alert-dialgo-icon .success {
-  width: 65px;
-  height: 65px;
-  font-size: 65px;
-  margin-bottom: 16px;
-  color: #00c853;
-}
-.btn {
-  color: #689f38;
-}
 .align-center {
   text-align: center;
 }
@@ -52,6 +31,6 @@ svg > circle {
 }
 
 .padding {
-  padding: 126px;
+  padding: 100px;
   width: 20rem;
 }

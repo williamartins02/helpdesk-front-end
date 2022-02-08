@@ -1,5 +1,7 @@
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Chamado } from './../../../models/chamado';
 
@@ -44,6 +46,9 @@ export class ChamadoUpdateComponent implements OnInit {
   tecnico:       FormControl = new FormControl(null, [Validators.required]);
   cliente:       FormControl = new FormControl(null, [Validators.required]);
 
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: Number},
     private chamadoService: ChamadoService,
@@ -54,7 +59,11 @@ export class ChamadoUpdateComponent implements OnInit {
     private route: ActivatedRoute,
 
     public dialogRef: MatDialogRef<ChamadoUpdateComponent>,
-  ) {}
+    public dialog: MatDialog
+    
+  ) {
+    this.genericDialog = new GenericDialog(dialog);
+  }
 
   ngOnInit(): void {
     this.chamado.id = this.route.snapshot.paramMap.get('id');//passando id para o editar via url
@@ -73,11 +82,16 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   update(): void{
+    this.onNoClick();
+    const matDialogRef = this.genericDialog.loadingMessage("Editando Chamado...");
      this.chamadoService.update(this.chamado).subscribe(() =>{
-      this.toast.success("Edita com sucesso", "Chamado Cliente  " + this.chamado.nomeCliente);
-      this.router.navigate(['chamados']);
-      this.onNoClick();
+      setTimeout(() => {
+        matDialogRef.close();
+        this.toast.success("Edita com sucesso", "Chamado Cliente  " + this.chamado.nomeCliente);
+        this.router.navigate(['chamados']);
+      },1000)
     },(error) => {
+      matDialogRef.close();
       this.toast.error("Ao adicionar um chamado", "ERROR");
       return throwError(error.error.error);
     });
