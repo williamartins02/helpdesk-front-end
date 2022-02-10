@@ -1,5 +1,4 @@
 
-
 import { AuthGuard } from './authentication/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
@@ -9,15 +8,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
-import { TecnicoTelefoneCreateComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-create/tecnico-telefone-create.component';
 import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-list/tecnico-telefone-list.component';
-import { TecnicoTelefoneDeleteComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-delete/tecnico-telefone-delete.component';
-import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamado/relatorio-chamado.component';
-
-
-
-
-
+import { LineChartComponent } from './components/chamado/chart/line-chart/line-chart.component';
 
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
@@ -39,6 +31,7 @@ const routes: Routes = [
       {path: 'clientes', component: ClienteListComponent},
 
       {path: 'chamados', component: ChamadoListComponent},
+      {path: 'chart', component: LineChartComponent},
       //{path: 'chamados/relatorios', component: RelatorioChamadoComponent},
     ]
   }

@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
 
   //Metodo que inicia
   ngOnInit(): void {
-   this.router.navigate(['home'])
+   this.router.navigate(['chart'])
   }
 
   /*Metodo para DESLOGAR e limpar o TOKEN do usuario do locaStorage */

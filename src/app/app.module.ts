@@ -1,6 +1,5 @@
-import { NgChartsModule } from 'ng2-charts' ;   
-import { GenericDialogComponent } from './components/molecules/generic-dialog/generic-dialog.component';
-import { GenericDialog } from './models/dialog/generic-dialog/generic-dialog';
+
+ import { GenericDialogComponent } from './components/molecules/generic-dialog/generic-dialog.component';
 
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
@@ -54,6 +53,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
+
 //component do projeto.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -73,7 +73,9 @@ import { RelatorioChamadoComponent } from './components/chamado/relatorio-chamad
 import { ReportParamComponent } from './components/chamado/report-param/report-param.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { LineChartComponent } from './components/chamado/line-chart/line-chart/line-chart.component';
+import { LineChartComponent } from './components/chamado/chart/line-chart/line-chart.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -111,6 +113,7 @@ import { LineChartComponent } from './components/chamado/line-chart/line-chart/l
     
   ],
   imports: [
+ 
     NgChartsModule,
     BrowserModule,
     AppRoutingModule,
