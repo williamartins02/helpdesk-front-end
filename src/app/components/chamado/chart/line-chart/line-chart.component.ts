@@ -1,13 +1,12 @@
 import * as moment from "moment";
 
-import { UserChart, IGraficoChart } from "./../../../../models/chart";
+import { IGraficoChart } from "./../../../../models/chart";
 import { ChartService } from "./../../../../services/chart.service";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import {
   ChartConfiguration,
   ChartData,
   ChartEvent,
-  ChartOptions,
   ChartType,
 } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
@@ -38,41 +37,29 @@ export class LineChartComponent {
     });
   }
 
-  public barChartType: ChartType = "bar";
-
-  public barChartData: ChartData<"bar"> = {
-    labels: [],
-    datasets: [
-      { data: [], label: "Aberto" },
-      { data: [], label: "Em Andamento" },
-      { data: [], label: "Encerrado" },
-    ],
-  };
-
   private generateChart(data: IGraficoChart[]) {
     const datasList: string[] = [];
     data.forEach(chart => {
       const formatedDate = this.formatDate(chart.dataAbertura);
       datasList.push(formatedDate);
       chart.dataAbertura = formatedDate;
-    }
-    )
+    })
 
     const datas: Set<string> = new Set(datasList);
     let dados = {};
     datas.forEach(d => {
       const chamadosDoAno = data.filter(chart => chart.dataAbertura === d);
-
-      const abertos = chamadosDoAno.filter(chart => chart.status === "ABERTO");
-      const emAndamento = chamadosDoAno.filter(chart => chart.status === "ANDAMENTO");
-      const encerrados = chamadosDoAno.filter(chart => chart.status === "ENCERRADO");
+      const baixa     = chamadosDoAno.filter(chart => chart.prioridade === "BAIXA");
+      const media     = chamadosDoAno.filter(chart => chart.prioridade === "MEDIA");
+      const alta      = chamadosDoAno.filter(chart => chart.prioridade === "ALTA");
+      const critica   = chamadosDoAno.filter(chart => chart.prioridade === "CRITICA");
       dados[d] = {
-        abertos: abertos.length,
-        emAndamento: emAndamento.length,
-        encerrados: encerrados.length  
+        baixa:    baixa.length,
+        media:    media.length,
+        alta:     alta.length,  
+        critica:  critica.length, 
       }
     })
-
     return dados;
   }
 
@@ -85,35 +72,48 @@ export class LineChartComponent {
     let graph = {
       labels: [],
       datasets: [
-        { data: [], label: "Aberto" },
-        { data: [], label: "Em Andamento" },
-        { data: [], label: "Encerrado" },
+        { data: [], label: "Alta" },
+        { data: [], label: "Baixa" },
+        { data: [], label: "Média" },
+        { data: [], label: "Crítica" },
       ]
     };
     
     Object.keys(this.graphicData).forEach(key => {
       const ano = this.graphicData[key];
       graph.labels.push(key);
-      graph.datasets[0].data.push(ano.abertos);
-      graph.datasets[1].data.push(ano.emAndamento);
-      graph.datasets[2].data.push(ano.encerrados);
+      graph.datasets[0].data.push(ano.alta);
+      graph.datasets[1].data.push(ano.baixa);
+      graph.datasets[2].data.push(ano.media);
+      graph.datasets[3].data.push(ano.critica);
     })
     this.barChartData = graph;
   }
 
+//começo do grafico (visual)
+  public barChartType: ChartType = "bar";
 
+  public barChartData: ChartData<"bar"> = {
+    labels: [],
+    datasets: [
+      { data: [], label: "Alta" },
+      { data: [], label: "Baixa" },
+      { data: [], label: "Média" },
+      { data: [], label: "Crítica" },
+    ],
+  };
 
   public barChartOptions: ChartConfiguration["options"] = {
     elements: {
       line: {
-        tension: 0,
+        tension: 0.1,
       },
     },
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
-        min: 0,
+        min: 0.1,
       },
     },
     plugins: {

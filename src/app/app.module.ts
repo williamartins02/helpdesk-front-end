@@ -75,6 +75,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { LineChartComponent } from './components/chamado/chart/line-chart/line-chart.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ChatComponent } from './components/chat/chat/chat.component';
+
 
 
 
@@ -109,11 +111,12 @@ import { NgChartsModule } from 'ng2-charts';
     ReportParamComponent,
     GenericDialogComponent,
     LineChartComponent,
+    ChatComponent,
     
     
   ],
   imports: [
- 
+    MatCardModule,
     NgChartsModule,
     BrowserModule,
     AppRoutingModule,
@@ -140,6 +143,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatTabsModule,
     MatDatepickerModule,
     MatTooltipModule,
+    FormsModule,
     //Configuração para Service ToastrModule
     ToastrModule.forRoot({ timeOut: 4000, closeButton: true, progressBar: true}),
     NgxMaskModule.forRoot({

@@ -5,5 +5,5 @@ export interface UserChart {
 
 export interface IGraficoChart {
   dataAbertura: string;
-  status: string;
+  prioridade: string;
 }

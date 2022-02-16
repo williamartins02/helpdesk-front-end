@@ -2,14 +2,14 @@ import { API_CONFIG } from "./../config/api.config";
 import { Chamado } from "./../models/chamado";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, Subject, tap } from "rxjs";
+import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class ChamadoService {
   private _refresh$ = new Subject<void>();
-
+  
   constructor(private http: HttpClient) {}
 
   get refresh$() {

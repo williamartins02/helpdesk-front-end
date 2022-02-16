@@ -1,0 +1,37 @@
+
+<mat-card class="example-card mat-elevation-z8" >
+  <mat-card >
+
+    <mat-card-header>
+
+      <mat-list >
+        <button mat-raised-button color="primary" (click) = "connect()"    *ngIf = "!connected">Conectar</button>
+        <button mat-raised-button color="warn"    (click) = "disconnect()" *ngIf = "connected">Desconectar</button>
+      </mat-list>
+
+    </mat-card-header>
+
+  </mat-card>
+    <mat-card-content style="overflow: scroll; height: 360px;" *ngIf="connected">
+
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+    <mat-card-footer *ngIf = "connected" >
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Messagem</mat-label>
+              <input matInput #message maxlength="256" placeholder="Ex. Digita Mensagem..." name="text" type="text">
+              <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+
+              <button class="button" mat-fab color="primary" floatLabel="always" type="submit">
+                <mat-icon>send</mat-icon>
+              </button>
+
+            </mat-form-field>
+          </form>
+    </mat-card-footer>
+
+  </mat-card>
+
+ 

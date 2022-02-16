@@ -1,0 +1,30 @@
+
+  .example-card {
+    max-width: 75%;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto; 
+    border-radius: 10px;
+    padding: 1em 0 1em 0;
+  }
+  
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 2rem;
+    margin-right: auto; 
+   
+  }
+  
+  .example-full-width {
+    width: 160%;
+    margin-top: 1rem;
+  }
+
+  .button{
+    margin-left: 103%;
+    margin-top: -4%;
+  }
+
+  

@@ -10,6 +10,7 @@ import { ClienteListComponent } from './components/cliente/cliente-list/cliente-
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { TecnicoTelefoneListComponent } from './components/tecnico/telefone-tecnico/tecnico-telefone-list/tecnico-telefone-list.component';
 import { LineChartComponent } from './components/chamado/chart/line-chart/line-chart.component';
+import { ChatComponent } from './components/chat/chat/chat.component';
 
 //Fica toda roda do projeto para ser renderizado.
 const routes: Routes = [
@@ -33,6 +34,9 @@ const routes: Routes = [
       {path: 'chamados', component: ChamadoListComponent},
       {path: 'chart', component: LineChartComponent},
       //{path: 'chamados/relatorios', component: RelatorioChamadoComponent},
+
+      {path: 'chat', component: ChatComponent},
+      
     ]
   }
 ];
