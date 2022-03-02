@@ -3,7 +3,7 @@
 
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
-import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
+
 import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
@@ -76,9 +76,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { LineChartComponent } from './components/chamado/chart/line-chart/line-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ChatComponent } from './components/chat/chat/chat.component';
-
-
-
+import { DeleteDialogComponent } from './components/molecules/delete/delete-dialog/delete-dialog.component';
+import { OrganismsComponent } from './components/organisms/organisms.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +93,6 @@ import { ChatComponent } from './components/chat/chat/chat.component';
     TecnicoDeleteComponent,
 
     ClienteCreateComponent,
-    ClienteDeleteComponent,
     ClienteListComponent,
     ClienteUpdateComponent,
 
@@ -112,6 +110,9 @@ import { ChatComponent } from './components/chat/chat/chat.component';
     GenericDialogComponent,
     LineChartComponent,
     ChatComponent,
+    DeleteDialogComponent,
+    OrganismsComponent,
+   
     
     
   ],

@@ -53,7 +53,7 @@ export class TecnicoListComponent implements OnInit, OnDestroy {
     private toast: ToastrService,
     public dialog: MatDialog,
   ) {
-    this.genericDialog = new GenericDialog(dialog);
+     
    }
 
   ngOnInit(): void {

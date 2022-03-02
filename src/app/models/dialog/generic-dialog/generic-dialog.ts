@@ -1,6 +1,8 @@
+
 import { Subject } from 'rxjs';
 import { GenericDialogComponent } from './../../../components/molecules/generic-dialog/generic-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/components/molecules/delete/delete-dialog/delete-dialog.component';
 
 
 
@@ -19,6 +21,12 @@ public successMessage(message): MatDialogRef<GenericDialogComponent>{
       title: message,
       btnOK: true
     }
+  });
+}
+
+public deleteWarningMessage(): MatDialogRef<DeleteDialogComponent> {
+  return this.dialog.open(DeleteDialogComponent, {
+    width: '600px',
   });
 }
 

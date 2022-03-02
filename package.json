@@ -26,6 +26,8 @@
     "ng2-charts": "^3.0.8",
     "ngx-mask": "^13.1.1",
     "ngx-toastr": "^14.2.1",
+    "@ctrl/ngx-emoji-mart": "^5.0.2",
+    "react-native-picker-module": "^2.0.4",
     "rxjs": "~7.4.0",
     "sockjs-client": "^1.5.2",
     "tslib": "^2.3.0",

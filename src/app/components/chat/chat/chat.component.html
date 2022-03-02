@@ -1,67 +1,73 @@
-
-<mat-card class="example-card mat-elevation-z8" >
-  <mat-card >
-
-    <mat-card-header>
-
-  <mat-list >
+<mat-card class="example-card mat-elevation-z8">
+  <p>
+    <mat-toolbar color="primary" *ngIf="connected">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>chat </mat-icon>
+      </button>
+      <span> Chat Messages</span>
+    </mat-toolbar>
+  </p>
+  <mat-card-header class="card-header">
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td><mat-form-field class="example-full-width" appearance="outline" *ngIf ="!connected">
-            <mat-label>Digite seu nome</mat-label>
-            <input matInput [(ngModel)]="mensagem.username" name="userName">
-          </mat-form-field></td>
-
-          <td><button mat-raised-button color="primary" (click) = "connect()"    *ngIf ="!connected" [disabled] = "!mensagem.username">Conectar</button></td>
-          <td><button mat-raised-button color="warn"    (click) = "disconnect()" *ngIf ="connected">Desconectar</button></td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline" *ngIf="!connected">
+              <mat-label>Digite seu nome</mat-label>
+              <input matInput [(ngModel)]="mensagem.username"/>
+            </mat-form-field>
+          <td>
+            <button mat-raised-button color="primary"(click)="connect()" *ngIf="!connected" [disabled]="!mensagem.username">Conectar</button>
+          </td>
+          <td>
+            <button mat-raised-button color="warn" (click)="disconnect()" *ngIf="connected" class="button-disconect">Desconectar</button>
+          </td>
         </tr>
       </table>
+  </mat-card-header>
+
+<mat-card-content #scrollChat [scrollTop]="scrollChat" style="overflow: scroll auto ; height: 360px" *ngIf="connected">
+  <mat-list>
+    <mat-list-item *ngFor="let msg of mensagens"  class="chat-new-user" ><!--direcionar lados de msgs desativado temporariamente [dir]="msg.direction"-->
+      
+      <span *ngIf="msg.type == 'NEW_USER'" [ngStyle]="{ color: msg.color }">
+        <mat-icon mat-list-icon>account_circle</mat-icon> <!--{{mensagem.date | date:'shortTime'}} [dir]="msg.direction"-->{{ msg.texto }}
+        <span [ngStyle]="{ color: msg.color }">"{{msg.username}}"</span>
+      </span>
+
+      <span *ngIf="msg.type == 'MENSAGEM'">
+        <img class="direct-chat-img" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="message user image">
+        <!--{{mensagem.date | date:'shortTime'}}-->
+        <span [ngStyle]="{ color: msg.color }">{{ msg.username }} </span>
+       
+        <div class="chat-bubble" [ngStyle]="{ backgroundColor: msg.color }">{{ msg.texto }}</div>
+      </span>
+      
+    </mat-list-item>
   </mat-list>
+</mat-card-content>
 
-    </mat-card-header>
+<div style="color: gray">&nbsp;&nbsp;&nbsp;{{ escrevendo }}</div>
 
-  </mat-card>
+<mat-card-footer class="card-footer" *ngIf="connected">
+  <form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Messagem</mat-label>
+            <input matInput #message maxlength="256" placeholder="Ex. Digita Mensagem..." name="texto" type="text" [(ngModel)]="mensagem.texto" (keyup)="escreverEvento()"/>
+            <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+          </mat-form-field>
+        </td>
+        <td>
+          <button [disabled]="!mensagem.texto" (click)="enviarMensagem()" class="button" mat-fab color="primary" floatLabel="always">
+            <mat-icon>send</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-card-footer>
 
-    <mat-card-content #scrollChat [scrollTop]="scrollChat" style="overflow: scroll; height: 360px;" *ngIf="connected">
-      <mat-list>
-        <div mat-subheader>Mensagem Help-Desk</div>
+</mat-card>
 
-          <mat-list-item *ngFor="let mensagem of mensagens">
-            <span *ngIf="mensagem.type=='NEW_USER'" [ngStyle]="{'color':mensagem.color}">
-              <mat-icon mat-list-icon>support_agent</mat-icon> <!--{{mensagem.date | date:'shortTime'}}--> {{mensagem.texto}} <span [ngStyle]="{'color':mensagem.color}">{{mensagem.username}}</span>
-            </span> 
-
-            <span *ngIf="mensagem.type=='MENSAGEM'">
-              <mat-icon mat-list-icon>support_agent</mat-icon> <!--{{mensagem.date | date:'shortTime'}}--> <span [ngStyle]="{'color':mensagem.color}">{{mensagem.username}}</span>  disse : <br> {{mensagem.texto}}
-            </span> 
-          </mat-list-item> 
-      </mat-list>
-    </mat-card-content>
-    <div style="color: gray;">&nbsp;&nbsp;&nbsp;{{escrevendo}}</div>
-    <mat-divider></mat-divider>
-   
-    <mat-card-footer *ngIf = "connected" >
-            <form class="example-form">          
-              <table class="example-full-width" cellspacing="0">
-                <tr>
-                  <td> 
-                    <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Messagem</mat-label>
-                          <input matInput #message maxlength="256"placeholder="Ex. Digita Mensagem..." name="texto" type="text"  [(ngModel)]="mensagem.texto" (keyup)="escreverEvento()">
-                          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-                      </mat-form-field>
-                  </td>
-                      <td>
-                        <button (click)="enviarMensagem()" class="button" mat-fab color="primary" floatLabel="always">
-                            <mat-icon >send</mat-icon>
-                        </button>
-                      </td>
-                </tr>
-              </table>
-            </form>
-            
-    </mat-card-footer>
-
-  </mat-card>
-
- 

@@ -19,9 +19,9 @@ export class TecnicoCreateComponent implements OnInit {
   hide = true; //esconder e aparecer senha
 
   tecnico: Tecnico = {
-    id: "",
-    nome: "",
-    cpf: "",
+    id:    "",
+    nome:  "",
+    cpf:   "",
     email: "",
     senha: "",
     perfis: [],

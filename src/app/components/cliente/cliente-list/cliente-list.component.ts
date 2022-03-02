@@ -1,4 +1,5 @@
-import { ClienteDeleteComponent } from '../cliente-delete/cliente-delete.component';
+import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { Router } from '@angular/router';
 
 import { ClienteUpdateComponent } from '../cliente-update/cliente-update.component';
@@ -41,6 +42,8 @@ export class ClienteListComponent implements OnInit  {
   /*Paninação da tabela cliente*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  private genericDialog: GenericDialog;
+  private matDialogRef: MatDialogRef<GenericDialogComponent>;
   constructor(
     public dialogRef: MatDialogRef<ClienteListComponent>,
     private service: ClienteService,
@@ -48,11 +51,14 @@ export class ClienteListComponent implements OnInit  {
     public dialog: MatDialog,
     private router: Router,
 
-  ) { }
+  ) {
+    this.genericDialog = new GenericDialog(dialog);
+  }
 
   ngOnInit(): void {
     this.findAll();
     this.refresh();
+    this.findById();
   }
 
   /*Destruindo uma sessão */
@@ -92,6 +98,34 @@ export class ClienteListComponent implements OnInit  {
       return throwError(error);
     })
   }
+
+  delete(id: number): void { 
+    const deleteDialogRef = this.genericDialog.deleteWarningMessage();
+      deleteDialogRef.afterClosed().subscribe(deleteConfirmation => {
+        if(!deleteConfirmation) {
+          return;
+        }
+      const matDialogRef = this.genericDialog.loadingMessage("Deletando Cliente...");
+      this.service.delete(id).subscribe(() => {
+          setTimeout(() => {
+            matDialogRef.close();
+            this.toast.success('Deletado com sucesso', 'Cliente ' + this.cliente.nome);
+            this.router.navigate(['/clientes']);
+          },1000)
+      }, (err) => {
+        matDialogRef.close();
+          if (err.error.errors)
+            err.error.errors.forEach((element) => {
+              this.toast.error(element.message);
+            });
+        this.toast.error(err.error.message)
+      })
+    })
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
   
   /*Metodo para filtrar*/
   applyFilter(event: Event) {
@@ -114,17 +148,6 @@ export class ClienteListComponent implements OnInit  {
     const dialogRef = this.dialog.open(ClienteUpdateComponent, {
       width: '600px',
       data: { id }//Pegando ID cliente para editar..
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  openDelete(id: Number): void {
-    console.log("ID", id);
-    const dialogRef = this.dialog.open(ClienteDeleteComponent, {
-      width: '600px',
-      data: { id }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

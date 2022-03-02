@@ -19,7 +19,6 @@ import {
 })
 export class TecnicoDeleteComponent implements OnInit {
   private genericDialog: GenericDialog;
-  private matDialogRef: MatDialogRef<GenericDialogComponent>;
 
   tecnico: Tecnico = {
     id: "",

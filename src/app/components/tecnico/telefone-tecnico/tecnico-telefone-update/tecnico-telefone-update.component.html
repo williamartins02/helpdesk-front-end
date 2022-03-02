@@ -24,8 +24,7 @@
  
          <mat-form-field class="full-width" appearance="fill">
           <mat-label>{{ retornaTipo(telefone.tipoTelefone) }}</mat-label>
-          <mat-select  [(ngModel)]="telefone.tipoTelefone" name="tipoTelefone" 
-                       [formControl]="tipoTelefone" required>
+          <mat-select  [(ngModel)]="telefone.tipoTelefone" name="tipoTelefone" [formControl]="tipoTelefone" required>
             <mat-option>NENHUM</mat-option>
             <mat-option value="0">CASA</mat-option>
             <mat-option value="1">EMPRESA</mat-option>

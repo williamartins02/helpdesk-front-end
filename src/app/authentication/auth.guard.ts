@@ -2,7 +2,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { AuthenticationService } from './../services/authentication.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Routes, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
 
 
 @Injectable({

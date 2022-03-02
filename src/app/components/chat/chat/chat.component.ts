@@ -1,3 +1,4 @@
+import { Credenciais } from './../../../models/credenciais';
 import { IMensagem } from './../../../models/mensagem';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '@stomp/stompjs';
@@ -9,16 +10,18 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+  userName: string = '';
   escrevendo:string;
   private client: Client;
   connected: boolean = false;
   mensagens : IMensagem[] = [];
   mensagem: IMensagem = {
-    texto:  '',
-    type: '',
+    texto:    '',
+    type:     '',
     username: '',
-    color: '',
-    //date: new Date(),
+    color:    '',
+    //direction: 'rtl', desativado temporariamente.
+    //date: 'hgajkhdhja',
   }
   
   constructor() { }
@@ -30,19 +33,22 @@ export class ChatComponent implements OnInit {
       return new SockJS("http://localhost:8080/chat-websocket");
     }
 
-    this.client.onConnect = (frame) => {
-      console.log('Connected : ' + this.client.connected + ' : ' + frame);
+    this.client.onConnect = () => {
       this.connected = true;
 
       this.client.subscribe('/chat/message', e => {
         let mensagem: IMensagem = JSON.parse(e.body) as IMensagem;
-        //this.mensagem.date = new Date(this.mensagem.date)
-
           if(!this.mensagem.color && mensagem.type == 'NEW_USER' && this.mensagem.username == mensagem.username){
+            console.log("Essa mensagem é minha")
             this.mensagem.color = mensagem.color;
           }
+        //direcionar lados de mensagens desativados temporario
+        //mensagem.direction = this.mensagem.username == mensagem.username ? 'rtl' : 'ltr';
+        
+        console.log("Mensagens", mensagem);
         this.mensagens.push(mensagem)
-        console.log("Recebido por ", mensagem)
+        console.log("Mensagens 2", mensagem);
+
       });
 
       this.client.subscribe('/chat/escrevendo', e =>{
@@ -55,8 +61,7 @@ export class ChatComponent implements OnInit {
       this.client.publish({ destination: '/app/message', body: JSON.stringify(this.mensagem)});
     }
 
-    this.client.onDisconnect = (frame) => {
-      console.log('Disconnected : ' + !this.client.connected + ' : ' + frame);
+    this.client.onDisconnect = () => {
       this.connected = false;
     }
   }
@@ -70,6 +75,7 @@ export class ChatComponent implements OnInit {
 
   enviarMensagem(): void{
     this.mensagem.type = "MENSAGEM"
+    console.log("mensagem", this.mensagem)
     this.client.publish({ destination: '/app/message', body: JSON.stringify(this.mensagem)});
     this.mensagem.texto = '';
   }
@@ -77,5 +83,4 @@ export class ChatComponent implements OnInit {
   escreverEvento(): void{
     this.client.publish({ destination: '/app/escrevendo', body: JSON.stringify(this.mensagem.username)});
   }
-
 }

@@ -107,9 +107,6 @@ export class TecnicoTelefoneListComponent implements OnInit {
       width: '600px',
       data: { id: this.route.snapshot.paramMap.get('id') }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   openEdit(id: Number): void {
@@ -117,18 +114,12 @@ export class TecnicoTelefoneListComponent implements OnInit {
       width: '600px',
       data: { id }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   openDelete(id: Number): void {
     const dialogRef = this.dialog.open(TecnicoTelefoneDeleteComponent, {
       width: '600px',
       data: { id }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

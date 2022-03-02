@@ -1,0 +1,70 @@
+
+.delete-dialog {
+    width: 250px;
+    padding: 0px 0px;
+    text-align: center;
+    margin-right: 17rem;
+    margin-bottom: 3rem;
+    
+  }
+    .header {
+      width: 100%;
+      text-align: -webkit-center;
+  }
+  .title{
+    line-height: 1.4;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+    font-family: 'Roboto';
+    text-align: center;
+    margin-left: 15rem;
+  }
+  .icon{
+    margin-left: 99%;
+    font-size: 65px;
+    margin-bottom: 16px;
+    border-radius: 100px;
+    height: 75px;
+    width: 75px;
+    color: #FFFFFF;
+    background-color: #FFC107;
+  }
+  .body{
+    width: 100px;
+    margin-top: 15px;
+  }
+  .option{
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    display: inline-flex;
+  }
+  div{
+    margin-left: 20px;
+    display: inline-flex;
+    width: 90%;
+    color: #999999;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 13px -1px 21px;
+    flex-direction: column;
+  }
+  span{
+    width: 200px;
+    width: 200px;
+    margin-left: 15rem;
+    margin-top: -2rem;
+  }
+  .button-icon{
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    display: flex;
+  }
+  .button-icon:hover{
+    background-color: #EBEBEB;
+    cursor: pointer;
+   }
+  

@@ -1,4 +1,3 @@
-import { Tecnico } from './../../models/tecnico';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Credenciais } from './../../models/credenciais';
 import { Component, OnInit } from '@angular/core';
@@ -16,8 +15,10 @@ export class LoginComponent implements OnInit {
 
   creds: Credenciais ={
     email: '',
-    senha: ''
+    senha: '',
   }
+
+
   //criando VALIDAÇÃO para campo(input) LOGIN/SENHA
   email = new FormControl(null, Validators.email);
   senha = new FormControl(null, Validators.minLength(4));
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.service.authenticate(this.creds).subscribe((resposta) => {
       this.service.successLogin(resposta.headers.get('Authorization').substring(7));
       this.router.navigate([''])
-      this.toast.success("Logado com sucesso!", 'Usuário(a)  ' + this.creds.email )
+      this.toast.success("Logado com sucesso!", 'Usuário(a)  ' + this.creds.email)
     },(error) => {
       this.toast.error('Usuários e/ou senha inválidos', 'ERROR')
       return throwError(error);
