@@ -26,8 +26,8 @@ export class TecnicoUpdateComponent implements OnInit {
   }
 
   /*Validação usando o FormControl*/
-  nome: FormControl = new FormControl(null, Validators.minLength(3));
-  cpf: FormControl = new FormControl(null, Validators.required);
+  nome:  FormControl = new FormControl(null, Validators.minLength(3));
+  cpf:   FormControl = new FormControl(null, Validators.required);
   email: FormControl = new FormControl(null, Validators.email);
   senha: FormControl = new FormControl(null, Validators.minLength(3))
 
@@ -35,13 +35,13 @@ export class TecnicoUpdateComponent implements OnInit {
   private matDialogRef: MatDialogRef<GenericDialogComponent>;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {id: Number},
-    public dialogRef: MatDialogRef<TecnicoUpdateComponent>,
-    private service: TecnicoService,
-    private toast: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute, //permite de um GET em parametros pela url para pegar paramentros 
-    public dialog: MatDialog
+    @Inject(MAT_DIALOG_DATA) public data: {id: Number},//pegando o id do tecnico para dentro do modal.
+    public  dialogRef: MatDialogRef<TecnicoUpdateComponent>,//dando referencia do componente que eu quero abrir o modal
+    private service:   TecnicoService,
+    private toast:     ToastrService,
+    private router:    Router,
+    private route:     ActivatedRoute, //permite de um GET em parametros pela url para pegar paramentros 
+    public  dialog:    MatDialog
   ) { 
     this.genericDialog = new GenericDialog(dialog);
   }
@@ -67,8 +67,8 @@ export class TecnicoUpdateComponent implements OnInit {
           this.router.navigate(['/tecnicos']);
       },1000)
     },(err) => {//listando LIST de erro.
-        matDialogRef.close();
-        err.error.errors.forEach((element) => {
+          matDialogRef.close();
+          err.error.errors.forEach((element) => {
           this.toast.error(element.message);
         });
     })
@@ -84,6 +84,4 @@ export class TecnicoUpdateComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
 }

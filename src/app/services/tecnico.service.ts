@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tecnico } from './../models/tecnico';
-import { Observable, pipe, Subject, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 
 import { HttpClient } from '@angular/common/http';

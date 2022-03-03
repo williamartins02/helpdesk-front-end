@@ -1,13 +1,16 @@
-import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
-import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { ClienteService } from './../../../services/cliente.service';
+import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
 import { Cliente } from './../../../models/cliente';
+
+
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GenericDialogComponent } from 'src/app/components/molecules/generic-dialog/generic-dialog.component';
+
 
 
 @Component({

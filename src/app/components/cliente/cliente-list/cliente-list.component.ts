@@ -1,12 +1,15 @@
+import { ClienteService } from './../../../services/cliente.service';
 import { GenericDialogComponent } from './../../molecules/generic-dialog/generic-dialog.component';
 import { GenericDialog } from './../../../models/dialog/generic-dialog/generic-dialog';
+import { Cliente } from './../../../models/cliente';
+
+
 import { Router } from '@angular/router';
 
 import { ClienteUpdateComponent } from '../cliente-update/cliente-update.component';
 import { Subscription, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { ClienteService } from '../../../services/cliente.service';
-import { Cliente } from '../../../models/cliente';
+
 import { Component, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,7 +25,7 @@ export class ClienteListComponent implements OnInit  {
 
   /*Scrooll da tabela */
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
-
+  //refresh
   refreshTable: Subscription;
   isLoading = false;
   cliente: Cliente = {
@@ -36,7 +39,9 @@ export class ClienteListComponent implements OnInit  {
   }
  
   CLIENTE_DATA: Cliente[] = [];
+  //injetando o ID para abrir no modal
   @Inject(MAT_DIALOG_DATA) public data: {id: Number}
+  //informaçoes da tabela (COLUNNAS)
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);
   /*Paninação da tabela cliente*/
@@ -45,11 +50,11 @@ export class ClienteListComponent implements OnInit  {
   private genericDialog: GenericDialog;
   private matDialogRef: MatDialogRef<GenericDialogComponent>;
   constructor(
-    public dialogRef: MatDialogRef<ClienteListComponent>,
-    private service: ClienteService,
-    private toast: ToastrService,
-    public dialog: MatDialog,
-    private router: Router,
+    public  dialogRef: MatDialogRef<ClienteListComponent>,
+    private service:   ClienteService,
+    private toast:     ToastrService,
+    public  dialog:    MatDialog,
+    private router:    Router,
 
   ) {
     this.genericDialog = new GenericDialog(dialog);
@@ -58,10 +63,9 @@ export class ClienteListComponent implements OnInit  {
   ngOnInit(): void {
     this.findAll();
     this.refresh();
-    this.findById();
   }
 
-  /*Destruindo uma sessão */
+  /*Destruindo uma sessão, renovando para da um refresh */
   ngOnDestroy(): void {
     this.refreshTable.unsubscribe();
   }
@@ -101,7 +105,7 @@ export class ClienteListComponent implements OnInit  {
 
   delete(id: number): void { 
     const deleteDialogRef = this.genericDialog.deleteWarningMessage();
-      deleteDialogRef.afterClosed().subscribe(deleteConfirmation => {
+    deleteDialogRef.afterClosed().subscribe(deleteConfirmation => {
         if(!deleteConfirmation) {
           return;
         }
@@ -144,7 +148,6 @@ export class ClienteListComponent implements OnInit  {
   }
 
   openEdit(id: Number): void {
-    console.log("ID", id);
     const dialogRef = this.dialog.open(ClienteUpdateComponent, {
       width: '600px',
       data: { id }//Pegando ID cliente para editar..

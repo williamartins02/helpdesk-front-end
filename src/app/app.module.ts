@@ -1,17 +1,14 @@
 
+
+
  import { GenericDialogComponent } from './components/molecules/generic-dialog/generic-dialog.component';
-
-import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
-import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
-
-import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
-import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
+
 
 
 
@@ -77,7 +74,12 @@ import { LineChartComponent } from './components/chamado/chart/line-chart/line-c
 import { NgChartsModule } from 'ng2-charts';
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { DeleteDialogComponent } from './components/molecules/delete/delete-dialog/delete-dialog.component';
-import { OrganismsComponent } from './components/organisms/organisms.component';
+import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
+import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
+import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -90,7 +92,7 @@ import { OrganismsComponent } from './components/organisms/organisms.component';
     TecnicoCreateComponent,
     TecnicoUpdateComponent,
     TecnicoListComponent,
-    TecnicoDeleteComponent,
+    
 
     ClienteCreateComponent,
     ClienteListComponent,
@@ -111,7 +113,6 @@ import { OrganismsComponent } from './components/organisms/organisms.component';
     LineChartComponent,
     ChatComponent,
     DeleteDialogComponent,
-    OrganismsComponent,
    
     
     

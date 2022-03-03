@@ -13,17 +13,6 @@ constructor(
   private dialog: MatDialog
 ){}
 
-public successMessage(message): MatDialogRef<GenericDialogComponent>{
-  return this.dialog.open(GenericDialogComponent,{
-    data: {
-      typ: 'success',
-      icon: 'check_circle',
-      title: message,
-      btnOK: true
-    }
-  });
-}
-
 public deleteWarningMessage(): MatDialogRef<DeleteDialogComponent> {
   return this.dialog.open(DeleteDialogComponent, {
     width: '600px',
