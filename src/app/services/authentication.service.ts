@@ -18,7 +18,7 @@ export class AuthenticationService {
 authenticate(creds: Credenciais){
   return this.http.post(`${API_CONFIG.baseUrl}/login`, creds,{
     //pedindo para observar o TOKEN que vem tipo TEXTO, na respsota de login
-    observe: 'response',
+    observe:      'response',
     responseType: 'text'
   });
 }

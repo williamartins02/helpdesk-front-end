@@ -25,8 +25,7 @@ export class ChamadoService {
   }
 
   create(chamados: Chamado): Observable<Chamado> {
-    return this.http
-      .post<Chamado>(`${API_CONFIG.baseUrl}/chamados`, chamados)
+    return this.http.post<Chamado>(`${API_CONFIG.baseUrl}/chamados`, chamados)
       .pipe(
         tap(() => {
           this._refresh$.next();
@@ -35,8 +34,7 @@ export class ChamadoService {
   }
 
   update(chamados: Chamado): Observable<Chamado> {
-    return this.http
-      .put<Chamado>(`${API_CONFIG.baseUrl}/chamados/${chamados.id}`, chamados)
+    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/chamados/${chamados.id}`, chamados)
       .pipe(
         tap(() => {
           this._refresh$.next();

@@ -19,7 +19,7 @@ export class RelatorioService {
   //}
 
     downloadPdfRelatorioParam(userReport:Report) {
-      return this.http.post(`${API_CONFIG.baseUrl}/relatorios/${'data.text'}`,userReport, { responseType: 'text' }).subscribe((data) => {
+      return this.http.post(`${API_CONFIG.baseUrl}/relatorios/${'data.text'}`, userReport, { responseType: 'text' }).subscribe((data) => {
           document.querySelector('iframe').src = data;
         });
     }

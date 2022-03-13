@@ -29,10 +29,10 @@ export class TecnicoCreateComponent implements OnInit {
   };
 
   /*Validação usando o FormControl*/
-  nome: FormControl = new FormControl(null, Validators.minLength(3));
-  cpf: FormControl = new FormControl(null, Validators.required);
-  email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+  nome:   FormControl = new FormControl(null, Validators.minLength(3));
+  cpf:    FormControl = new FormControl(null, Validators.required);
+  email:  FormControl = new FormControl(null, Validators.email);
+  senha:  FormControl = new FormControl(null, Validators.minLength(3));
   
   private genericDialog: GenericDialog;
   private matDialogRef: MatDialogRef<GenericDialogComponent>;
@@ -41,8 +41,8 @@ export class TecnicoCreateComponent implements OnInit {
     private service: TecnicoService,
     private toast: ToastrService,
     private router: Router,
-    public dialogRef: MatDialogRef<TecnicoCreateComponent>,
-    public dialog: MatDialog
+    public  dialogRef: MatDialogRef<TecnicoCreateComponent>,
+    public  dialog: MatDialog
   ) {
     this.genericDialog = new GenericDialog(dialog);
   }
