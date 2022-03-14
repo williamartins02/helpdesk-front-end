@@ -1,19 +1,18 @@
-import { HideForRolesDirective } from './directives/hide-for-roles.directive';
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ShowForRolesDirective } from './directives/show-for-roles.directive';
 
 
 
 @NgModule({
   declarations: [
-    HideForRolesDirective
+    ShowForRolesDirective
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    HideForRolesDirective
+    ShowForRolesDirective
   ]
 })
 export class SharedModule { }

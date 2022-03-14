@@ -107,7 +107,7 @@ import { SharedModule } from './components/shared/shared.module';
     LineChartComponent,
     ChatComponent,
     DeleteDialogComponent,
-    
+
   ],
   imports: [
     
