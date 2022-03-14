@@ -16,6 +16,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 //autenticando LOGIN/SENHA para entrar no sistema, via ENDPOINT
 authenticate(creds: Credenciais){
+  
   return this.http.post(`${API_CONFIG.baseUrl}/login`, creds,{
     //pedindo para observar o TOKEN que vem tipo TEXTO, na respsota de login
     observe:      'response',
@@ -27,6 +28,12 @@ authenticate(creds: Credenciais){
    localStorage.setItem('token', authToken);
  }
 
+ async getPermissions(email: string) {
+    const data = await this.http.get<{authorities: any}>(`${API_CONFIG.baseUrl}/user/${email}`).toPromise();
+    const permissions = this.parsePermissions(data.authorities);
+    localStorage.setItem('permissions', JSON.stringify(permissions));
+ }
+
  /**metodo para autenticar o TOKEN do usuario. */
  isAuthenticated(){
    let token = localStorage.getItem('token')
@@ -34,6 +41,10 @@ authenticate(creds: Credenciais){
      return !this.jwtService.isTokenExpired(token)
    }
    return false;
+ }
+
+ parsePermissions(authorities: any) {
+    return authorities.map(data => data.authority);
  }
 
  /*Metodo para limpar o (toke) */
